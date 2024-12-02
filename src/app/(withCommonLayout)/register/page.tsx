@@ -22,14 +22,14 @@ const Register = () => {
     }
   }, [error]);
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log(data)
-    // const res = await resigter(data).unwrap();
-    // if (res?.data) {
-    //   toast.success(`${res?.messaage}`);
-    //   const { email, name, _id, profileImg } = res?.data;
-    //   const finalUserData = { email, name, _id, profileImg };
-    //   dispatch(setUser({ user: finalUserData, token: res?.data?.token }));
-    // }
+    const res = await resigter(data).unwrap();
+    console.log(res)
+    if (res?.data) {
+      toast.success(`${res?.messaage}`);
+      const { email, name, _id, profileImg } = res?.data;
+      const finalUserData = { email, name, _id, profileImg };
+      dispatch(setUser({ user: finalUserData, token: res?.data?.token }));
+    }
   };
   return (
     <div className="relative h-screen flex items-center justify-center">
