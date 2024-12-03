@@ -25,7 +25,7 @@ const productApi = baseApi.injectEndpoints({
     getSingleProduct: builder.query({
       query: (id) => {
         return {
-          url: `/comment/${id}`,
+          url: `/prodct/${id}`,
           method: "GET",
         };
       },
@@ -35,7 +35,7 @@ const productApi = baseApi.injectEndpoints({
     addProduct: builder.mutation({
       query: (data) => {
         return {
-          url: "/comment",
+          url: "/product",
           method: "POST",
           body: data,
         };
@@ -46,7 +46,7 @@ const productApi = baseApi.injectEndpoints({
     updateProduct: builder.mutation({
       query: (data) => {
         return {
-          url: `/comment/${data?.id}`,
+          url: `/product/${data?.id}`,
           method: "Put",
           body: data?.data,
         };

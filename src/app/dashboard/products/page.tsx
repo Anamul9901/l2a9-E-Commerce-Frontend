@@ -1,5 +1,9 @@
 "use client";
-import { useGetMyProductQuery, useSoftDeleteProductMutation } from "@/src/redux/features/products/productApi";
+import AddProductModel from "@/src/components/modals/AddProductModel";
+import {
+  useGetMyProductQuery,
+  useSoftDeleteProductMutation,
+} from "@/src/redux/features/products/productApi";
 import Link from "next/link";
 import { toast } from "sonner";
 import Swal from "sweetalert2";
@@ -7,91 +11,102 @@ import Swal from "sweetalert2";
 const Products = () => {
   const { data: getMyProducts } = useGetMyProductQuery(undefined);
   const myPruducts = getMyProducts?.data;
-  const [deleteProduct]= useSoftDeleteProductMutation()
+  const [deleteProduct] = useSoftDeleteProductMutation();
   console.log(myPruducts);
 
-
-  const handleDelete=(id: string)=>{
+  const handleDelete = (id: string) => {
     Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!",
-      }).then(async (result) => {
-        if (result.isConfirmed) {
-          const res = await deleteProduct(id).unwrap();
-          console.log(res)
-          if (res) {
-            toast.success(res?.message);
-          }
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await deleteProduct(id).unwrap();
+        console.log(res);
+        if (res) {
+          toast.success(res?.message);
         }
-      });
-  }
+      }
+    });
+  };
+
+  
 
   return (
     <div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-4">
-  {myPruducts?.map((product: any) => (
-    <div
-      key={product?._id}
-      className="bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
-    >
-      {/* Product Image */}
-      <Link href={`/product/${product?._id}`} className="block">
-        <img
-          className="h-48 w-full object-cover rounded-t-lg"
-          src={
-            product?.images ||
-            "https://i.ibb.co/kBNtTmC/No-Image-Available.jpg"
-          }
-          alt={product?.name || "Product Image"}
-        />
-      </Link>
-
-      <div className="px-4 py-1">
-        {/* Product Title */}
-        <Link href={`/product/${product?._id}`} className="block">
-          <h2 className="text-lg font-bold text-teal-400 hover:text-teal-300 transition-colors duration-200">
-            {product?.name || "Unnamed Product"}
-          </h2>
-        </Link>
-
-        {/* Product Rating */}
-        <div className="flex items-center text-yellow-400">
-          <span className="text-lg">&#9733;</span>
-          <p className="ml-1 text-sm text-gray-300">
-            {product?.rating || "No Rating"}
-          </p>
-        </div>
-
-        {/* Product Price and Quantity */}
-        <div className="flex items-center justify-between">
-        <p className="text-sm text-gray-400">
-          <span className="font-semibold">Price:</span> ${product?.price || "N/A"}
-        </p>
-        <p className="text-sm text-gray-400">
-          <span className="font-semibold">Qty:</span>{" "}
-          {product?.inventoryCount || "N/A"}
-        </p>
-        </div>
-
-        {/* Action Buttons */}
-        <div className="flex justify-between pt-2 gap-2">
-          <button className="px-2  bg-blue-600 text-white rounded-md hover:bg-blue-500 transition-all">
-            Update
-          </button>
-          <button onClick={()=>handleDelete(product?.id)} className="px-2  bg-red-600 text-white rounded-md hover:bg-red-500 transition-all">
-            Delete
-          </button>
-        </div>
+      <div className="flex justify-between items-center pt-10 px-4">
+        <h1 className="text-2xl font-bold">Your Products</h1>
+        <button
+        >
+          <AddProductModel />
+        </button>
       </div>
-    </div>
-  ))}
-</div>
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-4 pt-10">
+        {myPruducts?.map((product: any) => (
+          <div
+            key={product?._id}
+            className="bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+          >
+            {/* Product Image */}
+            <Link href={`/product/${product?._id}`} className="block">
+              <img
+                className="h-48 w-full object-cover rounded-t-lg"
+                src={
+                  product?.images ||
+                  "https://i.ibb.co/kBNtTmC/No-Image-Available.jpg"
+                }
+                alt={product?.name || "Product Image"}
+              />
+            </Link>
 
+            <div className="px-4 py-1">
+              {/* Product Title */}
+              <Link href={`/product/${product?._id}`} className="block">
+                <h2 className="text-lg font-bold text-teal-400 hover:text-teal-300 transition-colors duration-200">
+                  {product?.name || "Unnamed Product"}
+                </h2>
+              </Link>
+
+              {/* Product Rating */}
+              <div className="flex items-center text-yellow-400">
+                <span className="text-lg">&#9733;</span>
+                <p className="ml-1 text-sm text-gray-300">
+                  {product?.rating || "No Rating"}
+                </p>
+              </div>
+
+              {/* Product Price and Quantity */}
+              <div className="flex items-center justify-between">
+                <p className="text-sm text-gray-400">
+                  <span className="font-semibold">Price:</span> $
+                  {product?.price || "N/A"}
+                </p>
+                <p className="text-sm text-gray-400">
+                  <span className="font-semibold">Qty:</span>{" "}
+                  {product?.inventoryCount || "N/A"}
+                </p>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex justify-between pt-2 gap-2">
+                <button className="px-2  bg-blue-600 text-white rounded-md hover:bg-blue-500 transition-all">
+                  Update
+                </button>
+                <button
+                  onClick={() => handleDelete(product?.id)}
+                  className="px-2  bg-red-600 text-white rounded-md hover:bg-red-500 transition-all"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
