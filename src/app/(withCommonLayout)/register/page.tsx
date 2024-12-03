@@ -18,7 +18,6 @@ const Register = () => {
   const router = useRouter();
 
   const [resigter, { isLoading, error }] = useRegisterMutation();
-  console.log(error);
 
   useEffect(() => {
     if ((error as any)?.status == 500) {
@@ -27,12 +26,10 @@ const Register = () => {
   }, [error]);
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const res = await resigter(data).unwrap();
-    console.log(res);
     if (res?.data) {
       toast.success(`${res?.message}`);
       const { email, name, id, profilePhoto } = res?.data?.result;
       const finalUserData = { email, name, id, profilePhoto };
-      console.log(finalUserData, res?.data?.accessToken);
       dispatch(setUser({ user: finalUserData, token: res?.data?.accessToken }));
       if (res?.data?.result?.role == "vendor") {
         router.push("/create-shop");

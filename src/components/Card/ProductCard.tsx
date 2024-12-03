@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Avatar } from "@nextui-org/avatar";
 import Image from "next/image";
 
 const ProductsCard = ({ products }: { products: any }) => {

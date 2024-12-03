@@ -32,14 +32,12 @@ const Login = () => {
   }, [errorShow, error]);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log(data)
     const res = await loginUser(data).unwrap();
-    console.log('res', res)
     if (res?.data) {
       toast.success(`${res?.message}`);
-      // const { email, name, _id, profileImg } = res?.data?.data;
-      // const finalUserData = { email, name, _id, profileImg };
-      dispatch(setUser({ user: 'sdaf', token: res?.data?.accessToken }));
+      const { email, name, id, profilePhoto } = res?.data?.data;
+      const finalUserData = { email, name, id, profilePhoto };
+      dispatch(setUser({ user: finalUserData, token: res?.data?.accessToken }));
       router?.push("/");
     }
   };
