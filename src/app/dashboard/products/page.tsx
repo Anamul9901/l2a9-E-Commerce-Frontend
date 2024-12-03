@@ -1,5 +1,6 @@
 "use client";
 import AddProductModel from "@/src/components/modals/AddProductModel";
+import DublicateProductModal from "@/src/components/modals/DublicateProductModel";
 import UpdateProductModal from "@/src/components/modals/UpdateProductModel";
 import {
   useGetMyProductQuery,
@@ -100,7 +101,9 @@ const Products = () => {
 
               {/* Action Buttons */}
               <div className="flex justify-between pt-2 gap-2">
-                <button className="">🗐</button>
+                <button onClick={() => handleDublicateId(product?.id)} className="">
+                <DublicateProductModal id={dublicateProductId} />
+                </button>
                 <button onClick={() => handleDublicateId(product?.id)}>
                   <UpdateProductModal id={dublicateProductId} />
                 </button>

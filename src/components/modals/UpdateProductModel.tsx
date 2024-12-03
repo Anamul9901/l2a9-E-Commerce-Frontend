@@ -5,10 +5,10 @@ import Loading from "../UI/loading";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 import FXModal from "./FXModal";
-import { useAddProductMutation, useGetSingleProductQuery } from "@/src/redux/features/products/productApi";
+import { useAddProductMutation, useGetSingleProductQuery, useUpdateProductMutation } from "@/src/redux/features/products/productApi";
 
 const UpdateProductModal = ({ id }: { id: string }) => {
-  const [addProduct, { isLoading, error }] = useAddProductMutation();
+  const [updateProduct, { isLoading, error }] = useUpdateProductMutation();
   const {data: singleData} = useGetSingleProductQuery(id);
   const singleProduct = singleData?.data;
   if (error) {
@@ -19,9 +19,8 @@ const UpdateProductModal = ({ id }: { id: string }) => {
     const inventoryCount = Number(data.inventoryCount);
     data.price = price;
     data.inventoryCount = inventoryCount;
-    console.log(data);
-    const res = await addProduct(data).unwrap();
-    console.log(res);
+    const finalData = {data, id}
+    const res = await updateProduct(finalData).unwrap();
     if (res?.data) {
       toast.success(res?.message);
     }
@@ -31,7 +30,7 @@ const UpdateProductModal = ({ id }: { id: string }) => {
     <div>
       {isLoading && <Loading />}
       <FXModal
-        title="asd"
+        title="Update Product"
         buttonText="📝"
         buttonClassName="px-2 py-1 bg-green-600 text-white rounded-md hover:bg-green-500 transition-all"
       >
