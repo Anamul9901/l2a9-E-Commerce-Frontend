@@ -1,36 +1,52 @@
 "use client";
 import FXForm from "@/src/components/form/FXForm";
 import FXInput from "@/src/components/form/FXInput";
+import FXSelect from "@/src/components/form/FXSelect";
 import Loading from "@/src/components/UI/loading";
 import { useRegisterMutation } from "@/src/redux/features/auth/authApi";
 import { setUser } from "@/src/redux/features/auth/authSlice";
 import { useAppDispatch } from "@/src/redux/hooks";
 import { Button } from "@nextui-org/button";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 
 const Register = () => {
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const [resigter, { isLoading, error }] = useRegisterMutation();
+  console.log(error);
 
   useEffect(() => {
-    if ((error as any)?.status == 400) {
+    if ((error as any)?.status == 500) {
       toast.error("Email is already exist");
     }
   }, [error]);
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const res = await resigter(data).unwrap();
-    console.log(res)
+    console.log(res);
     if (res?.data) {
-      toast.success(`${res?.messaage}`);
-      const { email, name, _id, profileImg } = res?.data;
-      const finalUserData = { email, name, _id, profileImg };
-      dispatch(setUser({ user: finalUserData, token: res?.data?.token }));
+      toast.success(`${res?.message}`);
+      const { email, name, id, profilePhoto } = res?.data?.result;
+      const finalUserData = { email, name, id, profilePhoto };
+      console.log(finalUserData, res?.data?.accessToken);
+      dispatch(setUser({ user: finalUserData, token: res?.data?.accessToken }));
+      if (res?.data?.result?.role == "vendor") {
+        router.push("/create-shop");
+      } else {
+        router.push("/");
+      }
     }
   };
+
+  const selectOpdiont = [
+    { key: "customer", label: "User" },
+    { key: "vendor", label: "Vendor" },
+  ];
+
   return (
     <div className="relative h-screen flex items-center justify-center">
       {isLoading && <Loading />}
@@ -58,6 +74,12 @@ const Register = () => {
               label="Password"
               type="password"
               size="sm"
+              required
+            />
+            <FXSelect
+              name="role"
+              label="Role"
+              options={selectOpdiont}
               required
             />
 

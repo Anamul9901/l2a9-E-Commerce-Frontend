@@ -15,16 +15,16 @@ const CreateShop = () => {
   const [createShop, { isLoading, error }] = useAddShopMutation();
 
   useEffect(() => {
-    if ((error as any)?.status == 400) {
-      toast.error("Email is already exist");
+    if ((error as any)?.status == 500) {
+      toast.error("Shop already created");
     }
   }, [error]);
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const res = await createShop(data).unwrap();
     console.log(res)
     if (res?.data) {
-      toast.success(`${res?.messaage}`);
-      router?.push("/");
+      toast.success(`${res?.message}`);
+      router.push("/dashboard?key=dashboard");
     }
   };
 
@@ -55,7 +55,6 @@ const CreateShop = () => {
             label="Logo"
             type="text"
             size="sm"
-            required
           />
 
           <Button

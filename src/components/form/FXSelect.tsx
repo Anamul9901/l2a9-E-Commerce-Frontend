@@ -23,7 +23,7 @@ const FXSelect = ({
 
   return (
     <Select
-      {...register(name)}
+      {...register(name, {required: true})}
       label={label}
       className="max-w-[284px] min-w-full"
       variant={variant}
