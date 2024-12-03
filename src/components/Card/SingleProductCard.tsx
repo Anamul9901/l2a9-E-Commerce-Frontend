@@ -1,8 +1,7 @@
 import Link from "next/link";
-import { Avatar } from "@nextui-org/avatar";
 import Image from "next/image";
 
-const productsCard = ({ products }: { products: any }) => {
+const SingleProductCard = ({ products }: { products: any }) => {
   return (
     <div className="max-w-sm mx-auto bg-gray-900 rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-y-105 hover:shadow-2xl">
       {/* Product Image */}
@@ -18,25 +17,16 @@ const productsCard = ({ products }: { products: any }) => {
           width={300}
           priority={true}
         />
-
-        <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
-          <Link
-            href={`/product/${products?.id}`}
-            className="text-sm px-4 py-2 bg-teal-500 text-white rounded-md shadow-md hover:bg-teal-600 transition"
-          >
-            View Details
-          </Link>
-        </div>
       </div>
 
       {/* Product Details */}
-      <div className="px-4 py-2">
+      <div className="px-4 py-2 space-y-2">
         {/* Shop Information */}
         <div className="flex items-center gap-3 pb-1">
           <Link href={`/profile/${products?.shopId}`}>
             <img
               src={
-                products?.shopLogo ||
+                products?.shop?.logo ||
                 "https://i.ibb.co/kBNtTmC/No-Image-Available.jpg"
               }
               alt="Shop Logo"
@@ -44,16 +34,19 @@ const productsCard = ({ products }: { products: any }) => {
             />
           </Link>
           <Link
-            href={`/profile/${products?.shopId}`}
+            href={`/profile/${products?.shop?.id}`}
             className="text-teal-400 text-sm font-bold hover:text-teal-300"
           >
-            {products?.publishUserName || "Shop Name"}
+            {products?.shop?.name || "Shop Name"}
           </Link>
         </div>
 
         {/* Product Title */}
         <h3 className="text-lg font-semibold text-white truncate">
           {products?.name || "Product Name"}
+        </h3>
+        <h3 className="text-sm text-white truncate">
+          Category: {products?.category}
         </h3>
 
         <div className="flex items-center justify-between">
@@ -80,9 +73,11 @@ const productsCard = ({ products }: { products: any }) => {
         </div>
 
         {/* Short Description */}
-        <Link  href={`/product/${products?.id}`} className="text-gray-400 text-sm mt-">
-          {products?.title?.slice(0, 50) || "No description available."}...
-        </Link>
+        <p
+          className="text-gray-400 text-sm mt-"
+        >
+          {products?.title || "No description available."}
+        </p>
       </div>
 
       {/* Actions */}
@@ -105,4 +100,4 @@ const productsCard = ({ products }: { products: any }) => {
   );
 };
 
-export default productsCard;
+export default SingleProductCard;
