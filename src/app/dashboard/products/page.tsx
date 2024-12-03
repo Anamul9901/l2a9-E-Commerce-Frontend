@@ -1,14 +1,20 @@
 "use client";
 import AddProductModel from "@/src/components/modals/AddProductModel";
+import UpdateProductModal from "@/src/components/modals/UpdateProductModel";
 import {
   useGetMyProductQuery,
   useSoftDeleteProductMutation,
 } from "@/src/redux/features/products/productApi";
 import Link from "next/link";
+import { useState } from "react";
+import { FaEdit } from "react-icons/fa";
+import { IoDuplicate } from "react-icons/io5";
+import { MdDeleteForever } from "react-icons/md";
 import { toast } from "sonner";
 import Swal from "sweetalert2";
 
 const Products = () => {
+    const [dublicateProductId, setDublicateProductId] = useState('');
   const { data: getMyProducts } = useGetMyProductQuery(undefined);
   const myPruducts = getMyProducts?.data;
   const [deleteProduct] = useSoftDeleteProductMutation();
@@ -34,14 +40,15 @@ const Products = () => {
     });
   };
 
-  
+  const handleDublicateId = (id: string) => {
+    setDublicateProductId(id);
+  };
 
   return (
     <div>
       <div className="flex justify-between items-center pt-10 px-4">
         <h1 className="text-2xl font-bold">Your Products</h1>
-        <button
-        >
+        <button>
           <AddProductModel />
         </button>
       </div>
@@ -93,14 +100,15 @@ const Products = () => {
 
               {/* Action Buttons */}
               <div className="flex justify-between pt-2 gap-2">
-                <button className="px-2  bg-blue-600 text-white rounded-md hover:bg-blue-500 transition-all">
-                  Update
+                <button className="">🗐</button>
+                <button onClick={() => handleDublicateId(product?.id)}>
+                  <UpdateProductModal id={dublicateProductId} />
                 </button>
                 <button
                   onClick={() => handleDelete(product?.id)}
-                  className="px-2  bg-red-600 text-white rounded-md hover:bg-red-500 transition-all"
+                  className="px-2 py-1 bg-red-600 text-white rounded-md hover:bg-red-500 transition-all"
                 >
-                  Delete
+                  <MdDeleteForever />
                 </button>
               </div>
             </div>
