@@ -14,6 +14,10 @@ const NavberDropdown = () => {
   const router = useRouter();
 
 
+  const handleNavigation = (pathname: string) => {
+    router.push(pathname);
+  };
+
 
   // for hybration error handle
   useEffect(() => {
@@ -35,7 +39,7 @@ const NavberDropdown = () => {
         </DropdownItem>
 
         <DropdownItem
-          // onClick={() => handleNavigation("/dashboard?key=dashboard")}
+          onClick={() => handleNavigation("/dashboard?key=dashboard")}
         >
           Dashboard
         </DropdownItem>
