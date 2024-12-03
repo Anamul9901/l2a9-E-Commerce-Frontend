@@ -1,11 +1,35 @@
 "use client";
-import { useGetMyProductQuery } from "@/src/redux/features/products/productApi";
+import { useGetMyProductQuery, useSoftDeleteProductMutation } from "@/src/redux/features/products/productApi";
 import Link from "next/link";
+import { toast } from "sonner";
+import Swal from "sweetalert2";
 
 const Products = () => {
   const { data: getMyProducts } = useGetMyProductQuery(undefined);
   const myPruducts = getMyProducts?.data;
+  const [deleteProduct]= useSoftDeleteProductMutation()
   console.log(myPruducts);
+
+
+  const handleDelete=(id: string)=>{
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          const res = await deleteProduct(id).unwrap();
+          console.log(res)
+          if (res) {
+            toast.success(res?.message);
+          }
+        }
+      });
+  }
 
   return (
     <div>
@@ -59,7 +83,7 @@ const Products = () => {
           <button className="px-2  bg-blue-600 text-white rounded-md hover:bg-blue-500 transition-all">
             Update
           </button>
-          <button className="px-2  bg-red-600 text-white rounded-md hover:bg-red-500 transition-all">
+          <button onClick={()=>handleDelete(product?.id)} className="px-2  bg-red-600 text-white rounded-md hover:bg-red-500 transition-all">
             Delete
           </button>
         </div>

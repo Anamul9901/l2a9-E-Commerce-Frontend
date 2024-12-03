@@ -57,7 +57,17 @@ const productApi = baseApi.injectEndpoints({
     deleteProduct: builder.mutation({
       query: (id) => {
         return {
-          url: `/comment/${id}`,
+          url: `/product/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["product"],
+    }),
+
+    softDeleteProduct: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/product/soft/${id}`,
           method: "DELETE",
         };
       },
@@ -72,5 +82,6 @@ export const {
   useGetSingleProductQuery,
   useUpdateProductMutation,
   useDeleteProductMutation,
-  useGetMyProductQuery
+  useGetMyProductQuery,
+  useSoftDeleteProductMutation
 } = productApi;
