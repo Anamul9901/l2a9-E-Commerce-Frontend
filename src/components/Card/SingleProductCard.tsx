@@ -23,7 +23,7 @@ const SingleProductCard = ({ products }: { products: any }) => {
       <div className="px-4 py-2 space-y-2">
         {/* Shop Information */}
         <div className="flex items-center gap-3 pb-1">
-          <Link href={`/profile/${products?.shopId}`}>
+          <Link href={`/shop/${products?.shopId}`}>
             <img
               src={
                 products?.shop?.logo ||
@@ -34,7 +34,7 @@ const SingleProductCard = ({ products }: { products: any }) => {
             />
           </Link>
           <Link
-            href={`/profile/${products?.shop?.id}`}
+            href={`/shop/${products?.shop?.id}`}
             className="text-teal-400 text-sm font-bold hover:text-teal-300"
           >
             {products?.shop?.name || "Shop Name"}

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Avatar } from "@nextui-org/avatar";
 import Image from "next/image";
 
-const productsCard = ({ products }: { products: any }) => {
+const ProductsCard = ({ products }: { products: any }) => {
   return (
     <div className="max-w-sm mx-auto bg-gray-900 rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-y-105 hover:shadow-2xl">
       {/* Product Image */}
@@ -32,11 +32,11 @@ const productsCard = ({ products }: { products: any }) => {
       {/* Product Details */}
       <div className="px-4 py-2">
         {/* Shop Information */}
-        <div className="flex items-center gap-3 pb-1">
-          <Link href={`/profile/${products?.shopId}`}>
+        {/* <div className="flex items-center gap-3 pb-1">
+          <Link href={`/profile/${products?.shop?.id}`}>
             <img
               src={
-                products?.shopLogo ||
+                products?.shop?.logo ||
                 "https://i.ibb.co/kBNtTmC/No-Image-Available.jpg"
               }
               alt="Shop Logo"
@@ -44,12 +44,12 @@ const productsCard = ({ products }: { products: any }) => {
             />
           </Link>
           <Link
-            href={`/profile/${products?.shopId}`}
+            href={`/profile/${products?.shop?.id}`}
             className="text-teal-400 text-sm font-bold hover:text-teal-300"
           >
-            {products?.publishUserName || "Shop Name"}
+            {products?.shop?.name || "Shop Name"}
           </Link>
-        </div>
+        </div> */}
 
         {/* Product Title */}
         <h3 className="text-lg font-semibold text-white truncate">
@@ -105,4 +105,4 @@ const productsCard = ({ products }: { products: any }) => {
   );
 };
 
-export default productsCard;
+export default ProductsCard;

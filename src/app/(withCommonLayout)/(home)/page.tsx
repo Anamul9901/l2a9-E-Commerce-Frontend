@@ -1,7 +1,6 @@
 // rafce
 'use client'
-import RecipeCard from "@/src/components/Card/ProductCard";
-import HeroSection from "@/src/components/HomeSection/HeroSection";
+import ProductsCard from "@/src/components/Card/ProductCard";
 import { useGetAllProductQuery } from "@/src/redux/features/products/productApi";
 import React from "react";
 
@@ -13,7 +12,7 @@ const HomePage = () => {
       {/* <HeroSection /> */}
       <div className="grid lg:grid-cols-4 xl:grid-cols-5 md:grid-cols-3 grid-cols-2 py-10 gap-4">
         {allProduct?.data?.map((product: any) => (
-          <RecipeCard products={product} />
+          <ProductsCard products={product} />
         ))}
       </div>
     </div>

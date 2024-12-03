@@ -32,6 +32,16 @@ const productApi = baseApi.injectEndpoints({
       providesTags: ["product"],
     }),
 
+    getShopProduct: builder.query({
+      query: (shopId) => {
+        return {
+          url: `/product//shop-product/${shopId}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["product"],
+    }),
+
     addProduct: builder.mutation({
       query: (data) => {
         return {
@@ -83,5 +93,6 @@ export const {
   useUpdateProductMutation,
   useDeleteProductMutation,
   useGetMyProductQuery,
-  useSoftDeleteProductMutation
+  useSoftDeleteProductMutation,
+  useGetShopProductQuery,
 } = productApi;
