@@ -69,23 +69,6 @@ const Sidebar = () => {
 
           {/* Users */}
 
-          {/* Create shop */}
-          <li className="w-full mb-2">
-            <Link href="/dashboard/create-shop?key=create-shop">
-              <div
-                className={`block px-2 py-4 text-white text-center md:text-left rounded-lg transition-all duration-300 hover:bg-purple-700 hover:shadow-xl ${
-                  queryValue === "create-shop"
-                    ? "bg-purple-700 shadow-xl text-[#ff4a4afd] font-extrabold"
-                    : ""
-                }`}
-              >
-                <span className="material-icons md:hidden">
-                  <IoFastFood />
-                </span>
-                <span className="hidden md:inline-block ml-2">create-shop</span>
-              </div>
-            </Link>
-          </li>
 
           {/* Recipes */}
           <li className="w-full mb-2">

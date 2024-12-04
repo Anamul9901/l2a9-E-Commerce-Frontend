@@ -1,4 +1,5 @@
 "use client";
+import ChangePasswordModal from "@/src/components/modals/ChangePasswordModal";
 import { useGetMyDataQuery } from "@/src/redux/features/user/userApi";
 import { useEffect, useState } from "react";
 
@@ -46,17 +47,11 @@ const Dashboard = () => {
 
         {/* Statistics Section */}
         <div className="grid grid-cols-2 gap-4 md:grid-cols-3 mb-6">
-          <div className="text-center p-4 bg-default-600 rounded-lg shadow hover:bg-default-800 transition duration-200">
-            <h3 className="text-xl md:text-2xl font-semibold text-default-100">
-              {currentUserData?.shop?.followers}
-            </h3>
-            <p className="text-default-100">Followers</p>
-          </div>
         </div>
 
         {/* Actions Section */}
         <div className="flex justify-center mb-6">
-          <button className="">{/* <ChangePasswordModal /> */}</button>
+          <button className=""> <ChangePasswordModal /> </button>
         </div>
 
         {/* Account Details */}
