@@ -12,6 +12,16 @@ const productApi = baseApi.injectEndpoints({
       providesTags: ["product"],
     }),
 
+    recentViewProducts: builder.query({
+      query: (userId) => {
+        return {
+          url: `/recent-product-view/${userId}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["product"],
+    }),
+
     getMyProduct: builder.query({
       query: () => {
         return {
@@ -23,9 +33,10 @@ const productApi = baseApi.injectEndpoints({
     }),
 
     getSingleProduct: builder.query({
-      query: (id) => {
+      query: (data) => {
+        console.log('2 ids',data);
         return {
-          url: `/product/${id}`,
+          url: `/product/${data?.productId}?userId=${data?.userId}`,
           method: "GET",
         };
       },
@@ -35,7 +46,7 @@ const productApi = baseApi.injectEndpoints({
     getShopProduct: builder.query({
       query: (shopId) => {
         return {
-          url: `/product//shop-product/${shopId}`,
+          url: `/product/shop-product/${shopId}`,
           method: "GET",
         };
       },
@@ -95,4 +106,5 @@ export const {
   useGetMyProductQuery,
   useSoftDeleteProductMutation,
   useGetShopProductQuery,
+  useRecentViewProductsQuery,
 } = productApi;

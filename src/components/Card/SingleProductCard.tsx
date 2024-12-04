@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 const SingleProductCard = ({ products }: { products: any }) => {
+ 
   return (
     <div className="max-w-sm mx-auto bg-gray-900 rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-y-105 hover:shadow-2xl">
       {/* Product Image */}
@@ -73,9 +74,7 @@ const SingleProductCard = ({ products }: { products: any }) => {
         </div>
 
         {/* Short Description */}
-        <p
-          className="text-gray-400 text-sm mt-"
-        >
+        <p className="text-gray-400 text-sm mt-">
           {products?.title || "No description available."}
         </p>
       </div>

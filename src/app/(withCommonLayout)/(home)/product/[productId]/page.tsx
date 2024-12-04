@@ -1,13 +1,18 @@
 "use client";
 import SingleProductCard from "@/src/components/Card/SingleProductCard";
+import { selectCurrentUser } from "@/src/redux/features/auth/authSlice";
 import { useGetSingleProductQuery } from "@/src/redux/features/products/productApi";
+import { useAppSelector } from "@/src/redux/hooks";
 import { useParams } from "next/navigation";
 
 const SingleProductPage = () => {
+  const { user } = useAppSelector(selectCurrentUser);
+  const userId = (user as any)?.id;
   const { productId } = useParams();
-  const { data: singleData } = useGetSingleProductQuery(productId);
+  const data = { productId, userId };
+  const { data: singleData } = useGetSingleProductQuery(data);
+  console.log("single", singleData);
   const singleProduct = singleData?.data;
-  console.log(singleProduct);
 
   return (
     <div className="w-full h-[94vh] flex justify-center items-center">
