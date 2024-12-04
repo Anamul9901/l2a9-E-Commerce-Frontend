@@ -12,11 +12,12 @@ const cartApi = baseApi.injectEndpoints({
       providesTags: ["cart"],
     }),
 
-    addcart: builder.mutation({
-      query: (shopId) => {
+    addAndUpdateCart: builder.mutation({
+      query: (data) => {
         return {
-          url: `/follow/${shopId}`,
+          url: `/cart`,
           method: "POST",
+          body: data,
         };
       },
       invalidatesTags: ["cart"],
@@ -46,8 +47,9 @@ const cartApi = baseApi.injectEndpoints({
 
 export const {
   useGetSingleCartQuery,
+  useAddAndUpdateCartMutation,
 
-  useAddcartMutation,
+  
   useRemovecartMutation,
   useCheckMyFolloQuery,
 } = cartApi;

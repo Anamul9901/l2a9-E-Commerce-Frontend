@@ -1,13 +1,27 @@
 "use client";
 
-import { useGetSingleCartQuery } from "@/src/redux/features/cart/cartApi";
+import {
+  useAddAndUpdateCartMutation,
+  useGetSingleCartQuery,
+} from "@/src/redux/features/cart/cartApi";
 
 const CartPage = () => {
   const { data: singleCartData } = useGetSingleCartQuery(undefined);
   const cartData = singleCartData?.data;
+  const [increaseQuantity] = useAddAndUpdateCartMutation();
 
   const totalSum = cartData?.totalSum;
   const cartItems = cartData?.data?.cartItem || [];
+
+  const handleIncreateQuantity =async (productId: string) => {
+    const data = {productId, quantity: 1}
+    const res = await increaseQuantity(data).unwrap();
+    console.log(res)
+  };
+
+  const handleDecreaseQuantity = (productId: string) => {
+    
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 py-10 px-5 md:px-20">
@@ -59,6 +73,7 @@ const CartPage = () => {
               {/* Quantity Control */}
               <div className="flex items-center space-x-2">
                 <button
+                  onClick={() => handleDecreaseQuantity(item.product.id)}
                   className="bg-gray-200 text-gray-600 px-3 py-1 rounded hover:bg-gray-300"
                   title="Decrease quantity"
                 >
@@ -68,6 +83,7 @@ const CartPage = () => {
                   {item.quantity}
                 </span>
                 <button
+                  onClick={() => handleIncreateQuantity(item.product.id)}
                   className="bg-gray-200 text-gray-600 px-3 py-1 rounded hover:bg-gray-300"
                   title="Increase quantity"
                 >
