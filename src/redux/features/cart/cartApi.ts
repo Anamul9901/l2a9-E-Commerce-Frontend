@@ -23,24 +23,15 @@ const cartApi = baseApi.injectEndpoints({
       invalidatesTags: ["cart"],
     }),
 
-    removecart: builder.mutation({
-      query: (shopId) => {
+    reduceCartQty: builder.mutation({
+      query: (data) => {
         return {
-          url: `/unfollow/${shopId}`,
-          method: "DELETE",
+          url: `/cart/reduce-quantity`,
+          method: "POST",
+          body: data,
         };
       },
       invalidatesTags: ["cart"],
-    }),
-
-    checkMyFollo: builder.query({
-      query: (shopId) => {
-        return {
-          url: `/check-my-follow/${shopId}`,
-          method: "GET",
-        };
-      },
-      providesTags: ["cart"],
     }),
   }),
 });
@@ -48,8 +39,5 @@ const cartApi = baseApi.injectEndpoints({
 export const {
   useGetSingleCartQuery,
   useAddAndUpdateCartMutation,
-
-  
-  useRemovecartMutation,
-  useCheckMyFolloQuery,
+  useReduceCartQtyMutation,
 } = cartApi;

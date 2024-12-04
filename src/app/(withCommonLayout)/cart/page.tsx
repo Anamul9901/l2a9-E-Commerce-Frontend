@@ -3,24 +3,26 @@
 import {
   useAddAndUpdateCartMutation,
   useGetSingleCartQuery,
+  useReduceCartQtyMutation,
 } from "@/src/redux/features/cart/cartApi";
 
 const CartPage = () => {
   const { data: singleCartData } = useGetSingleCartQuery(undefined);
   const cartData = singleCartData?.data;
   const [increaseQuantity] = useAddAndUpdateCartMutation();
+  const [decreseQuantity] = useReduceCartQtyMutation();
 
   const totalSum = cartData?.totalSum;
   const cartItems = cartData?.data?.cartItem || [];
 
-  const handleIncreateQuantity =async (productId: string) => {
-    const data = {productId, quantity: 1}
-    const res = await increaseQuantity(data).unwrap();
-    console.log(res)
+  const handleIncreateQuantity = async (productId: string) => {
+    const data = { productId, quantity: 1 };
+    await increaseQuantity(data).unwrap();
   };
 
-  const handleDecreaseQuantity = (productId: string) => {
-    
+  const handleDecreaseQuantity = async (productId: string) => {
+    const data = { productId, quantity: 1 };
+    await decreseQuantity(data).unwrap();
   };
 
   return (
