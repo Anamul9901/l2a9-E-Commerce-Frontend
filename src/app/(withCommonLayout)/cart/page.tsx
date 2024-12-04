@@ -18,8 +18,11 @@ const CartPage = () => {
   const totalSum = cartData?.totalSum;
   const cartItems = cartData?.data?.cartItem || [];
 
-  const handleIncreateQuantity = async (productId: string) => {
-    const data = { productId, quantity: 1 };
+  const handleIncreateQuantity = async (
+    productId: string,
+    vendorId: string
+  ) => {
+    const data = { productId, vendorId, quantity: 1 };
     await increaseQuantity(data).unwrap();
   };
 
@@ -92,7 +95,9 @@ const CartPage = () => {
                   {item.quantity}
                 </span>
                 <button
-                  onClick={() => handleIncreateQuantity(item.product.id)}
+                  onClick={() =>
+                    handleIncreateQuantity(item.product.id, item.product.userId)
+                  }
                   className="bg-gray-200 text-gray-600 px-3 py-1 rounded hover:bg-gray-300"
                   title="Increase quantity"
                 >

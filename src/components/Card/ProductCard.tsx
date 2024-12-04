@@ -6,11 +6,11 @@ import { toast } from "sonner";
 const ProductsCard = ({ products }: { products: any }) => {
   const [addToCart] = useCreateCartMutation();
 
-  const handleDddToCart = async (productId: string) => {
-    const data = { productId, quantity: 1 };
+  const handleDddToCart = async (productId: string, vendorId: string) => {
+    const data = { productId, vendorId, quantity: 1 };
     const res = await addToCart(data).unwrap();
-    if(res.success){
-      toast.success(res.message)
+    if (res.success) {
+      toast.success(res.message);
     }
   };
 
@@ -91,7 +91,10 @@ const ProductsCard = ({ products }: { products: any }) => {
         </div>
 
         {/* Short Description */}
-        <Link  href={`/product/${products?.id}`} className="text-gray-400 text-sm mt-">
+        <Link
+          href={`/product/${products?.id}`}
+          className="text-gray-400 text-sm mt-"
+        >
           {products?.title?.slice(0, 50) || "No description available."}...
         </Link>
       </div>
@@ -107,7 +110,7 @@ const ProductsCard = ({ products }: { products: any }) => {
         {/* Add to Cart Button */}
         <button
           className="bg-teal-500 text-white text-sm px-4 py-2 rounded shadow-md hover:bg-teal-600 transition"
-          onClick={() => handleDddToCart(products?.id)}
+          onClick={() => handleDddToCart(products?.id, products?.userId)}
         >
           Add to Cart
         </button>
