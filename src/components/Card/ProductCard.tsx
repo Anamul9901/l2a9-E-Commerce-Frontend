@@ -1,7 +1,19 @@
 import Link from "next/link";
 import Image from "next/image";
+import { useCreateCartMutation } from "@/src/redux/features/cart/cartApi";
+import { toast } from "sonner";
 
 const ProductsCard = ({ products }: { products: any }) => {
+  const [addToCart] = useCreateCartMutation();
+
+  const handleDddToCart = async (productId: string) => {
+    const data = { productId, quantity: 1 };
+    const res = await addToCart(data).unwrap();
+    if(res.success){
+      toast.success(res.message)
+    }
+  };
+
   return (
     <div className="max-w-sm mx-auto bg-gray-900 rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-y-105 hover:shadow-2xl">
       {/* Product Image */}
@@ -95,7 +107,7 @@ const ProductsCard = ({ products }: { products: any }) => {
         {/* Add to Cart Button */}
         <button
           className="bg-teal-500 text-white text-sm px-4 py-2 rounded shadow-md hover:bg-teal-600 transition"
-          // onClick={() => addToCart(products?._id)}
+          onClick={() => handleDddToCart(products?.id)}
         >
           Add to Cart
         </button>
