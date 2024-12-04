@@ -54,6 +54,16 @@ const cartApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ["cart"],
     }),
+
+    checkSameVendorProduct: builder.query({
+      query: () => {
+        return {
+          url: `/cart/check-same-vendor`,
+          method: "GET",
+        };
+      },
+      providesTags: ["cart"],
+    }),
   }),
 });
 
@@ -63,4 +73,5 @@ export const {
   useReduceCartQtyMutation,
   useDeleteCartItemMutation,
   useCreateCartMutation,
+  useCheckSameVendorProductQuery,
 } = cartApi;

@@ -1,16 +1,48 @@
 import Link from "next/link";
 import Image from "next/image";
-import { useCreateCartMutation } from "@/src/redux/features/cart/cartApi";
+import {
+  useCheckSameVendorProductQuery,
+  useCreateCartMutation,
+} from "@/src/redux/features/cart/cartApi";
 import { toast } from "sonner";
+import { useState } from "react";
+import Swal from "sweetalert2";
 
 const ProductsCard = ({ products }: { products: any }) => {
   const [addToCart] = useCreateCartMutation();
+  const { data: checkSameVendorProduct } =
+    useCheckSameVendorProductQuery(undefined);
+  const CheckSameVendorProductId = checkSameVendorProduct?.data?.vendorId;
 
   const handleDddToCart = async (productId: string, vendorId: string) => {
-    const data = { productId, vendorId, quantity: 1 };
-    const res = await addToCart(data).unwrap();
-    if (res.success) {
-      toast.success(res.message);
+    if (CheckSameVendorProductId == vendorId) {
+      const data = { productId, vendorId, quantity: 1 };
+
+      const res = await addToCart(data).unwrap();
+      if (res.success) {
+        toast.success(res.message);
+      }
+    }
+    if (CheckSameVendorProductId != vendorId) {
+      //Replace the cart with the new product
+      Swal.fire({
+        title: "Are you sure?",
+        text: "Replace the cart with the new products!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, replace it!",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          const data = { productId, vendorId, quantity: 1 };
+
+          const res = await addToCart(data).unwrap();
+          if (res.success) {
+            toast.success(res.message);
+          }
+        }
+      });
     }
   };
 

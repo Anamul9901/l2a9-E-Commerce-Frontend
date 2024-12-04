@@ -19,7 +19,6 @@ const Products = () => {
   const { data: getMyProducts } = useGetMyProductQuery(undefined);
   const myPruducts = getMyProducts?.data;
   const [deleteProduct] = useSoftDeleteProductMutation();
-  console.log(myPruducts);
 
   const handleDelete = (id: string) => {
     Swal.fire({
