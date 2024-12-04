@@ -24,17 +24,19 @@ const authApi = baseApi.injectEndpoints({
     }),
 
     forgetPassword: builder.mutation({
-      query: (userInfo) => ({
-        url: "/user/forgate-password",
-        method: "POST",
-        body: userInfo,
-      }),
+      query: (userInfo) => {
+        return {
+          url: "/auth/forgot-password",
+          method: "POST",
+          body: userInfo,
+        };
+      },
     }),
 
     resitPassword: builder.mutation({
       query: (data) => ({
-        url: `/user/reset-password/${data?.token}`,
-        method: "PATCH",
+        url: `/auth/reset-password/${data?.token}`,
+        method: "POST",
         body: data?.data,
       }),
     }),

@@ -2,72 +2,52 @@
 import FXForm from "@/src/components/form/FXForm";
 import FXInput from "@/src/components/form/FXInput";
 import Loading from "@/src/components/UI/loading";
-import { useLoginMutation } from "@/src/redux/features/auth/authApi";
-import { setUser } from "@/src/redux/features/auth/authSlice";
-import { useAppDispatch } from "@/src/redux/hooks";
+import { useForgetPasswordMutation } from "@/src/redux/features/auth/authApi";
 import { Button } from "@nextui-org/button";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 
-const Login = () => {
-  const [errorShow, setErrorShow] = useState(false);
-  const dispatch = useAppDispatch();
-  const router = useRouter();
-  const [loginUser, { isLoading, error }] = useLoginMutation();
-
-  useEffect(() => {
-    if (error) {
-      setErrorShow(true); 
-    }
-  }, [error]); 
-
-  useEffect(() => {
-    if (errorShow && (error as any)?.data) {
-      toast.error((error as any)?.data?.message);
-    }
-  }, [errorShow, error]);
+const ForgetPassword = () => {
+  const [forgatePassword, { isLoading }] = useForgetPasswordMutation();
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const res = await loginUser(data).unwrap();
-    if (res?.data) {
-      toast.success(`${res?.message}`);
-      const { email, name, id, profilePhoto } = res?.data?.data;
-      const finalUserData = { email, name, id, profilePhoto };
-      dispatch(setUser({ user: finalUserData, token: res?.data?.accessToken }));
-      router?.push("/");
+    const res = await forgatePassword(data);
+    if((res as any)?.data){
+      toast.success((res as any)?.data?.message)
+    }
+    if((res as any)?.error){
+      toast.error((res as any)?.error?.data?.message)
     }
   };
-
   return (
     <div className="relative h-screen flex items-center justify-center">
       {isLoading && <Loading />}
 
       <div className="bg-default-100 shadow-lg rounded-lg w-full max-w-md p-8 mx-4">
         <h3 className="text-3xl font-bold text-center text-default-700">
-          Login to CookUp
+          Forgot Password
         </h3>
         <p className="text-center text-default-800 mb-6">
-          Welcome back! Let’s get started.
+          Enter your email to reset your password.
         </p>
 
         <FXForm onSubmit={onSubmit}>
           <div className="space-y-4">
-            <FXInput name="email" label="Email" type="email" size="sm" />
             <FXInput
-              name="password"
-              label="Password"
-              type="password"
+              name="email"
+              label="Email"
+              type="email"
               size="sm"
+              required
             />
             <Button
               className="w-full rounded-md bg-gradient-to-r from-teal-400 to-purple-500 text-default-800 font-semibold py-2"
               size="lg"
               type="submit"
             >
-              Login
+              Send Email
             </Button>
           </div>
         </FXForm>
@@ -80,7 +60,7 @@ const Login = () => {
             </Link>
           </p>
           <p className="text-sm text-teal-500 mt-2">
-            <Link href={"/forget-password"}>Forgot password?</Link>
+            <Link href={"/login"}>Back to Login</Link>
           </p>
         </div>
       </div>
@@ -88,4 +68,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ForgetPassword;
