@@ -33,6 +33,16 @@ const cartApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ["cart"],
     }),
+
+    deleteCartItem: builder.mutation({
+      query: (cartItemId) => {
+        return {
+          url: `/cart/${cartItemId}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["cart"],
+    }),
   }),
 });
 
@@ -40,4 +50,5 @@ export const {
   useGetSingleCartQuery,
   useAddAndUpdateCartMutation,
   useReduceCartQtyMutation,
+  useDeleteCartItemMutation,
 } = cartApi;

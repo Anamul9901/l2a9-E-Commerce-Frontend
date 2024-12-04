@@ -2,15 +2,18 @@
 
 import {
   useAddAndUpdateCartMutation,
+  useDeleteCartItemMutation,
   useGetSingleCartQuery,
   useReduceCartQtyMutation,
 } from "@/src/redux/features/cart/cartApi";
+import { MdDelete } from "react-icons/md";
 
 const CartPage = () => {
   const { data: singleCartData } = useGetSingleCartQuery(undefined);
   const cartData = singleCartData?.data;
   const [increaseQuantity] = useAddAndUpdateCartMutation();
   const [decreseQuantity] = useReduceCartQtyMutation();
+  const [deleteCartItem] = useDeleteCartItemMutation();
 
   const totalSum = cartData?.totalSum;
   const cartItems = cartData?.data?.cartItem || [];
@@ -23,6 +26,10 @@ const CartPage = () => {
   const handleDecreaseQuantity = async (productId: string) => {
     const data = { productId, quantity: 1 };
     await decreseQuantity(data).unwrap();
+  };
+
+  const handleDeleteCartItem = async (productId: string) => {
+    await deleteCartItem(productId).unwrap();
   };
 
   return (
@@ -90,6 +97,12 @@ const CartPage = () => {
                   title="Increase quantity"
                 >
                   +
+                </button>
+                <button
+                  onClick={() => handleDeleteCartItem(item.id)}
+                  className="bg-red-400  px-2 py-[6px] text-xl rounded hover:bg-gray-300"
+                >
+                  <MdDelete />
                 </button>
               </div>
             </li>
