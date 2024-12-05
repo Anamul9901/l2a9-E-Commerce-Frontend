@@ -3,9 +3,9 @@ import { baseApi } from "../../api/baseApi";
 const productApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllProduct: builder.query({
-      query: () => {
+      query: (data) => {
         return {
-          url: "/product",
+          url: `/product?limit=${data?.limit}&page=${data?.page}`,
           method: "GET",
         };
       },
@@ -34,7 +34,6 @@ const productApi = baseApi.injectEndpoints({
 
     getSingleProduct: builder.query({
       query: (data) => {
-        console.log('2 ids',data);
         return {
           url: `/product/${data?.productId}?userId=${data?.userId}`,
           method: "GET",

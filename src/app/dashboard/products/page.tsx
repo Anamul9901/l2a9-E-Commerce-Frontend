@@ -8,17 +8,20 @@ import {
 } from "@/src/redux/features/products/productApi";
 import Link from "next/link";
 import { useState } from "react";
-import { FaEdit } from "react-icons/fa";
-import { IoDuplicate } from "react-icons/io5";
 import { MdDeleteForever } from "react-icons/md";
 import { toast } from "sonner";
 import Swal from "sweetalert2";
 
 const Products = () => {
-    const [dublicateProductId, setDublicateProductId] = useState('');
+  const [dublicateProductId, setDublicateProductId] = useState("");
   const { data: getMyProducts } = useGetMyProductQuery(undefined);
   const myPruducts = getMyProducts?.data;
   const [deleteProduct] = useSoftDeleteProductMutation();
+
+
+  const findSingleProduct = myPruducts?.find(
+    (product: any) => product?.id === dublicateProductId
+  );
 
   const handleDelete = (id: string) => {
     Swal.fire({
@@ -32,7 +35,6 @@ const Products = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const res = await deleteProduct(id).unwrap();
-        console.log(res);
         if (res) {
           toast.success(res?.message);
         }
@@ -100,11 +102,14 @@ const Products = () => {
 
               {/* Action Buttons */}
               <div className="flex justify-between pt-2 gap-2">
-                <button onClick={() => handleDublicateId(product?.id)} className="">
-                <DublicateProductModal id={dublicateProductId} />
+                <button
+                  onClick={() => handleDublicateId(product?.id)}
+                  className=""
+                >
+                  <DublicateProductModal product={findSingleProduct} />
                 </button>
                 <button onClick={() => handleDublicateId(product?.id)}>
-                  <UpdateProductModal id={dublicateProductId} />
+                  <UpdateProductModal product={findSingleProduct} />
                 </button>
                 <button
                   onClick={() => handleDelete(product?.id)}

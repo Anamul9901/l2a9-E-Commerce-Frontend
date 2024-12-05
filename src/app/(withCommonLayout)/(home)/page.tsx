@@ -1,12 +1,38 @@
 // rafce
-'use client'
+"use client";
 import ProductsCard from "@/src/components/Card/ProductCard";
 import { useGetAllProductQuery } from "@/src/redux/features/products/productApi";
-import React from "react";
+import { Spinner } from "@nextui-org/spinner";
+import React, { useEffect, useState } from "react";
 
 const HomePage = () => {
-  const { data: allProduct } = useGetAllProductQuery(undefined);
-  console.log(allProduct)
+  const [productLimit, setProductLimit] = useState(10);
+  const [productPage, setProductPage] = useState(1);
+  const data = { limit: productLimit, page: productPage };
+  const { data: allProduct, isLoading } = useGetAllProductQuery(data);
+  console.log(allProduct);
+
+  const handelInfiniteScroll = async () => {
+    console.log("scrollHeight" + document.documentElement.scrollHeight);
+    console.log("innerHeight" + window.innerHeight);
+    console.log("scrollTop" + document.documentElement.scrollTop);
+    try {
+      if (
+        window.innerHeight + document.documentElement.scrollTop + 5 >=
+        document.documentElement.scrollHeight
+      ) {
+        // setProductPage((prev) => prev + 1);
+        setProductLimit((prev) => prev + 10);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handelInfiniteScroll);
+  }, []);
+
   return (
     <div>
       {/* <HeroSection /> */}
@@ -15,6 +41,7 @@ const HomePage = () => {
           <ProductsCard products={product} />
         ))}
       </div>
+      <div className="text-center text-2xl">{isLoading && <Spinner />}</div>
     </div>
   );
 };

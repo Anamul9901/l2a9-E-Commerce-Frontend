@@ -5,12 +5,14 @@ import Loading from "../UI/loading";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 import FXModal from "./FXModal";
-import { useAddProductMutation, useGetSingleProductQuery } from "@/src/redux/features/products/productApi";
+import {
+  useAddProductMutation,
+  useGetSingleProductQuery,
+} from "@/src/redux/features/products/productApi";
 
-const DublicateProductModal = ({ id }: { id: string }) => {
+const DublicateProductModal = ({ product }: { product: any }) => {
   const [addProduct, { isLoading, error }] = useAddProductMutation();
-  const {data: singleData} = useGetSingleProductQuery(id);
-  const singleProduct = singleData?.data;
+ 
   if (error) {
     toast.error((error as any)?.data?.message);
   }
@@ -19,14 +21,12 @@ const DublicateProductModal = ({ id }: { id: string }) => {
     const inventoryCount = Number(data.inventoryCount);
     data.price = price;
     data.inventoryCount = inventoryCount;
-    console.log(data);
     const res = await addProduct(data).unwrap();
-    console.log(res);
     if (res?.data) {
       toast.success(res?.message);
     }
   };
-  
+
   return (
     <div>
       {isLoading && <Loading />}
@@ -37,20 +37,35 @@ const DublicateProductModal = ({ id }: { id: string }) => {
       >
         <FXForm onSubmit={onSubmit}>
           <div className="py-1">
-            <FXInput label="Name" name="name" defaultValue={singleProduct?.name} required></FXInput>
+            <FXInput
+              label="Name"
+              name="name"
+              defaultValue={product?.name}
+              required
+            ></FXInput>
           </div>
           <div className="py-1">
-            <FXInput label="Title" name="title" defaultValue={singleProduct?.title} required></FXInput>
+            <FXInput
+              label="Title"
+              name="title"
+              defaultValue={product?.title}
+              required
+            ></FXInput>
           </div>
           <div className="py-1">
-            <FXInput label="Category" name="category" defaultValue={singleProduct?.category} required></FXInput>
+            <FXInput
+              label="Category"
+              name="category"
+              defaultValue={product?.category}
+              required
+            ></FXInput>
           </div>
           <div className="py-1">
             <FXInput
               label="Price"
               name="price"
               type="number"
-              defaultValue={singleProduct?.price}
+              defaultValue={product?.price}
               required
             ></FXInput>
           </div>
@@ -59,12 +74,16 @@ const DublicateProductModal = ({ id }: { id: string }) => {
               label="Quantity"
               name="inventoryCount"
               type="number"
-              defaultValue={singleProduct?.inventoryCount}
+              defaultValue={product?.inventoryCount}
               required
             ></FXInput>
           </div>
           <div className="py-1">
-            <FXInput label="Images" name="images" defaultValue={singleProduct?.images}></FXInput>
+            <FXInput
+              label="Images"
+              name="images"
+              defaultValue={product?.images}
+            ></FXInput>
           </div>
           <div className="flex justify-center pt-2 w-full pb-2">
             <Button className="w-full" type="submit">
