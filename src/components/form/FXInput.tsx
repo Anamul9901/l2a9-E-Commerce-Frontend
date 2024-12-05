@@ -1,24 +1,29 @@
-"use client";
-import { IInput } from "@/src/types";
 import { Input } from "@nextui-org/input";
+import React from "react";
 import { useFormContext } from "react-hook-form";
 
-interface IProps extends IInput {}
-
-const FXInput = ({
+ const FXInput = ({
+  defaultValue,
   variant = "bordered",
   size = "md",
   required = false,
   type = "text",
   label,
   name,
-  defaultValue,
-  isDisabled
-}: IProps) => {
+  isDisabled,
+}: any) => {
   const {
     register,
+    setValue,
     formState: { errors },
   } = useFormContext();
+
+  // Set the default value for the field when the component mounts
+  React.useEffect(() => {
+    if (defaultValue !== undefined) {
+      setValue(name, defaultValue);
+    }
+  }, [defaultValue, name, setValue]);
 
   return (
     <Input
@@ -26,7 +31,6 @@ const FXInput = ({
       variant={variant}
       size={size}
       required={required}
-      defaultValue={defaultValue}
       type={type}
       label={label}
       isDisabled={isDisabled}
