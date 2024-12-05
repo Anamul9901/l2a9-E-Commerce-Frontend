@@ -61,7 +61,7 @@ const CouponPage = () => {
                     </td>
                     <td className="border border-gray-300 px-4 py-2 pl-8">
                       <div
-                        className="border w-[40px] h-[25px] text-xl text-red-500 items-center hover:text-red-300"
+                        className="w-[40px] h-[25px] text-xl text-red-500 items-center hover:text-red-300"
                         onClick={() => handleDeleteCoupon(coupon.id)}
                       >
                         <MdDelete className="" />

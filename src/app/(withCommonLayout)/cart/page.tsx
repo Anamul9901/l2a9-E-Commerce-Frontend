@@ -2,32 +2,38 @@
 
 import FXForm from "@/src/components/form/FXForm";
 import FXInput from "@/src/components/form/FXInput";
-import { selectCurrentUser } from "@/src/redux/features/auth/authSlice";
 import {
   useAddAndUpdateCartMutation,
   useDeleteCartItemMutation,
   useGetSingleCartQuery,
   useReduceCartQtyMutation,
 } from "@/src/redux/features/cart/cartApi";
-import { useGetMyDataQuery } from "@/src/redux/features/user/userApi";
-import { useAppSelector } from "@/src/redux/hooks";
+import { useGetSingleCouponMutation } from "@/src/redux/features/coupon/couponApi";
 import { Button } from "@nextui-org/button";
+import { useEffect, useState } from "react";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import { MdDelete } from "react-icons/md";
+import { toast } from "sonner";
 
 const CartPage = () => {
+  const [getDiscountProce, setDiscountProce] = useState<number | null>(null);
   const { data: singleCartData } = useGetSingleCartQuery(undefined);
   const cartData = singleCartData?.data;
   const [increaseQuantity] = useAddAndUpdateCartMutation();
   const [decreseQuantity] = useReduceCartQtyMutation();
   const [deleteCartItem] = useDeleteCartItemMutation();
 
-  const { data: myData } = useGetMyDataQuery(undefined);
-  const myDataInfo = myData?.data;
-  console.log(myDataInfo);
+  const [singleCoupon, { error }] = useGetSingleCouponMutation();
+
+  if (error) {
+    toast.error("Invalid Coupon Code");
+  }
+
 
   const totalSum = cartData?.totalSum;
   const cartItems = cartData?.data?.cartItem || [];
+  const VendorId = cartData?.data?.vendorId;
+  console.log(VendorId);
 
   const handleIncreateQuantity = async (
     productId: string,
@@ -48,11 +54,37 @@ const CartPage = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     console.log(data);
+    const couponData = { couponId: data?.Coupon, vendorId: VendorId };
+    const res = await singleCoupon(couponData).unwrap();
+    console.log(res);
+    if (res.data) {
+      const discountPercent = res?.data?.discount;
+      const previousPrice = totalSum;
+      const discountPrice =
+        previousPrice - (previousPrice * discountPercent) / 100;
+      localStorage.setItem("discountPrice", JSON.stringify(discountPrice));
+      localStorage.setItem(
+        "discountCoupon",
+        JSON.stringify(res?.data?.couponCode)
+      );
+    }
+    const storedDiscountPrice = localStorage.getItem("discountPrice");
+    setDiscountProce(
+      storedDiscountPrice ? JSON.parse(storedDiscountPrice) : null
+    );
   };
 
-  const handleBuyNow = () => {
-    console.log("buy now");
+  const handleNotProductWarning = () => {
+    toast.error("No product added");
   };
+  // useEffect(() => {
+  //   if (typeof window !== "undefined") {
+  //     const storedDiscountPrice = localStorage.getItem("discountPrice");
+  //     setDiscountProce(
+  //       storedDiscountPrice ? JSON.parse(storedDiscountPrice) : null
+  //     );
+  //   }
+  // }, []);
 
   return (
     <div className="min-h-screen bg-gray-50 py-10 px-5 md:px-20">
@@ -143,7 +175,10 @@ const CartPage = () => {
         <div className="md:w-[30%] h-70 bg-white mt-10 md:mt-0 p-6 rounded-lg shadow-md text-black space-y-6">
           {/* Total Price */}
           <h1 className="text-lg font-semibold">
-            Discount Price: <span className="text-xl font-bold"><span className="text-green-600">${totalSum}</span></span>
+            Discount Price:{" "}
+            <span className="text-xl font-bold">
+              <span className="text-green-600">${getDiscountProce || totalSum}</span>
+            </span>
           </h1>
 
           {/* Coupon Form */}
@@ -164,6 +199,7 @@ const CartPage = () => {
                   className="w-full rounded-md bg-gradient-to-r from-teal-400 to-purple-500 text-white font-semibold py-2 hover:from-teal-500 hover:to-purple-600 transition"
                   size="lg"
                   type="submit"
+                  isDisabled={cartItems.length === 0}
                 >
                   Apply Coupon
                 </Button>
@@ -173,12 +209,21 @@ const CartPage = () => {
 
           {/* Checkout Button */}
           <div>
-            <a
-              href="/cart/checkout"
-              className="block w-full text-center bg-teal-500 text-white font-semibold py-2 rounded-md hover:bg-teal-600 transition"
-            >
-              Proceed to Checkout
-            </a>
+            {cartItems.length === 0 ? (
+              <a
+                onClick={handleNotProductWarning}
+                className="block w-full text-center bg-teal-500 text-white font-semibold py-2 rounded-md hover:bg-teal-600 transition"
+              >
+                Proceed to Checkout
+              </a>
+            ) : (
+              <a
+                href="/cart/checkout"
+                className="block w-full text-center bg-teal-500 text-white font-semibold py-2 rounded-md hover:bg-teal-600 transition"
+              >
+                Proceed to Checkout
+              </a>
+            )}
           </div>
         </div>
       </div>

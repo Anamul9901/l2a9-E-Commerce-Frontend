@@ -12,6 +12,17 @@ const couponApi = baseApi.injectEndpoints({
       providesTags: ["coupon"],
     }),
 
+    getSingleCoupon: builder.mutation({
+      query: (data) => {
+        console.log('data', data)
+        return {
+          url: `/coupon/${data?.couponId}`,
+          method: "POST",
+          body: {vendorId: data.vendorId},
+        };
+      },
+    }),
+
     createCoupon: builder.mutation({
       query: (data) => {
         return {
@@ -38,5 +49,6 @@ const couponApi = baseApi.injectEndpoints({
 export const {
   useCreateCouponMutation,
   useGetVendorCouponQuery,
+  useGetSingleCouponMutation,
   useDeleteCouponMutation,
 } = couponApi;

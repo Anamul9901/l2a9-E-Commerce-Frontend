@@ -9,9 +9,12 @@ import { useGetMyDataQuery } from "@/src/redux/features/user/userApi";
 import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
 import { Button } from "@nextui-org/button";
 import { Spinner } from "@nextui-org/spinner";
+import { useEffect, useState } from "react";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 
 const CheckoutPage = () => {
+  const [couponCode, setCouponCode] = useState();
+  const [getDiscountProce, setDiscountProce] = useState<number | null>(null);
   const { data: singleCartData } = useGetSingleCartQuery(undefined);
   const cartData = singleCartData?.data;
   const { user } = useAppSelector(selectCurrentUser);
@@ -21,17 +24,28 @@ const CheckoutPage = () => {
   const cartItems = cartData?.data?.cartItem || [];
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log(data);
+    data.couponCode = couponCode;
     const res = await orderCompleate(data).unwrap();
     console.log("res", res);
+    localStorage.removeItem("discountPrice");
+    localStorage.removeItem("discountCoupon");
     if (res.success) {
       window.location.href = res.data.payment_url;
     }
   };
 
-  const handleBuyNow = () => {
-    console.log("buy now");
-  };
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedDiscountPrice = localStorage.getItem("discountPrice");
+      const couponCode = JSON.parse(
+        localStorage.getItem("discountCoupon") as any
+      );
+      setCouponCode(couponCode);
+      setDiscountProce(
+        storedDiscountPrice ? JSON.parse(storedDiscountPrice) : null
+      );
+    }
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-50 py-10 px-5 md:px-20">
@@ -108,7 +122,10 @@ const CheckoutPage = () => {
         <div className="md:w-[30%] h-70 bg-white mt-10 md:mt-0 p-6 rounded-lg shadow-md text-black space-y-6">
           {/* Total Price */}
           <h1 className="text-lg font-semibold">
-            Total Price: <span className="text-xl font-bold">${totalSum}</span>
+            Discount Price:{" "}
+            <span className="text-green-600 font-bold">
+              ${getDiscountProce || totalSum || 0}
+            </span>
           </h1>
 
           {/* Checkout Button */}

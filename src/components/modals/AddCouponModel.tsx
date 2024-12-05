@@ -11,13 +11,11 @@ const AddCouponModel = () => {
   const [isMounted, setIsMounted] = useState(false);
   const [addCoupon, { isLoading }] = useCreateCouponMutation();
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log(data);
     const discount = Number(data.discount);
     data.discount = discount;
     const res = await addCoupon(data).unwrap();
-    console.log(res);
-    if(res.success){
-      toast.success('Coupon Added Successfully')
+    if (res.success) {
+      toast.success("Coupon Added Successfully");
     }
   };
 
