@@ -4,8 +4,15 @@ const productApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllProduct: builder.query({
       query: (data) => {
+        const params = new URLSearchParams();
+
+        if (data?.searchTerm) params.append("searchTerm", data.searchTerm);
+        if (data?.category) params.append("category", data.category);
+        if (data?.limit) params.append("limit", data.limit);
+        if (data?.page) params.append("page", data.page);
+
         return {
-          url: `/product?limit=${data?.limit}&page=${data?.page}`,
+          url: `/product?${params.toString()}`,
           method: "GET",
         };
       },
@@ -43,9 +50,9 @@ const productApi = baseApi.injectEndpoints({
     }),
 
     getShopProduct: builder.query({
-      query: (shopId) => {
+      query: (data) => {
         return {
-          url: `/product/shop-product/${shopId}`,
+          url: `/product/shop-product/${data?.shopId}?limit=${data.limit}`,
           method: "GET",
         };
       },

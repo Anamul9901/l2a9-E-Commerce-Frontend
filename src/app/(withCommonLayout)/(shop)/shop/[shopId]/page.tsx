@@ -10,12 +10,15 @@ import { useGetShopProductQuery } from "@/src/redux/features/products/productApi
 import { useGetSingleshopQuery } from "@/src/redux/features/shop/shopApi";
 import { Button } from "@nextui-org/button";
 import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const ShopPage = () => {
+  const [productLimit, setProductLimit] = useState(10);
   const { shopId } = useParams();
   const { data: singleShop } = useGetSingleshopQuery(shopId);
   const singleShopData = singleShop?.data;
-  const { data: getShopProduct } = useGetShopProductQuery(shopId);
+  const productData = { shopId, limit: productLimit };
+  const { data: getShopProduct } = useGetShopProductQuery(productData);
   const shopProducts = getShopProduct?.data;
   const { data: getFollowerCount } = useGetFollowerCountQuery(shopId);
   const followerThisShop = getFollowerCount?.data?.follower;
@@ -31,6 +34,23 @@ const ShopPage = () => {
   const handleUnfollowShop = async () => {
     const res = await removeFollower(shopId);
   };
+
+  const handelInfiniteScroll = async () => {
+    try {
+      if (
+        window.innerHeight + document.documentElement.scrollTop + 5 >=
+        document.documentElement.scrollHeight
+      ) {
+        setProductLimit((prev) => prev + 10);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handelInfiniteScroll);
+  }, []);
   return (
     <div>
       {/* Profile Banner */}

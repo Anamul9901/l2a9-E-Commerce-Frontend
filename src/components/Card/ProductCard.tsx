@@ -50,7 +50,7 @@ const ProductsCard = ({ products }: { products: any }) => {
     <div className="max-w-sm mx-auto bg-gray-900 rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-y-105 hover:shadow-2xl">
       {/* Product Image */}
       <div className="relative">
-        <Image
+        <img
           className="w-full h-45 object-cover rounded-lg shadow-sm"
           src={
             products?.images ||
@@ -59,7 +59,6 @@ const ProductsCard = ({ products }: { products: any }) => {
           alt={products?.title || "Product Image"}
           height={300}
           width={300}
-          priority={true}
         />
 
         <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
@@ -74,30 +73,14 @@ const ProductsCard = ({ products }: { products: any }) => {
 
       {/* Product Details */}
       <div className="px-4 py-2">
-        {/* Shop Information */}
-        {/* <div className="flex items-center gap-3 pb-1">
-          <Link href={`/profile/${products?.shop?.id}`}>
-            <img
-              src={
-                products?.shop?.logo ||
-                "https://i.ibb.co/kBNtTmC/No-Image-Available.jpg"
-              }
-              alt="Shop Logo"
-              className="w-10 h-10 rounded-full border-2 border-teal-400"
-            />
-          </Link>
-          <Link
-            href={`/profile/${products?.shop?.id}`}
-            className="text-teal-400 text-sm font-bold hover:text-teal-300"
-          >
-            {products?.shop?.name || "Shop Name"}
-          </Link>
-        </div> */}
 
         {/* Product Title */}
         <h3 className="text-lg font-semibold text-white truncate">
           {products?.name || "Product Name"}
         </h3>
+        {/* <h3 className="text-sm text-white truncate">
+        Category: {products?.category || "Product category"}
+        </h3> */}
 
         <div className="flex items-center justify-between">
           {/* Product Price */}
@@ -135,8 +118,9 @@ const ProductsCard = ({ products }: { products: any }) => {
       <div className="flex justify-between items-center bg-gray-800 p-2">
         {/* Rating */}
         <div className="flex items-center text-teal-400">
-          <span className="mr-1">⭐</span>
-          <span className="text-sm">{products?.rating || "No Rating"}</span>
+          {/* <span className="mr-1">⭐</span> */}
+          {/* <span className="text-sm">{products?.rating || "No Rating"}</span> */}
+          <span className="text-sm">{products?.category || "No Rating"}</span>
         </div>
 
         {/* Add to Cart Button */}

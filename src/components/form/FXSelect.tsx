@@ -9,6 +9,8 @@ interface IProps extends IInput {
   }[];
 }
 
+
+
 const FXSelect = ({
   options,
   name,
@@ -20,10 +22,9 @@ const FXSelect = ({
     register,
     formState: { errors },
   } = useFormContext();
-
   return (
     <Select
-      {...register(name, {required: true})}
+      {...register(name)}
       label={label}
       className="max-w-[284px] min-w-full"
       variant={variant}

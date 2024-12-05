@@ -15,7 +15,7 @@ const SingleProductPage = () => {
   const singleProduct = singleData?.data;
 
   return (
-    <div className="w-full h-[94vh] flex justify-center items-center">
+    <div className="w-full min-h-[94vh] flex justify-center items-center">
       <SingleProductCard products={singleProduct} />
     </div>
   );

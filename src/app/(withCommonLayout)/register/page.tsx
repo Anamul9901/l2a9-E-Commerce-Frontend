@@ -25,6 +25,10 @@ const Register = () => {
     }
   }, [error]);
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    if(data.role == ""){
+      toast.error("Please select role");
+      return;
+    }
     const res = await resigter(data).unwrap();
     if (res?.data) {
       toast.success(`${res?.message}`);
@@ -77,7 +81,6 @@ const Register = () => {
               name="role"
               label="Role"
               options={selectOpdiont}
-              required
             />
 
             <Button
