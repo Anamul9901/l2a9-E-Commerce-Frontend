@@ -1,16 +1,22 @@
 "use client";
 import React from "react";
 import AddCouponModel from "@/src/components/modals/AddCouponModel";
-import { useGetVendorCouponQuery } from "@/src/redux/features/coupon/couponApi";
+import {
+  useDeleteCouponMutation,
+  useGetVendorCouponQuery,
+} from "@/src/redux/features/coupon/couponApi";
 import { MdDelete } from "react-icons/md";
+import { toast } from "sonner";
 
 const CouponPage = () => {
   // Fetch coupons
   const { data: getAllCoupon } = useGetVendorCouponQuery(undefined);
   const allCoupon = getAllCoupon?.data;
+  const [deleteCoupon] = useDeleteCouponMutation();
 
   const handleDeleteCoupon = async (id: string) => {
-    console.log(id)
+    const res = await deleteCoupon(id).unwrap();
+    if (res.success) toast.success("Coupon Deleted Successfully");
   };
 
   return (
@@ -53,11 +59,13 @@ const CouponPage = () => {
                     <td className="border border-gray-300 px-4 py-2">
                       {coupon.discount}
                     </td>
-                    <td
-                      
-                      className="border border-gray-300 px-4 py-2 pl-8"
-                    >
-                      <MdDelete onClick={() => handleDeleteCoupon(coupon.id)} className="text-xl text-red-500 items-center" />
+                    <td className="border border-gray-300 px-4 py-2 pl-8">
+                      <div
+                        className="border w-[40px] h-[25px] text-xl text-red-500 items-center hover:text-red-300"
+                        onClick={() => handleDeleteCoupon(coupon.id)}
+                      >
+                        <MdDelete className="" />
+                      </div>
                     </td>
                   </tr>
                 ))
