@@ -123,6 +123,42 @@ const Sidebar = () => {
             </Link>
           </li>
 
+          {/* Order history */}
+          <li className="w-full mb-2">
+            <Link href="/dashboard/order-history?key=order-history">
+              <div
+                className={`block px-2 py-4 text-white text-center md:text-left rounded-lg transition-all duration-300 hover:bg-purple-700 hover:shadow-xl ${
+                  queryValue === "order-history"
+                    ? "bg-purple-700 shadow-xl text-[#ff4a4afd] font-extrabold"
+                    : ""
+                }`}
+              >
+                <span className="material-icons md:hidden">
+                  <IoFastFood />
+                </span>
+                <span className="hidden md:inline-block ml-2">Shop Order History</span>
+              </div>
+            </Link>
+          </li>
+
+          {/* shop Order history */}
+          <li className="w-full mb-2">
+            <Link href="/dashboard/shop-order-history?key=shop-order-history">
+              <div
+                className={`block px-2 py-4 text-white text-center md:text-left rounded-lg transition-all duration-300 hover:bg-purple-700 hover:shadow-xl ${
+                  queryValue === "shop-order-history"
+                    ? "bg-purple-700 shadow-xl text-[#ff4a4afd] font-extrabold"
+                    : ""
+                }`}
+              >
+                <span className="material-icons md:hidden">
+                  <IoFastFood />
+                </span>
+                <span className="hidden md:inline-block ml-2">Shop Order History</span>
+              </div>
+            </Link>
+          </li>
+
           {/* Membership */}
           <li className="w-full mb-2">
             <Link href="/dashboard/membership?key=membership">

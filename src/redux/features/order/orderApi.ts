@@ -2,20 +2,20 @@ import { baseApi } from "../../api/baseApi";
 
 const orderApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getAllorder: builder.query({
+    getCustomerOrder: builder.query({
       query: () => {
         return {
-          url: "/order",
+          url: "/order/for-customer",
           method: "GET",
         };
       },
       providesTags: ["order"],
     }),
 
-    getSingleorder: builder.query({
+    getShopOrder: builder.query({
       query: (id) => {
         return {
-          url: `/order/${id}`,
+          url: `/order/for-vendor`,
           method: "GET",
         };
       },
@@ -33,35 +33,11 @@ const orderApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ["order"],
     }),
-
-    updateorder: builder.mutation({
-      query: (data) => {
-        return {
-          url: `/comment/${data?.id}`,
-          method: "Put",
-          body: data?.data,
-        };
-      },
-      invalidatesTags: ["order"],
-    }),
-
-    deleteorder: builder.mutation({
-      query: (id) => {
-        return {
-          url: `/comment/${id}`,
-          method: "DELETE",
-        };
-      },
-      invalidatesTags: ["order"],
-    }),
   }),
 });
 
 export const {
   useCreateOrderMutation,
-
-  useGetAllorderQuery,
-  useGetSingleorderQuery,
-  useUpdateorderMutation,
-  useDeleteorderMutation,
+  useGetCustomerOrderQuery,
+  useGetShopOrderQuery,
 } = orderApi;
