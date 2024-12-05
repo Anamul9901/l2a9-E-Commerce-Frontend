@@ -11,7 +11,6 @@ const OrderHistory = () => {
   } = useGetCustomerOrderQuery(undefined);
   const orderHistory = customerOrder?.data;
 
-  console.log(orderHistory)
 
   // Modal state
   const [isModalOpen, setIsModalOpen] = useState(false);

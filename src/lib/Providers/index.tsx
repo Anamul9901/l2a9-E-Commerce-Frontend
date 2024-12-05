@@ -8,6 +8,7 @@ import { ThemeProviderProps } from "next-themes/dist/types";
 import { store } from "@/src/redux/store";
 import { Provider } from "react-redux";
 import { Toaster } from "sonner";
+import GoToTop from "@/src/components/GoToTop/GoToTop";
 
 export interface ProvidersProps {
   children: React.ReactNode;
@@ -23,6 +24,7 @@ export function Providers({ children, themeProps }: ProvidersProps) {
         <Toaster />
         <NextThemesProvider {...themeProps}>{children}</NextThemesProvider>
       </Provider>
+      <GoToTop />
     </NextUIProvider>
   );
 }

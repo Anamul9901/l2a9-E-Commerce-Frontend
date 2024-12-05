@@ -11,7 +11,6 @@ const ShopOrderHistory = () => {
   } = useGetShopOrderQuery(undefined);
   const orderHistory = customerOrder?.data;
 
-  console.log(orderHistory);
 
 
 
