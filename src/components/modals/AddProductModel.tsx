@@ -6,8 +6,10 @@ import { FieldValues, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 import FXModal from "./FXModal";
 import { useAddProductMutation } from "@/src/redux/features/products/productApi";
+import { useEffect, useState } from "react";
 
 const AddProductModel = () => {
+  const [isMounted, setIsMounted] = useState(false);
   const [addProduct, { isLoading, error }] = useAddProductMutation();
   if (error) {
     toast.error((error as any)?.data?.message);
@@ -24,6 +26,15 @@ const AddProductModel = () => {
       toast.success(res?.message);
     }
   };
+
+   // For hydration error handle
+   useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null;
+  }
   return (
     <div>
       {isLoading && <Loading />}
