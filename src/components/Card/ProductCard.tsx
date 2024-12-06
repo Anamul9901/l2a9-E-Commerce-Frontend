@@ -124,7 +124,7 @@ const ProductsCard = ({ products }: { products: any }) => {
 
         {/* Add to Cart Button */}
         <button
-          className="bg-teal-500 text-white text-sm px-4 py-2 rounded shadow-md hover:bg-teal-600 transition"
+          className="bg-teal-500 text-white text-sm md:px-4 md:py-2 px-2 py-1 rounded shadow-md hover:bg-teal-600 transition"
           onClick={() => handleDddToCart(products?.id, products?.userId)}
         >
           Add to Cart

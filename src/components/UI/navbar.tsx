@@ -25,7 +25,6 @@ export const Navbar = () => {
   
   const [isMounted, setIsMounted] = useState(false);
   const { user } = useAppSelector(selectCurrentUser);
-console.log(user)
     // For hydration error handle
     useEffect(() => {
       setIsMounted(true);

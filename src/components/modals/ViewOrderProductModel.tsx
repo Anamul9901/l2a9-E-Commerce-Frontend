@@ -1,7 +1,6 @@
 import FXModal from "./FXModal";
 
 const ViewOrderProductModel = ({ order }: { order: any }) => {
-  console.log(order);
   return (
     <div>
       <FXModal

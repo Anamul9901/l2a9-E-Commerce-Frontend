@@ -15,7 +15,6 @@ const CategoryPage = () => {
   const { data: getAllCategory } = useGetAllCategoryQuery(undefined);
   const categoryOptions = getAllCategory?.data;
   const [deleteCategory] = useDeleteCategoryMutation();
-  console.log(categoryId);
 
   const findCatgory = categoryOptions?.find(
     (category: any) => category.id == categoryId

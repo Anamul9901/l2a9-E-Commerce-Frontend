@@ -32,7 +32,6 @@ const CartPage = () => {
   const totalSum = cartData?.totalSum;
   const cartItems = cartData?.data?.cartItem || [];
   const VendorId = cartData?.data?.vendorId;
-  console.log(VendorId);
 
   const handleIncreateQuantity = async (
     productId: string,
@@ -52,10 +51,8 @@ const CartPage = () => {
   };
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log(data);
     const couponData = { couponId: data?.Coupon, vendorId: VendorId };
     const res = await singleCoupon(couponData).unwrap();
-    console.log(res);
     if (res.data) {
       const discountPercent = res?.data?.discount;
       const previousPrice = totalSum;

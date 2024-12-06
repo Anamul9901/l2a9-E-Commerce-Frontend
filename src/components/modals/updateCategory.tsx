@@ -13,7 +13,6 @@ const UpdateCategoryModel = ({ category }: { category: any }) => {
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const findlData = { data, id: category.id };
     const res = await updateCategory(findlData).unwrap();
-    console.log('res', res)
     if (res.success) {
       toast.success("Category Updated Successfully");
     }

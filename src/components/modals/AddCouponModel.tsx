@@ -9,7 +9,12 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 const AddCouponModel = () => {
   const [isMounted, setIsMounted] = useState(false);
-  const [addCoupon, { isLoading }] = useCreateCouponMutation();
+  const [addCoupon, { isLoading, isError }] = useCreateCouponMutation();
+  useEffect(() => {
+    if (isError) {
+      toast.error("This coupon is not available. Try another one.");
+    }
+  }, [isError]);
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const discount = Number(data.discount);
     data.discount = discount;

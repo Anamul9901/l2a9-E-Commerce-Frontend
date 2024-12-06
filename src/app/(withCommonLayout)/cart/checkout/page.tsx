@@ -26,7 +26,6 @@ const CheckoutPage = () => {
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     data.couponCode = couponCode;
     const res = await orderCompleate(data).unwrap();
-    console.log("res", res);
     localStorage.removeItem("discountPrice");
     localStorage.removeItem("discountCoupon");
     if (res.success) {

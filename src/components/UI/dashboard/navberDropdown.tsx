@@ -11,6 +11,7 @@ import { Avatar } from "@nextui-org/avatar";
 import { useGetSingleshopQuery } from "@/src/redux/features/shop/shopApi";
 import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
 import { logout, selectCurrentUser } from "@/src/redux/features/auth/authSlice";
+import { useGetMyDataQuery } from "@/src/redux/features/user/userApi";
 
 const NavberDropdown = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -18,10 +19,9 @@ const NavberDropdown = () => {
   const dispatch = useAppDispatch();
   const { user } = useAppSelector(selectCurrentUser);
   const userId = (user as any)?.id;
+  const userRole = (user as any)?.role;
   const { data: shopData } = useGetSingleshopQuery(userId);
-
   const shopId = shopData?.data?.id;
-
   const handleNavigation = (pathname: string) => {
     router.push(pathname);
   };
@@ -43,15 +43,38 @@ const NavberDropdown = () => {
         <Avatar className="cursor-pointer" name="ana" />
       </DropdownTrigger>
       <DropdownMenu aria-label="Static Actions">
-        <DropdownItem onClick={() => handleNavigation(`/shop/${shopId}`)}>
-          Profile
-        </DropdownItem>
+        {/* {userRole == "vendor" ? (
+          <DropdownItem onClick={() => handleNavigation(`/shop/${shopId}`)}>
+            Profile
+          </DropdownItem>
+        ) : null} */}
 
-        <DropdownItem
-          onClick={() => handleNavigation("/dashboard?key=dashboard")}
-        >
-          Dashboard
-        </DropdownItem>
+        {userRole == "vendor" && shopData ? (
+          <>
+            <DropdownItem onClick={() => handleNavigation(`/shop/${shopId}`)}>
+              Profile
+            </DropdownItem>
+            <DropdownItem
+              onClick={() => handleNavigation("/dashboard?key=dashboard")}
+            >
+              Dashboard
+            </DropdownItem>
+          </>
+        ) : null}
+        {userRole == "vendor" && !shopData ? (
+          <DropdownItem onClick={() => handleNavigation("/create-shop")}>
+            Create shop
+          </DropdownItem>
+        ) : null}
+
+        {userRole != "vendor" ? (
+          <DropdownItem
+            onClick={() => handleNavigation("/dashboard?key=dashboard")}
+          >
+            Dashboard
+          </DropdownItem>
+        ) : null}
+
         <DropdownItem
           onClick={() => handleLogOut()}
           className="text-danger"

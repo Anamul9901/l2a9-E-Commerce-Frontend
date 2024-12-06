@@ -62,7 +62,7 @@ const RecentViewProducts = () => {
                   <td className="px-6 py-4 whitespace-nowrap">
                     <img
                       src={
-                        product.image ||
+                        product?.images ||
                         "https://i.ibb.co/kBNtTmC/No-Image-Available.jpg"
                       }
                       alt={product.name}

@@ -31,7 +31,6 @@ const Sidebar = () => {
     // currenttUser = verifyToken(user?.token);
   }
   const currenttUserRole = (user as any)?.user?.role;
-  console.log(currenttUserRole);
 
   return (
     <div className="min-h-screen fixed h-full flex bg-gray-900">

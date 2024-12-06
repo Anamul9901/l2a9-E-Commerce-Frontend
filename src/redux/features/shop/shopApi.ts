@@ -24,7 +24,6 @@ const shopApi = baseApi.injectEndpoints({
 
     addShop: builder.mutation({
       query: (data) => {
-        console.log("data", data);
         return {
           url: "/shop",
           method: "POST",

@@ -1,42 +1,39 @@
 "use client";
 
 import { useGetAllshopQuery } from "@/src/redux/features/shop/shopApi";
+import { useBlockUserMutation, useUnblockUserMutation } from "@/src/redux/features/user/userApi";
 import { toast } from "sonner";
 import Swal from "sweetalert2";
 
 const AllShop = () => {
   const { data: allShop } = useGetAllshopQuery(undefined);
+  
+  const [blockedUser] = useBlockUserMutation();
+  const [unblockedUser]= useUnblockUserMutation();
   const allShopData = allShop?.data;
-  console.log(allShopData);
 
   const handleUnblockUser = async (id: string) => {
-    const finalData = { data: { status: "active" }, id };
-    // const res = await userUpdate(finalData).unwrap();
+    const res = await unblockedUser(id).unwrap();
   };
   const handleBlockUser = async (id: string) => {
-    const finalData = { data: { status: "blocked" }, id };
-    // const res = await userUpdate(finalData).unwrap();
-  };
-  const handleDeleteUser = async (id: string) => {
-    console.log(id);
     Swal.fire({
       title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      text: "This Vendor, Shop and Product will be blocked!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonText: "Yes, blocked!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const finalData = { data: { status: "deleted" }, id };
-        // const res = await userUpdate(finalData).unwrap();
-        //   if (res) {
-        //     toast.success('User deleted successfully');
-        //   }
+        const res = await blockedUser(id).unwrap();
+        if (res) {
+          toast.success("Shop blocked successfully");
+        }
       }
     });
   };
+ 
 
   return (
     <div className="min-h-screen bg-gray-900 text-white flex justify-center pt-10 px-4">
@@ -81,28 +78,22 @@ const AllShop = () => {
 
                   <td className=" py-4 items-center whitespace-nowrap flex justify-center md:justify-start space-x-4">
                     <div>
-                      {user?.status == "blocked" ? (
+                      {user?.isDeleted ? (
                         <button
-                          onClick={() => handleUnblockUser(user?.id)}
+                          onClick={() => handleUnblockUser(user?.userId)}
                           className="px-2 py-1 bg-green-500 hover:bg-green-700 rounded-full text-sm transition duration-300"
                         >
                           Unblock
                         </button>
                       ) : (
                         <button
-                          onClick={() => handleBlockUser(user?.id)}
+                          onClick={() => handleBlockUser(user?.userId)}
                           className="px-2 py-1 bg-yellow-500 hover:bg-yellow-700 rounded-full text-sm transition duration-300"
                         >
                           Block
                         </button>
                       )}
                     </div>
-                    <button
-                      onClick={() => handleDeleteUser(user?.id)}
-                      className="px-2 py-1 bg-red-500 hover:bg-red-700 rounded-full  transition duration-300"
-                    >
-                      Delete
-                    </button>
                     <a
                       href={`/shop/${user.id}`}
                       className="px-2 py-1 bg-green-500 hover:bg-green-700 rounded-full  transition duration-300"
@@ -128,14 +119,14 @@ const AllShop = () => {
                 <div className="space-x-2">
                   {user?.isBlocked ? (
                     <button
-                      onClick={() => handleUnblockUser(user?.id)}
+                      onClick={() => handleUnblockUser(user?.usreId)}
                       className="px-3 py-1 bg-green-500 hover:bg-green-700 rounded-full text-sm transition duration-300"
                     >
                       Unblock
                     </button>
                   ) : (
                     <button
-                      onClick={() => handleBlockUser(user?.id)}
+                      onClick={() => handleBlockUser(user?.userId)}
                       className="px-3 py-1 bg-yellow-500 hover:bg-yellow-700 rounded-full text-sm transition duration-300"
                     >
                       Block

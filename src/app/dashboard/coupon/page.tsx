@@ -16,7 +16,9 @@ const CouponPage = () => {
 
   const handleDeleteCoupon = async (id: string) => {
     const res = await deleteCoupon(id).unwrap();
-    if (res.success) toast.success("Coupon Deleted Successfully");
+    if (res.success) {
+      toast.success("Coupon Deleted Successfully");
+    }
   };
 
   return (

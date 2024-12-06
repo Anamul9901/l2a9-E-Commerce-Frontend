@@ -57,9 +57,7 @@ const AddProductModel = () => {
     const inventoryCount = Number(data.inventoryCount);
     data.price = price;
     data.inventoryCount = inventoryCount;
-    console.log(data);
     const res = await addProduct(data).unwrap();
-    console.log(res);
     if (res?.data) {
       toast.success(res?.message);
     }

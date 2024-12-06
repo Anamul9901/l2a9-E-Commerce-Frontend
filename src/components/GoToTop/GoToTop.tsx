@@ -10,7 +10,6 @@ const GoToTop = () => {
   const listenToScroll = () => {
     const winSacroll =
       document.body.scrollTop || document.documentElement.scrollTop;
-    // console.log(winSacroll);
     if (winSacroll > 200) {
       setIsVisible(true);
     } else {

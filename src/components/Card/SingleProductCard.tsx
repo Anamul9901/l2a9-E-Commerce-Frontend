@@ -15,7 +15,6 @@ const SingleProductCard = ({ products }: { products: any }) => {
     useCheckSameVendorProductQuery(undefined);
   const CheckSameVendorProductId = checkSameVendorProduct?.data?.vendorId;
   const productCategory = products?.category;
-  console.log({ productCategory });
 
   const { data: categoryProducts, isLoading } = useGetAllProductQuery({
     category: productCategory,
@@ -24,7 +23,6 @@ const SingleProductCard = ({ products }: { products: any }) => {
 
   const reletedCategoryProduct = categoryProducts?.data;
 
-  console.log("cate pro", reletedCategoryProduct);
 
   const handleDddToCart = async (productId: string, vendorId: string) => {
     if (CheckSameVendorProductId == vendorId) {

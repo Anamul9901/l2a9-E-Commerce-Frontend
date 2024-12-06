@@ -11,7 +11,6 @@ const SingleProductPage = () => {
   const { productId } = useParams();
   const data = { productId, userId };
   const { data: singleData } = useGetSingleProductQuery(data);
-  console.log("single", singleData);
   const singleProduct = singleData?.data;
 
   return (

@@ -14,7 +14,6 @@ const couponApi = baseApi.injectEndpoints({
 
     getSingleCoupon: builder.mutation({
       query: (data) => {
-        console.log("data", data);
         return {
           url: `/coupon/${data?.couponId}`,
           method: "POST",
