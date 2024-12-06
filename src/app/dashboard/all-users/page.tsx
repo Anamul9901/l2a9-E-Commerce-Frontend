@@ -1,29 +1,50 @@
 "use client";
 
 import {
+  useBlockUserMutation,
+  useDeleteUserMutation,
   useGetAlluserQuery,
+  useUnblockUserMutation,
   useUpdateuserMutation,
 } from "@/src/redux/features/user/userApi";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import Swal from "sweetalert2";
 
 const AllUsers = () => {
+  const [isMounted, setIsMounted] = useState(false);
   const { data: alluser } = useGetAlluserQuery(undefined);
   const userData = alluser?.data;
   const [userUpdate] = useUpdateuserMutation();
+  const [deleteUser] = useDeleteUserMutation();
+  const [blockedUser] = useBlockUserMutation();
+  const [unblockedUser]= useUnblockUserMutation();
 
   const handleUnblockUser = async (id: string) => {
-    const finalData = { data: { status: "active" }, id };
-    const res = await userUpdate(finalData).unwrap();
+    const res = await unblockedUser(id).unwrap();
   };
   const handleBlockUser = async (id: string) => {
-    const finalData = { data: { status: "blocked" }, id };
-    const res = await userUpdate(finalData).unwrap();
+    Swal.fire({
+      title: "Are you sure?",
+      text: "This Vendor, Shop and Product will be blocked!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, blocked!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await blockedUser(id).unwrap();
+        if (res) {
+          toast.success("User blocked successfully");
+        }
+      }
+    });
   };
   const handleDeleteUser = async (id: string) => {
     Swal.fire({
       title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      text: "This Vendor, Shop adn Product will be deleted!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -31,18 +52,22 @@ const AllUsers = () => {
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const finalData = { data: { status: "deleted" }, id };
-        const res = await userUpdate(finalData).unwrap();
+        const res = await deleteUser(id).unwrap();
         if (res) {
           toast.success("User deleted successfully");
         }
       }
     });
   };
-  //   const handleUpdateUser = async (id: string) => {
-  //     console.log(id);
-  //   };
 
+  // For hydration error handle
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null;
+  }
   return (
     <div className="min-h-screen bg-gray-900 text-white flex justify-center pt-10 px-4">
       <div className="w-full max-w-6xl">

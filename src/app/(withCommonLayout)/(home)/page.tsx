@@ -1,10 +1,10 @@
 // rafce
 "use client";
+import React, { useEffect, useState } from "react";
 import ProductsCard from "@/src/components/Card/ProductCard";
 import { useGetAllCategoryQuery } from "@/src/redux/features/Category/catogoryApi";
 import { useGetAllProductQuery } from "@/src/redux/features/products/productApi";
 import { Spinner } from "@nextui-org/spinner";
-import React, { useEffect, useState } from "react";
 
 // const categoryOptions = [
 //   { key: "electronics", label: "Electronics" },

@@ -1,6 +1,7 @@
 "use client";
 import ChangePasswordModal from "@/src/components/modals/ChangePasswordModal";
 import UpdateShopInfoModel from "@/src/components/modals/UpdateShopInfoModel";
+import { useGetFollowerCountQuery } from "@/src/redux/features/Follower/followerApi";
 import { useGetSingleshopQuery } from "@/src/redux/features/shop/shopApi";
 import { useGetMyDataQuery } from "@/src/redux/features/user/userApi";
 import { useEffect, useState } from "react";
@@ -11,8 +12,13 @@ const Dashboard = () => {
   const currentUserData = myData?.data;
 
   const userId = currentUserData?.id;
-  const { data: shopData } = useGetSingleshopQuery(userId);
+  const { data: shopData } = useGetSingleshopQuery(userId, { skip: !userId });
   const myShopInfo = shopData?.data;
+  const shopId = myShopInfo?.id;
+
+  const { data: getFollowerCount } = useGetFollowerCountQuery(shopId);
+  const followerThisShop = getFollowerCount?.data?.follower;
+
 
   // For hydration error handle
   useEffect(() => {
@@ -53,24 +59,35 @@ const Dashboard = () => {
         </div>
 
         {/* Statistics Section */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-6 py-4">
-          <div className="bg-gray-500 p-4 rounded-lg shadow">
-            <h4 className=" font-semibold text-gray-200">Followers</h4>
-            <p className=" text-gray-200">{myShopInfo?.followers || 0}</p>
-          </div>
-          <div className="bg-gray-500 p-4 rounded-lg shadow">
-            <h4 className=" font-semibold text-gray-200">Shop Title</h4>
-            <p className=" text-gray-200">{myShopInfo?.title || "No title"}</p>
-          </div>
-          <div className="bg-gray-500 p-4 rounded-lg shadow">
-            <h4 className=" font-semibold text-gray-200">Shop Name</h4>
-            <p className=" text-gray-200">{myShopInfo?.name || "No name"}</p>
-          </div>
-        </div>
+        {currentUserData && currentUserData?.role === "vendor" && (
+          <>
+            <h1 className="text-center font-semibold text-xl">Shop Info</h1>
+            <div className="grid text-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-6 py-4">
+              <div className="bg-gray-500 p-4 rounded-lg shadow">
+                <h4 className=" font-semibold text-gray-200">Followers</h4>
+                <p className=" text-gray-200">{followerThisShop || 0}</p>
+              </div>
+              <div className="bg-gray-500 p-4 rounded-lg shadow">
+                <h4 className=" font-semibold text-gray-200">Shop Name</h4>
+                <p className=" text-gray-200">
+                  {myShopInfo?.name || "No name"}
+                </p>
+              </div>
+              <div className="bg-gray-500 p-4 rounded-lg shadow">
+                <h4 className=" font-semibold text-gray-200">Shop Title</h4>
+                <p className=" text-gray-200">
+                  {myShopInfo?.title || "No title"}
+                </p>
+              </div>
+            </div>
+          </>
+        )}
 
         {/* Actions Section */}
         <div className="px-6 py-4 border-t border-gray-200 flex justify-center items-center space-x-4">
-          <UpdateShopInfoModel shopInfo={myShopInfo} />
+          {currentUserData && currentUserData?.role == "vendor" && (
+            <UpdateShopInfoModel shopInfo={myShopInfo} />
+          )}
 
           <ChangePasswordModal />
         </div>
@@ -83,6 +100,9 @@ const Dashboard = () => {
           <div className="bg-gray-200 p-4 rounded-lg shadow">
             <p className="text-black">
               <strong>Role:</strong> {currentUserData?.role || "No role"}
+            </p>
+            <p className="text-black">
+              <strong>Active:</strong> Yes
             </p>
           </div>
         </div>

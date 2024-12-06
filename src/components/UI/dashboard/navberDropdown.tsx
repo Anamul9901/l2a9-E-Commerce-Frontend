@@ -9,14 +9,14 @@ import {
 } from "@nextui-org/dropdown";
 import { Avatar } from "@nextui-org/avatar";
 import { useGetSingleshopQuery } from "@/src/redux/features/shop/shopApi";
-import { useAppSelector } from "@/src/redux/hooks";
-import { selectCurrentUser } from "@/src/redux/features/auth/authSlice";
+import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
+import { logout, selectCurrentUser } from "@/src/redux/features/auth/authSlice";
 
 const NavberDropdown = () => {
   const [isMounted, setIsMounted] = useState(false);
   const router = useRouter();
+  const dispatch = useAppDispatch();
   const { user } = useAppSelector(selectCurrentUser);
-  console.log(user);
   const userId = (user as any)?.id;
   const { data: shopData } = useGetSingleshopQuery(userId);
 
@@ -24,6 +24,10 @@ const NavberDropdown = () => {
 
   const handleNavigation = (pathname: string) => {
     router.push(pathname);
+  };
+
+  const handleLogOut = () => {
+    dispatch(logout());
   };
 
   // for hybration error handle
@@ -49,9 +53,9 @@ const NavberDropdown = () => {
           Dashboard
         </DropdownItem>
         <DropdownItem
-        // onClick={() => handleLogOut()}
-        // className="text-danger"
-        // color="danger"
+          onClick={() => handleLogOut()}
+          className="text-danger"
+          color="danger"
         >
           Logout
         </DropdownItem>

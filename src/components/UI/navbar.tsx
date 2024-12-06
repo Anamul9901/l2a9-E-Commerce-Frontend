@@ -1,3 +1,4 @@
+"use client";
 import {
   Navbar as NextUINavbar,
   NavbarContent,
@@ -8,7 +9,7 @@ import {
   NavbarMenuItem,
 } from "@nextui-org/navbar";
 import { Link } from "@nextui-org/link";
-import { link as linkStyles } from "@nextui-org/theme";
+import { divider, link as linkStyles } from "@nextui-org/theme";
 import NextLink from "next/link";
 import { Logo } from "../icons";
 import { siteConfig } from "../../config/site";
@@ -16,8 +17,23 @@ import { ThemeSwitch } from "../theme-switch";
 import NavberDropdown from "./dashboard/navberDropdown";
 import { HiMiniShoppingCart } from "react-icons/hi2";
 import clsx from "clsx";
+import { useAppSelector } from "@/src/redux/hooks";
+import { selectCurrentUser } from "@/src/redux/features/auth/authSlice";
+import { useEffect, useState } from "react";
 
 export const Navbar = () => {
+  
+  const [isMounted, setIsMounted] = useState(false);
+  const { user } = useAppSelector(selectCurrentUser);
+console.log(user)
+    // For hydration error handle
+    useEffect(() => {
+      setIsMounted(true);
+    }, []);
+  
+    if (!isMounted) {
+      return null;
+    }
   return (
     <NextUINavbar maxWidth="xl" position="sticky">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
@@ -34,7 +50,7 @@ export const Navbar = () => {
                 <NextLink
                   className={clsx(
                     linkStyles({ color: "foreground" }),
-                    "data-[active=true]:text-primary data-[active=true]:font-medium",
+                    "data-[active=true]:text-primary data-[active=true]:font-medium"
                   )}
                   color="foreground"
                   href={item.href}
@@ -53,7 +69,9 @@ export const Navbar = () => {
             <HiMiniShoppingCart className="text-xl text-gray-400" />
           </a>
           <ThemeSwitch />
-          <NavberDropdown />
+          <div>{user ? <NavberDropdown /> : 
+          <a href="/login">
+            Login</a>}</div>
         </NavbarItem>
         <div className="md:hidden w-[30px] h-[30px]">
           <NavbarMenuToggle className="w-full h-full" />

@@ -35,7 +35,7 @@ const userApi = baseApi.injectEndpoints({
 
     updateuser: builder.mutation({
       query: (data) => {
-        console.log('data', data)
+        console.log("data", data);
         return {
           url: `/user/${data?.id}`,
           method: "PATCH",
@@ -45,11 +45,31 @@ const userApi = baseApi.injectEndpoints({
       invalidatesTags: ["user"],
     }),
 
-    deleteuser: builder.mutation({
+    deleteUser: builder.mutation({
       query: (id) => {
         return {
-          url: `/comment/${id}`,
+          url: `/user/${id}`,
           method: "DELETE",
+        };
+      },
+      invalidatesTags: ["user"],
+    }),
+
+    blockUser: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/user/block/${id}`,
+          method: "PATCH",
+        };
+      },
+      invalidatesTags: ["user"],
+    }),
+
+    unblockUser: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/user/unblock/${id}`,
+          method: "PATCH",
         };
       },
       invalidatesTags: ["user"],
@@ -62,5 +82,7 @@ export const {
   useAdduserMutation,
   useGetMyDataQuery,
   useUpdateuserMutation,
-  useDeleteuserMutation,
+  useDeleteUserMutation,
+  useBlockUserMutation,
+  useUnblockUserMutation,
 } = userApi;
