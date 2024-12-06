@@ -5,11 +5,9 @@ import {
   useGetAllCategoryQuery,
 } from "@/src/redux/features/Category/catogoryApi";
 import { MdDelete } from "react-icons/md";
-import AddCouponModel from "@/src/components/modals/AddCouponModel";
 import AddCategoryModel from "@/src/components/modals/AddCategoryModel";
 import { toast } from "sonner";
 import Swal from "sweetalert2";
-import { FaEdit } from "react-icons/fa";
 import UpdateCategoryModel from "@/src/components/modals/updateCategory";
 
 const CategoryPage = () => {
@@ -95,7 +93,16 @@ const CategoryPage = () => {
                           <MdDelete />
                         </div>
 
-                        <div onClick={() => setCategoryId(coupon?.id)}>
+                        <div
+                          role="button"
+                          tabIndex={0}
+                          onClick={() => setCategoryId(coupon?.id)}
+                          onKeyPress={(e) => {
+                            if (e.key === "Enter" || e.key === " ") {
+                              setCategoryId(coupon?.id);
+                            }
+                          }}
+                        >
                           <UpdateCategoryModel category={findCatgory} />
                         </div>
                       </div>
