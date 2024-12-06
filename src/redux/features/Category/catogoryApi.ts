@@ -37,7 +37,7 @@ const catogoryApi = baseApi.injectEndpoints({
       query: (data) => {
         return {
           url: `/category/${data.id}`,
-          method: "DELETE",
+          method: "PATCH",
           body: data?.data,
         };
       },

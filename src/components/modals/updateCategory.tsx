@@ -6,14 +6,16 @@ import { FieldValues, SubmitHandler } from "react-hook-form";
 import FXInput from "../form/FXInput";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { useCreateCategoryMutation } from "@/src/redux/features/Category/catogoryApi";
+import { useUpdateCategoryMutation } from "@/src/redux/features/Category/catogoryApi";
 const UpdateCategoryModel = ({ category }: { category: any }) => {
   const [isMounted, setIsMounted] = useState(false);
-  const [addCategory, { isLoading }] = useCreateCategoryMutation();
+  const [updateCategory, { isLoading }] = useUpdateCategoryMutation();
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const res = await addCategory(data).unwrap();
+    const findlData = { data, id: category.id };
+    const res = await updateCategory(findlData).unwrap();
+    console.log('res', res)
     if (res.success) {
-      toast.success("Category Added Successfully");
+      toast.success("Category Updated Successfully");
     }
   };
 
@@ -35,10 +37,21 @@ const UpdateCategoryModel = ({ category }: { category: any }) => {
       >
         <FXForm onSubmit={onSubmit}>
           <div className="py-1">
-            <FXInput label="Key" name="key" type="text" defaultValue={category?.key} required></FXInput>
+            <FXInput
+              label="Key"
+              name="key"
+              type="text"
+              defaultValue={category?.key}
+              required
+            ></FXInput>
           </div>
           <div className="py-1">
-            <FXInput label="Name" name="label" defaultValue={category?.label} required></FXInput>
+            <FXInput
+              label="Name"
+              name="label"
+              defaultValue={category?.label}
+              required
+            ></FXInput>
           </div>
           <div className="flex justify-center pt-2 w-full pb-2">
             <Button className="w-full" type="submit">
