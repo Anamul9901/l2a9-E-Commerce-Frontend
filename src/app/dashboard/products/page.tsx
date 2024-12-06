@@ -54,7 +54,7 @@ const Products = () => {
         </button>
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-4 pt-10">
-        {myPruducts?.map((product: any) => (
+        { myPruducts && myPruducts?.map((product: any) => (
           <div
             key={product?._id}
             className="bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
