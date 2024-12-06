@@ -8,33 +8,38 @@ import FXModal from "./FXModal";
 import { useAddProductMutation } from "@/src/redux/features/products/productApi";
 import { useEffect, useState } from "react";
 import FXSelect from "../form/FXSelect";
+import { useGetAllCategoryQuery } from "@/src/redux/features/Category/catogoryApi";
 
-const categoryOptions = [
-  { key: "electronics", label: "Electronics" },
-  { key: "fashion", label: "Fashion" },
-  { key: "home_appliances", label: "Home Appliances" },
-  { key: "beauty", label: "Beauty and Personal Care" },
-  { key: "sports", label: "Sports and Fitness" },
-  { key: "books", label: "Books and Stationery" },
-  { key: "toys", label: "Toys and Games" },
-  { key: "automotive", label: "Automotive Accessories" },
-  { key: "groceries", label: "Groceries" },
-  { key: "furniture", label: "Furniture" },
-  { key: "health", label: "Health and Wellness" },
-  { key: "pet_supplies", label: "Pet Supplies" },
-  { key: "tools", label: "Tools and Hardware" },
-  { key: "baby_products", label: "Baby Products" },
-  { key: "outdoor", label: "Outdoor and Gardening" },
-  { key: "gaming", label: "Gaming" },
-  { key: "footwear", label: "Footwear" },
-  { key: "stationery", label: "Stationery" },
-  { key: "kitchen", label: "Kitchen and Dining" },
-  { key: "travel", label: "Travel Accessories" },
-];
+// const categoryOptions = [
+//   { key: "electronics", label: "Electronics" },
+//   { key: "fashion", label: "Fashion" },
+//   { key: "home_appliances", label: "Home Appliances" },
+//   { key: "beauty", label: "Beauty and Personal Care" },
+//   { key: "sports", label: "Sports and Fitness" },
+//   { key: "books", label: "Books and Stationery" },
+//   { key: "toys", label: "Toys and Games" },
+//   { key: "automotive", label: "Automotive Accessories" },
+//   { key: "groceries", label: "Groceries" },
+//   { key: "furniture", label: "Furniture" },
+//   { key: "health", label: "Health and Wellness" },
+//   { key: "pet_supplies", label: "Pet Supplies" },
+//   { key: "tools", label: "Tools and Hardware" },
+//   { key: "baby_products", label: "Baby Products" },
+//   { key: "outdoor", label: "Outdoor and Gardening" },
+//   { key: "gaming", label: "Gaming" },
+//   { key: "footwear", label: "Footwear" },
+//   { key: "stationery", label: "Stationery" },
+//   { key: "kitchen", label: "Kitchen and Dining" },
+//   { key: "travel", label: "Travel Accessories" },
+// ];
 
 const AddProductModel = () => {
   const [isMounted, setIsMounted] = useState(false);
   const [addProduct, { isLoading, error }] = useAddProductMutation();
+  const { data: getAllCategory } = useGetAllCategoryQuery(undefined);
+  const categoryOptions = getAllCategory?.data;
+
+
   if (error) {
     toast.error((error as any)?.data?.message);
   }

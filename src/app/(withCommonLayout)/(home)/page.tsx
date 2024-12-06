@@ -1,32 +1,33 @@
 // rafce
 "use client";
 import ProductsCard from "@/src/components/Card/ProductCard";
+import { useGetAllCategoryQuery } from "@/src/redux/features/Category/catogoryApi";
 import { useGetAllProductQuery } from "@/src/redux/features/products/productApi";
 import { Spinner } from "@nextui-org/spinner";
 import React, { useEffect, useState } from "react";
 
-const categoryOptions = [
-  { key: "electronics", label: "Electronics" },
-  { key: "fashion", label: "Fashion" },
-  { key: "home_appliances", label: "Home Appliances" },
-  { key: "beauty", label: "Beauty and Personal Care" },
-  { key: "sports", label: "Sports and Fitness" },
-  { key: "books", label: "Books and Stationery" },
-  { key: "toys", label: "Toys and Games" },
-  { key: "automotive", label: "Automotive Accessories" },
-  { key: "groceries", label: "Groceries" },
-  { key: "furniture", label: "Furniture" },
-  { key: "health", label: "Health and Wellness" },
-  { key: "pet_supplies", label: "Pet Supplies" },
-  { key: "tools", label: "Tools and Hardware" },
-  { key: "baby_products", label: "Baby Products" },
-  { key: "outdoor", label: "Outdoor and Gardening" },
-  { key: "gaming", label: "Gaming" },
-  { key: "footwear", label: "Footwear" },
-  { key: "stationery", label: "Stationery" },
-  { key: "kitchen", label: "Kitchen and Dining" },
-  { key: "travel", label: "Travel Accessories" },
-];
+// const categoryOptions = [
+//   { key: "electronics", label: "Electronics" },
+//   { key: "fashion", label: "Fashion" },
+//   { key: "home_appliances", label: "Home Appliances" },
+//   { key: "beauty", label: "Beauty and Personal Care" },
+//   { key: "sports", label: "Sports and Fitness" },
+//   { key: "books", label: "Books and Stationery" },
+//   { key: "toys", label: "Toys and Games" },
+//   { key: "automotive", label: "Automotive Accessories" },
+//   { key: "groceries", label: "Groceries" },
+//   { key: "furniture", label: "Furniture" },
+//   { key: "health", label: "Health and Wellness" },
+//   { key: "pet_supplies", label: "Pet Supplies" },
+//   { key: "tools", label: "Tools and Hardware" },
+//   { key: "baby_products", label: "Baby Products" },
+//   { key: "outdoor", label: "Outdoor and Gardening" },
+//   { key: "gaming", label: "Gaming" },
+//   { key: "footwear", label: "Footwear" },
+//   { key: "stationery", label: "Stationery" },
+//   { key: "kitchen", label: "Kitchen and Dining" },
+//   { key: "travel", label: "Travel Accessories" },
+// ];
 
 const HomePage = () => {
   const [productLimit, setProductLimit] = useState(10);
@@ -36,10 +37,12 @@ const HomePage = () => {
   const [minUpvoteFilter, setminUpvoteFilter] = useState("");
   const [maxUpvoteFilter, setmaxUpvoteFilter] = useState("");
   const [sortOption, setSortOption] = useState("");
-  console.log("searchTerm", searchTerm);
 
   const data = { limit: productLimit, page: productPage, searchTerm, category };
   const { data: allProduct, isLoading } = useGetAllProductQuery(data);
+
+  const { data: getAllCategory } = useGetAllCategoryQuery(undefined);
+  const categoryOptions = getAllCategory?.data;
 
   const handelInfiniteScroll = async () => {
     // console.log("scrollHeight" + document.documentElement.scrollHeight);
@@ -103,7 +106,9 @@ const HomePage = () => {
               Sort by Category
             </option>
             {categoryOptions?.map((category: any, idx: number) => (
-              <option value={category.key} key={idx}>{category.label}</option>
+              <option value={category.key} key={idx}>
+                {category.label}
+              </option>
             ))}
           </select>
         </div>
