@@ -39,8 +39,6 @@ const AddProductModel = () => {
     toast.error((error as any)?.data?.message);
   }
 
-
-
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     if (data.role == "") {
       toast.error("Please select category");

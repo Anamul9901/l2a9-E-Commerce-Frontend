@@ -25,7 +25,7 @@ const Register = () => {
     }
   }, [error]);
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    if(data.role == ""){
+    if (data.role == "") {
       toast.error("Please select role");
       return;
     }
@@ -77,11 +77,7 @@ const Register = () => {
               size="sm"
               required
             />
-            <FXSelect
-              name="role"
-              label="Role"
-              options={selectOpdiont}
-            />
+            <FXSelect name="role" label="Role" options={selectOpdiont} />
 
             <Button
               className="w-full rounded-md bg-gradient-to-r from-teal-400 to-purple-500 text-default-800 font-semibold py-2"

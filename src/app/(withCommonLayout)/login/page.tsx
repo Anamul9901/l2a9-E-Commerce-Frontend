@@ -20,9 +20,9 @@ const Login = () => {
 
   useEffect(() => {
     if (error) {
-      setErrorShow(true); 
+      setErrorShow(true);
     }
-  }, [error]); 
+  }, [error]);
 
   useEffect(() => {
     if (errorShow && (error as any)?.data) {

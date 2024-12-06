@@ -142,7 +142,9 @@ const SingleProductCard = ({ products }: { products: any }) => {
           <div className="flex items-center text-teal-400">
             {/* <span className="mr-1">⭐</span> */}
             {/* <span className="text-sm">{products?.rating || "No Rating"}</span> */}
-            <span className="text-sm">Category: {products?.category || "No category"}</span>
+            <span className="text-sm">
+              Category: {products?.category || "No category"}
+            </span>
           </div>
 
           {/* Add to Cart Button */}
@@ -157,8 +159,8 @@ const SingleProductCard = ({ products }: { products: any }) => {
       <div className="pt-14">
         <h1 className="text-2xl font-semibold mb-4">Releted Products</h1>
         <div className="grid itece lg:grid-cols-5 xl:grid-cols-6 md:grid-cols-4 grid-cols-2 gap-4">
-          {reletedCategoryProduct?.map((product: any) => (
-            <ReletedProduct products={product} />
+          {reletedCategoryProduct?.map((product: any, idx: number) => (
+            <ReletedProduct products={product} key={idx}/>
           ))}
         </div>
       </div>

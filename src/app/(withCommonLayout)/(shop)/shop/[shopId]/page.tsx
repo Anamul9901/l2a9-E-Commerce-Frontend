@@ -63,9 +63,7 @@ const ShopPage = () => {
               singleShopData?.logo ||
               "https://i.ibb.co.com/z89cgQr/profile.webp"
             }
-            alt="Profile Picture"
-            height={500}
-            width={500}
+            alt="Shop logo"
           />
           <div className="text-white w-full">
             <h2 className="text-2xl font-bold">{singleShopData?.name} </h2>

@@ -8,7 +8,6 @@ import { useIsSSR } from "@react-aria/ssr";
 import clsx from "clsx";
 import { MoonFilledIcon, SunFilledIcon } from "./icons";
 
-
 export interface ThemeSwitchProps {
   className?: string;
   classNames?: SwitchProps["classNames"];

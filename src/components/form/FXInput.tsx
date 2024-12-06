@@ -2,7 +2,7 @@ import { Input } from "@nextui-org/input";
 import React from "react";
 import { useFormContext } from "react-hook-form";
 
- const FXInput = ({
+const FXInput = ({
   defaultValue,
   variant = "bordered",
   size = "md",

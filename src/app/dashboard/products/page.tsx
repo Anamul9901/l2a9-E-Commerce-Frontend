@@ -18,9 +18,8 @@ const Products = () => {
   const myPruducts = getMyProducts?.data;
   const [deleteProduct] = useSoftDeleteProductMutation();
 
-
   const findSingleProduct = myPruducts?.find(
-    (product: any) => product?.id === dublicateProductId
+    (product: any) => product?.id === dublicateProductId,
   );
 
   const handleDelete = (id: string) => {

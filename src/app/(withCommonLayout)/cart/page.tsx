@@ -29,7 +29,6 @@ const CartPage = () => {
     toast.error("Invalid Coupon Code");
   }
 
-
   const totalSum = cartData?.totalSum;
   const cartItems = cartData?.data?.cartItem || [];
   const VendorId = cartData?.data?.vendorId;
@@ -177,7 +176,9 @@ const CartPage = () => {
           <h1 className="text-lg font-semibold">
             Discount Price:{" "}
             <span className="text-xl font-bold">
-              <span className="text-green-600">${getDiscountProce || totalSum}</span>
+              <span className="text-green-600">
+                ${getDiscountProce || totalSum}
+              </span>
             </span>
           </h1>
 
@@ -210,12 +211,12 @@ const CartPage = () => {
           {/* Checkout Button */}
           <div>
             {cartItems.length === 0 ? (
-              <a
+              <button
                 onClick={handleNotProductWarning}
                 className="block w-full text-center bg-teal-500 text-white font-semibold py-2 rounded-md hover:bg-teal-600 transition"
               >
                 Proceed to Checkout
-              </a>
+              </button>
             ) : (
               <a
                 href="/cart/checkout"

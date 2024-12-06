@@ -1,5 +1,5 @@
+import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import {
   useCheckSameVendorProductQuery,
   useCreateCartMutation,
@@ -73,7 +73,6 @@ const ProductsCard = ({ products }: { products: any }) => {
 
       {/* Product Details */}
       <div className="px-4 py-2">
-
         {/* Product Title */}
         <h3 className="text-lg font-semibold text-white truncate">
           {products?.name || "Product Name"}

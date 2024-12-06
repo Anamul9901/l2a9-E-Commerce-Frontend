@@ -12,7 +12,7 @@ import {
 
 const DublicateProductModal = ({ product }: { product: any }) => {
   const [addProduct, { isLoading, error }] = useAddProductMutation();
- 
+
   if (error) {
     toast.error((error as any)?.data?.message);
   }

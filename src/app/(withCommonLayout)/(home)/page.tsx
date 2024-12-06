@@ -102,20 +102,20 @@ const HomePage = () => {
             <option value="" disabled>
               Sort by Category
             </option>
-            {categoryOptions?.map((category) => (
-              <option value={category.key}>{category.label}</option>
+            {categoryOptions?.map((category: any, idx: number) => (
+              <option value={category.key} key={idx}>{category.label}</option>
             ))}
           </select>
         </div>
       </div>
       <div className="grid lg:grid-cols-4 xl:grid-cols-5 md:grid-cols-3 grid-cols-2 py-10 gap-4">
-        {allProduct?.data?.map((product: any) => (
-          <ProductsCard products={product} />
+        {allProduct?.data?.map((product: any, idx: any) => (
+          <ProductsCard products={product} key={idx} />
         ))}
       </div>
       {allProduct?.data?.length == 0 && (
-          <p className="text-center text-2xl w-full">No products found</p>
-        )}
+        <p className="text-center text-2xl w-full">No products found</p>
+      )}
       <div className="text-center text-2xl">{isLoading && <Spinner />}</div>
     </div>
   );

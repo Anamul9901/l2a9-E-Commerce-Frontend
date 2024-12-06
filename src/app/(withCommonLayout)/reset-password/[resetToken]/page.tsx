@@ -17,9 +17,8 @@ const ResetPassword = () => {
   const [resetPassword, { isLoading, error }] = useResitPasswordMutation();
 
   useEffect(() => {
-  
     if (error) {
-      setErrorShow(true); 
+      setErrorShow(true);
     }
   }, [error]);
 

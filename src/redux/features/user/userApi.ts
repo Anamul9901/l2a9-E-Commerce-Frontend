@@ -13,7 +13,7 @@ const userApi = baseApi.injectEndpoints({
     }),
 
     getMyData: builder.query({
-      query: (id) => {
+      query: () => {
         return {
           url: `/user/me`,
           method: "GET",
@@ -24,7 +24,6 @@ const userApi = baseApi.injectEndpoints({
 
     adduser: builder.mutation({
       query: (data) => {
-        console.log("data", data);
         return {
           url: "/user",
           method: "POST",
@@ -36,9 +35,10 @@ const userApi = baseApi.injectEndpoints({
 
     updateuser: builder.mutation({
       query: (data) => {
+        console.log('data', data)
         return {
-          url: `/comment/${data?.id}`,
-          method: "Put",
+          url: `/user/${data?.id}`,
+          method: "PATCH",
           body: data?.data,
         };
       },

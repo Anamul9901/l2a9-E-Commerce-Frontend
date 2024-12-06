@@ -14,11 +14,11 @@ const couponApi = baseApi.injectEndpoints({
 
     getSingleCoupon: builder.mutation({
       query: (data) => {
-        console.log('data', data)
+        console.log("data", data);
         return {
           url: `/coupon/${data?.couponId}`,
           method: "POST",
-          body: {vendorId: data.vendorId},
+          body: { vendorId: data.vendorId },
         };
       },
     }),

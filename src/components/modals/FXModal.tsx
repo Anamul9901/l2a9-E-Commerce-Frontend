@@ -1,4 +1,3 @@
-
 import {
   Modal,
   ModalContent,
@@ -34,10 +33,7 @@ export default function FXModal({
 
   return (
     <div>
-      <button
-        className={buttonClassName}
-        onClick={onOpen}
-      >
+      <button className={buttonClassName} onClick={onOpen}>
         {buttonText}
       </button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>

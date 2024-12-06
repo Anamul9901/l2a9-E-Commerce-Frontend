@@ -11,11 +11,6 @@ const ShopOrderHistory = () => {
   } = useGetShopOrderQuery(undefined);
   const orderHistory = customerOrder?.data;
 
-
-
-
-
-
   if (isLoading) return <p>Loading order history...</p>;
   // if (error) return <p>Error fetching orders: {error.message}</p>;
 
@@ -65,7 +60,7 @@ const ShopOrderHistory = () => {
                     {order.transactionId}
                   </td>
                   <td className="border border-gray-300 px-4 py-2">
-                   {order?.user?.email}
+                    {order?.user?.email}
                   </td>
                 </tr>
               ))}
@@ -75,8 +70,6 @@ const ShopOrderHistory = () => {
       ) : (
         <p className="text-center text-gray-600">No orders found.</p>
       )}
-
-    
     </div>
   );
 };

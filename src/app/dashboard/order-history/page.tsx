@@ -11,7 +11,6 @@ const OrderHistory = () => {
   } = useGetCustomerOrderQuery(undefined);
   const orderHistory = customerOrder?.data;
 
-
   // Modal state
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState<any>(null);
@@ -43,13 +42,13 @@ const OrderHistory = () => {
                 <th className="border border-gray-300 px-4 py-2">
                   Payment Status
                 </th>
-                <th className="border border-gray-300 px-4 py-2">Total Price</th>
+                <th className="border border-gray-300 px-4 py-2">
+                  Total Price
+                </th>
                 <th className="border border-gray-300 px-4 py-2">
                   Transaction ID
                 </th>
-                <th className="border border-gray-300 px-4 py-2">
-                  Products
-                </th>
+                <th className="border border-gray-300 px-4 py-2">Products</th>
               </tr>
             </thead>
             <tbody>
@@ -79,7 +78,15 @@ const OrderHistory = () => {
                   <td className="border border-gray-300 px-4 py-2">
                     <div
                       onClick={() => handleOpenModal(order)}
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={(e) =>
+                        e.key === "Enter" || e.key === " "
+                          ? handleOpenModal(order)
+                          : null
+                      }
                       className="flex justify-center text-xl text-green-500 items-center hover:text-green-300 cursor-pointer"
+                      aria-label="View Order Details"
                     >
                       <FaEye />
                     </div>
@@ -104,21 +111,40 @@ const OrderHistory = () => {
               ✖
             </button>
             <h2 className="text-2xl font-bold mb-4">Order Details</h2>
-            <p><strong>Order ID:</strong> {selectedOrder.id}</p>
-            <p><strong>Payment Status:</strong> {selectedOrder.paymentStatus}</p>
-            <p><strong>Total Price:</strong> ${selectedOrder.totalPrice}</p>
-            <p><strong>Transaction ID:</strong> {selectedOrder.transactionId}</p>
-            <p><strong>Order Date:</strong> {new Date(selectedOrder.cretedAt).toLocaleDateString()}</p>
+            <p>
+              <strong>Order ID:</strong> {selectedOrder.id}
+            </p>
+            <p>
+              <strong>Payment Status:</strong> {selectedOrder.paymentStatus}
+            </p>
+            <p>
+              <strong>Total Price:</strong> ${selectedOrder.totalPrice}
+            </p>
+            <p>
+              <strong>Transaction ID:</strong> {selectedOrder.transactionId}
+            </p>
+            <p>
+              <strong>Order Date:</strong>{" "}
+              {new Date(selectedOrder.cretedAt).toLocaleDateString()}
+            </p>
 
             <h3 className="text-xl font-semibold mt-4 mb-2">Products:</h3>
             <ul className="space-y-2">
-              {selectedOrder?.productInfo?.cartItem?.map((item: any, index: number) => (
-                <li key={index} className="border-b py-2">
-                  <p><strong>Product Name:</strong> {item.productName}</p>
-                  <p><strong>Quantity:</strong> {item.quantity}</p>
-                  <p><strong>Price:</strong> ${item.price}</p>
-                </li>
-              ))}
+              {selectedOrder?.productInfo?.cartItem?.map(
+                (item: any, index: number) => (
+                  <li key={index} className="border-b py-2">
+                    <p>
+                      <strong>Product Name:</strong> {item.productName}
+                    </p>
+                    <p>
+                      <strong>Quantity:</strong> {item.quantity}
+                    </p>
+                    <p>
+                      <strong>Price:</strong> ${item.price}
+                    </p>
+                  </li>
+                )
+              )}
             </ul>
           </div>
         </div>

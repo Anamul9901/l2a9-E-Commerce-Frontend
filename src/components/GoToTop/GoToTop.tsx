@@ -27,8 +27,14 @@ const GoToTop = () => {
     <div>
       {isVasible && (
         <div
-          className="fixed bottom-6 right-6 bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-600 cursor-pointer transition duration-300"
           onClick={goToBtn}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) =>
+            e.key === "Enter" || e.key === " " ? goToBtn() : null
+          }
+          className="fixed bottom-6 right-6 bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-600 cursor-pointer transition duration-300"
+          aria-label="Scroll to top"
         >
           <FaArrowUp className="animate-up-down" />
         </div>

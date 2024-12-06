@@ -14,11 +14,11 @@ const ForgetPassword = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const res = await forgatePassword(data);
-    if((res as any)?.data){
-      toast.success((res as any)?.data?.message)
+    if ((res as any)?.data) {
+      toast.success((res as any)?.data?.message);
     }
-    if((res as any)?.error){
-      toast.error((res as any)?.error?.data?.message)
+    if ((res as any)?.error) {
+      toast.error((res as any)?.error?.data?.message);
     }
   };
   return (

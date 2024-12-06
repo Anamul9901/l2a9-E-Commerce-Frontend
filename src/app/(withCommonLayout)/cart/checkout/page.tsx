@@ -38,11 +38,11 @@ const CheckoutPage = () => {
     if (typeof window !== "undefined") {
       const storedDiscountPrice = localStorage.getItem("discountPrice");
       const couponCode = JSON.parse(
-        localStorage.getItem("discountCoupon") as any
+        localStorage.getItem("discountCoupon") as any,
       );
       setCouponCode(couponCode);
       setDiscountProce(
-        storedDiscountPrice ? JSON.parse(storedDiscountPrice) : null
+        storedDiscountPrice ? JSON.parse(storedDiscountPrice) : null,
       );
     }
   }, []);

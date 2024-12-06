@@ -1,5 +1,7 @@
 "use client";
 import ChangePasswordModal from "@/src/components/modals/ChangePasswordModal";
+import UpdateShopInfoModel from "@/src/components/modals/UpdateShopInfoModel";
+import { useGetSingleshopQuery } from "@/src/redux/features/shop/shopApi";
 import { useGetMyDataQuery } from "@/src/redux/features/user/userApi";
 import { useEffect, useState } from "react";
 
@@ -7,7 +9,10 @@ const Dashboard = () => {
   const [isMounted, setIsMounted] = useState(false);
   const { data: myData } = useGetMyDataQuery(undefined);
   const currentUserData = myData?.data;
-  // console.log(currentUserData);
+
+  const userId = currentUserData?.id;
+  const { data: shopData } = useGetSingleshopQuery(userId);
+  const myShopInfo = shopData?.data;
 
   // For hydration error handle
   useEffect(() => {
@@ -17,60 +22,67 @@ const Dashboard = () => {
   if (!isMounted) {
     return null;
   }
+
   return (
-    <div className="min-h-screen flex justify-center items-center p-4">
-      <div className="max-w-lg w-full bg-default-100 shadow-2xl rounded-lg transform transition-transform hover:scale-105 p-4">
-        <h1 className="text-3xl md:text-4xl font-bold text-center text-default-900 mb-4">
-          User Dashboard
+    <div className="min-h-screen  p-6">
+      <div className="max-w-4xl mx-auto bg-white/60 shadow-xl rounded-lg overflow-hidden">
+        <h1 className="text-3xl font-bold text-center text-gray-800 py-6">
+          Dashboard
         </h1>
 
         {/* Profile Section */}
-        <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4 mb-6">
-          <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden shadow-lg">
+        <div className="flex flex-col md:flex-row items-center justify-between px-6 py-4 border-b border-gray-200">
+          <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden shadow-lg">
             <img
               src={
                 currentUserData?.profilePhoto ||
                 "https://i.ibb.co/z89cgQr/profile.webp"
               }
-              alt=""
+              alt="Profile"
               className="w-full h-full object-cover"
             />
           </div>
-          <div className="text-center md:text-left">
-            <h2 className="text-xl md:text-3xl font-bold text-default-800">
-              {currentUserData?.name}
+          <div className="mt-4 md:mt-0 text-center md:text-left">
+            <h2 className="text-2xl font-semibold text-gray-800">
+              {currentUserData?.name || "User Name"}
             </h2>
-            <p className="text-default-600"></p>
-            <p className="text-default-600">{"No bio available"}</p>
+            <p className="text-gray-600 mt-2">
+              {currentUserData?.bio || "No bio available"}
+            </p>
           </div>
         </div>
 
         {/* Statistics Section */}
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-3 mb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-6 py-4">
+          <div className="bg-gray-500 p-4 rounded-lg shadow">
+            <h4 className=" font-semibold text-gray-200">Followers</h4>
+            <p className=" text-gray-200">{myShopInfo?.followers || 0}</p>
+          </div>
+          <div className="bg-gray-500 p-4 rounded-lg shadow">
+            <h4 className=" font-semibold text-gray-200">Shop Title</h4>
+            <p className=" text-gray-200">{myShopInfo?.title || "No title"}</p>
+          </div>
+          <div className="bg-gray-500 p-4 rounded-lg shadow">
+            <h4 className=" font-semibold text-gray-200">Shop Name</h4>
+            <p className=" text-gray-200">{myShopInfo?.name || "No name"}</p>
+          </div>
         </div>
 
         {/* Actions Section */}
-        <div className="flex justify-center mb-6">
-          <button className=""> <ChangePasswordModal /> </button>
+        <div className="px-6 py-4 border-t border-gray-200 flex justify-center items-center space-x-4">
+          <UpdateShopInfoModel shopInfo={myShopInfo} />
+
+          <ChangePasswordModal />
         </div>
 
         {/* Account Details */}
-        <div>
-          <h3 className="text-lg md:text-xl font-semibold text-default-700 mb-4">
+        <div className="px-6 py-4 border-t border-gray-200">
+          <h3 className="text-xl font-semibold text-gray-700 mb-4">
             Account Details
           </h3>
-          <div className="bg-default-600 text-default-50 p-4 rounded-lg shadow">
-            <p>
-              <strong>Role:</strong>
-              {currentUserData?.role}
-            </p>
-            <p>
-              <strong>Blocked:</strong>
-              {currentUserData?.isBlocked ? "Yes" : "No"}
-            </p>
-            <p>
-              <strong>Deleted:</strong>
-              {currentUserData?.isDeleted ? "Yes" : "No"}
+          <div className="bg-gray-200 p-4 rounded-lg shadow">
+            <p className="text-black">
+              <strong>Role:</strong> {currentUserData?.role || "No role"}
             </p>
           </div>
         </div>

@@ -6,7 +6,7 @@ import { useAppSelector } from "@/src/redux/hooks";
 const RecentViewProducts = () => {
   const { user } = useAppSelector(selectCurrentUser);
   const { data: recentViewProducts } = useRecentViewProductsQuery(
-    (user as any)?.id
+    (user as any)?.id,
   );
   const recentViewProductsData = recentViewProducts?.data;
 
@@ -61,7 +61,10 @@ const RecentViewProducts = () => {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <img
-                      src={product.image || "https://i.ibb.co/kBNtTmC/No-Image-Available.jpg"}
+                      src={
+                        product.image ||
+                        "https://i.ibb.co/kBNtTmC/No-Image-Available.jpg"
+                      }
                       alt={product.name}
                       className="w-16 h-16 object-cover rounded-lg mx-auto"
                     />

@@ -24,7 +24,7 @@ const shopApi = baseApi.injectEndpoints({
 
     addShop: builder.mutation({
       query: (data) => {
-        console.log('data', data)
+        console.log("data", data);
         return {
           url: "/shop",
           method: "POST",
@@ -34,12 +34,12 @@ const shopApi = baseApi.injectEndpoints({
       invalidatesTags: ["shop"],
     }),
 
-    updateshop: builder.mutation({
+    updateShop: builder.mutation({
       query: (data) => {
         return {
-          url: `/comment/${data?.id}`,
-          method: "Put",
-          body: data?.data,
+          url: `/shop`,
+          method: "PATCH",
+          body: data,
         };
       },
       invalidatesTags: ["shop"],
@@ -61,6 +61,6 @@ export const {
   useGetAllshopQuery,
   useAddShopMutation,
   useGetSingleshopQuery,
-  useUpdateshopMutation,
+  useUpdateShopMutation,
   useDeleteshopMutation,
 } = shopApi;

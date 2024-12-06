@@ -9,8 +9,6 @@ interface IProps extends IInput {
   }[];
 }
 
-
-
 const FXSelect = ({
   options,
   name,
@@ -20,7 +18,6 @@ const FXSelect = ({
 }: IProps) => {
   const {
     register,
-    formState: { errors },
   } = useFormContext();
   return (
     <Select

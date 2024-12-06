@@ -1,5 +1,5 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { baseApi } from './api/baseApi';
+import { configureStore } from "@reduxjs/toolkit";
+import { baseApi } from "./api/baseApi";
 import {
   persistReducer,
   FLUSH,
@@ -9,12 +9,12 @@ import {
   PURGE,
   REGISTER,
   persistStore,
-} from 'redux-persist';
-import authReducer from './features/auth/authSlice';
-import storage from 'redux-persist/lib/storage';
+} from "redux-persist";
+import authReducer from "./features/auth/authSlice";
+import storage from "redux-persist/lib/storage";
 
 const persistConfig = {
-  key: 'auth',
+  key: "auth",
   storage,
 };
 const persistedAuthReducer = persistReducer(persistConfig, authReducer);
