@@ -56,11 +56,11 @@ const Products = () => {
       <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-4 pt-10">
         { myPruducts && myPruducts?.map((product: any) => (
           <div
-            key={product?._id}
+            key={product?.id}
             className="bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
           >
             {/* Product Image */}
-            <Link href={`/product/${product?._id}`} className="block">
+            <Link href={`/product/${product?.id}`} className="block">
               <img
                 className="h-48 w-full object-cover rounded-t-lg"
                 src={
@@ -73,7 +73,7 @@ const Products = () => {
 
             <div className="px-4 py-1">
               {/* Product Title */}
-              <Link href={`/product/${product?._id}`} className="block">
+              <Link href={`/product/${product?.id}`} className="block">
                 <h2 className="text-lg font-bold text-teal-400 hover:text-teal-300 transition-colors duration-200">
                   {product?.name || "Unnamed Product"}
                 </h2>

@@ -89,7 +89,7 @@ const ShopPage = () => {
       {/* shop products */}
       <div className="grid lg:grid-cols-4 xl:grid-cols-5 md:grid-cols-3 grid-cols-2 py-10 gap-4">
         {shopProducts?.map((product: any) => (
-          <ProductsCard key={product._id} products={product} />
+          <ProductsCard key={product.id} products={product} />
         ))}
       </div>
     </div>

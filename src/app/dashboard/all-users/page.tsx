@@ -99,7 +99,7 @@ const AllUsers = () => {
             <tbody>
               {userData?.map((user: any, idx: number) => (
                 <tr
-                  key={user?._id}
+                  key={user?.id}
                   className="border-b border-gray-700 hover:bg-gray-700 transition-all duration-300"
                 >
                   <td className="px-6 py-4 whitespace-nowrap text-center md:text-left">
@@ -152,7 +152,7 @@ const AllUsers = () => {
         <div className="block md:hidden">
           {userData?.map((user: any, idx: number) => (
             <div
-              key={user?._id}
+              key={user?.id}
               className="border-b border-gray-700 p-4 mb-4 rounded-lg shadow-lg bg-gray-700"
             >
               <div className="flex justify-between">
