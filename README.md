@@ -2,6 +2,14 @@
 
 The **E-Commerce Application Frontend** is designed to provide an intuitive and responsive user interface for customers, vendors, and administrators. Built with modern web technologies, it ensures a seamless shopping experience while maintaining scalability and performance.
 
+## Live URL
+
+   https://l2-a9-frontend.netlify.app/
+
+## Backend Repository Link
+
+   https://github.com/Anamul9901/l2a9-Receipt-Sharing-Backend
+
 ## Tech Stack
 
 - **Framework**: [Next.js](https://nextjs.org/) (React-based framework for server-side rendering and static site generation).
@@ -38,7 +46,7 @@ The **E-Commerce Application Frontend** is designed to provide an intuitive and 
 
 ### Checkout
 - Apply coupon codes for discounts.
-- Integrates with [Aamarpay](https://aamarpay.com/) or [Stripe](https://stripe.com/) for payment processing.
+- Integrates with [Aamarpay](https://aamarpay.com/) for payment processing.
 
 ### Order History
 - **For Vendors**: Detailed list of orders placed for their shop.
