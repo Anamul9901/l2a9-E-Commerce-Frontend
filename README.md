@@ -8,7 +8,7 @@ The **E-Commerce Application Frontend** is designed to provide an intuitive and 
 
 ## Backend Repository Link
 
-   https://github.com/Anamul9901/l2a9-Receipt-Sharing-Backend
+   https://github.com/Anamul9901/l2a9-E-Commerce-Backend
 
 ## Tech Stack
 
