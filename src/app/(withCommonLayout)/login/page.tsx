@@ -1,6 +1,4 @@
 "use client";
-import FXForm from "@/src/components/form/FXForm";
-import FXInput from "@/src/components/form/FXInput";
 import Loading from "@/src/components/UI/loading";
 import { useLoginMutation } from "@/src/redux/features/auth/authApi";
 import { setUser } from "@/src/redux/features/auth/authSlice";
@@ -9,11 +7,11 @@ import { Button } from "@nextui-org/button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { FieldValues, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 
 const Login = () => {
   const [errorShow, setErrorShow] = useState(false);
+  const [credentials, setCredentials] = useState({ email: "", password: "" });
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [loginUser, { isLoading, error }] = useLoginMutation();
@@ -30,8 +28,13 @@ const Login = () => {
     }
   }, [errorShow, error]);
 
-  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const res = await loginUser(data).unwrap();
+  const handleCredentialSet = (email: string, password: string) => {
+    setCredentials({ email, password });
+  };
+
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    const res = await loginUser(credentials).unwrap();
     if (res?.data) {
       toast.success(`${res?.message}`);
       const { email, name, id, role } = res?.data?.data;
@@ -52,25 +55,70 @@ const Login = () => {
         <p className="text-center text-default-800 mb-6">
           Welcome back! Let’s get started.
         </p>
-
-        <FXForm onSubmit={onSubmit}>
-          <div className="space-y-4">
-            <FXInput name="email" label="Email" type="email" size="sm" />
-            <FXInput
-              name="password"
-              label="Password"
-              type="password"
-              size="sm"
-            />
-            <Button
-              className="w-full rounded-md bg-gradient-to-r from-teal-400 to-purple-500 text-default-800 font-semibold py-2"
-              size="lg"
-              type="submit"
+        <div className="pb-4">
+          <div className="flex items-center justify-between gap-1">
+            <p
+              onClick={() => handleCredentialSet("testuser@gmail.com", "123")}
+              className="bg-default-300 text-sm rounded-lg px-1 hover:cursor-pointer"
             >
-              Login
-            </Button>
+              User credential
+            </p>
+            <p
+              onClick={() =>
+                handleCredentialSet("vendor@gmail.com", "vendor123")
+              }
+              className="bg-default-300 text-sm rounded-lg px-1 hover:cursor-pointer"
+            >
+              Vendor credential
+            </p>
+            <p
+              onClick={() => handleCredentialSet("admin@gmail.com", "admin123")}
+              className="bg-default-300 text-sm rounded-lg px-1 hover:cursor-pointer"
+            >
+              Admin credential
+            </p>
           </div>
-        </FXForm>
+        </div>
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-default-800 font-medium mb-1">
+              Email
+            </label>
+            <input
+              type="email"
+              name="email"
+              value={credentials.email}
+              onChange={(e) =>
+                setCredentials({ ...credentials, email: e.target.value })
+              }
+              className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-teal-400 focus:outline-none"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-default-800 font-medium mb-1">
+              Password
+            </label>
+            <input
+              type="password"
+              name="password"
+              value={credentials.password}
+              onChange={(e) =>
+                setCredentials({ ...credentials, password: e.target.value })
+              }
+              className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-teal-400 focus:outline-none"
+              required
+            />
+          </div>
+          <Button
+            className="w-full rounded-md bg-gradient-to-r from-teal-400 to-purple-500 text-default-800 font-semibold py-2"
+            size="lg"
+            type="submit"
+          >
+            Login
+          </Button>
+        </form>
 
         <div className="mt-4 text-center">
           <p className="text-default-500">

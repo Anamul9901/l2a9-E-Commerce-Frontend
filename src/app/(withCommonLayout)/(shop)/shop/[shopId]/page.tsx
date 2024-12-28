@@ -20,6 +20,7 @@ const ShopPage = () => {
   const productData = { shopId, limit: productLimit };
   const { data: getShopProduct } = useGetShopProductQuery(productData);
   const shopProducts = getShopProduct?.data;
+  const shopProductLength = shopProducts?.length;
   const { data: getFollowerCount } = useGetFollowerCountQuery(shopId);
   const followerThisShop = getFollowerCount?.data?.follower;
   const [addFollower] = useAddfollowerMutation();
@@ -68,6 +69,7 @@ const ShopPage = () => {
           <div className="text-white w-full">
             <h2 className="text-2xl font-bold">{singleShopData?.name} </h2>
             <h2 className="text-sm">{singleShopData?.title}</h2>
+            <h2 className="text-sm">Total Product: {shopProductLength}</h2>
             <div className="flex justify-between items-center">
               <p className="text-sm">{followerThisShop} Followers</p>
               <div className="flex pr-6 md:pr-20 gap-2">
