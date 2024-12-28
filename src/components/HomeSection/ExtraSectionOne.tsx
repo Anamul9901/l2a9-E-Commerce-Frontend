@@ -42,8 +42,8 @@ const ExtraSectionOne = () => {
   return (
     <div className="py-12">
       <div className="grid md:grid-cols-4 grid-cols-2 justify-center items-center gap-4">
-        {images?.map((item) => (
-          <div>
+        {images?.map((item: any, idx: number) => (
+          <div key={idx}>
             <Image
               className="rounded-lg hover:scale-105 duration-300"
               src={item}
@@ -54,21 +54,20 @@ const ExtraSectionOne = () => {
           </div>
         ))}
       </div>{" "}
-
       {/* support section */}
       <div className="grid md:grid-cols-5 py-20 space-y-10 md:space-y-0 gap-2">
-        {supportData?.map((item) => (
-          <div className="text-center flex justify-center items-center hover:text-red-600">
-            <div className="">
-             <div className="flex justify-center items-center">
-             <Image
-             className="w-[30px]"
-                src={item.image}
-                alt={item.name}
-                height={100}
-                width={100}
-              />
-             </div>
+        {supportData?.map((item: any, idx: number) => (
+          <div key={idx} className="text-center flex justify-center items-center hover:text-red-600">
+            <div className="" >
+              <div className="flex justify-center items-center">
+                <Image
+                  className="w-[30px]"
+                  src={item.image}
+                  alt={item.name}
+                  height={100}
+                  width={100}
+                />
+              </div>
               <div>
                 <h1 className="text-sm font-bold ">{item.name}</h1>
                 <h1 className="text-sm text-default-900">{item.dis}</h1>
