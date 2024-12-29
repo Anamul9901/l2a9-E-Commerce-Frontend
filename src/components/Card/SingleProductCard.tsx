@@ -155,7 +155,7 @@ const SingleProductCard = ({ products }: { products: any }) => {
         </div>
       </div>
       <div className="pt-14">
-        <h1 className="text-2xl font-semibold mb-4">Releted Products</h1>
+        <h1 className="text-2xl font-semibold mb-4">You may also like</h1>
         <div className="grid itece lg:grid-cols-5 md:grid-cols-4 grid-cols-2 gap-4">
           {reletedCategoryProduct?.map((product: any, idx: number) => (
             <ReletedProduct products={product} key={idx}/>

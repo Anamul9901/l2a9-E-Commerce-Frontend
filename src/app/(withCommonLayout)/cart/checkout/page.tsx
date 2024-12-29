@@ -47,14 +47,14 @@ const CheckoutPage = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50 py-10 px-5 md:px-20">
-      <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">
+    <div className="min-h-screen bg-default-50 py-10 px-5 md:px-20">
+      <h1 className="text-3xl font-bold text-center text-default-800 mb-8">
         Checkout Page
       </h1>
 
       {/* Total Price Section */}
-      <div className="bg-white p-6 rounded-lg shadow-md mb-10">
-        <h2 className="text-xl font-semibold text-gray-700">
+      <div className="bg-default-200 p-6 rounded-lg shadow-xl mb-10">
+        <h2 className="text-xl font-semibold text-default-700">
           Total Price:{" "}
           <span className="text-green-600 font-bold">${totalSum || 0}</span>
         </h2>
@@ -63,7 +63,7 @@ const CheckoutPage = () => {
       {/* Cart List */}
       <div className="md:flex gap-10">
         {/* cart info  */}
-        <div className="bg-white text-black rounded-lg shadow-md md:w-[70%] p-8">
+        <div className="bg-default-200 text-default-800 rounded-lg shadow-xl md:w-[70%] p-8">
           <FXForm onSubmit={onSubmit}>
             <div className="space-y-4">
               {/* Coupon Input */}
@@ -107,7 +107,7 @@ const CheckoutPage = () => {
 
               {/* Submit Button */}
               <Button
-                className="w-full rounded-md bg-gradient-to-r from-teal-400 to-purple-500 text-white font-semibold py-2 hover:from-teal-500 hover:to-purple-600 transition"
+                className="w-full rounded-md bg-gradient-to-r from-teal-400 to-purple-500 text-default-800 font-semibold py-2 hover:from-teal-500 hover:to-purple-600 transition"
                 size="lg"
                 type="submit"
               >
@@ -118,7 +118,7 @@ const CheckoutPage = () => {
         </div>
 
         {/* Buy Info */}
-        <div className="md:w-[30%] h-70 bg-white mt-10 md:mt-0 p-6 rounded-lg shadow-md text-black space-y-6">
+        <div className="md:w-[30%] h-70 bg-default-200 mt-10 md:mt-0 p-6 rounded-lg shadow-xl text-default-800 space-y-6">
           {/* Total Price */}
           <h1 className="text-lg font-semibold">
             Discount Price:{" "}

@@ -83,14 +83,14 @@ const CartPage = () => {
   // }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50 py-10 px-5 md:px-20">
-      <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">
+    <div className="min-h-screen bg-default-50 py-10 px-5 md:px-20">
+      <h1 className="text-3xl font-bold text-center text-default-800 mb-8">
         Your Cart
       </h1>
 
       {/* Total Price Section */}
-      <div className="bg-white p-6 rounded-lg shadow-md mb-10">
-        <h2 className="text-xl font-semibold text-gray-700">
+      <div className="bg-default-200 p-6 rounded-lg shadow-xl mb-10">
+        <h2 className="text-xl font-semibold text-default-700">
           Total Price:{" "}
           <span className="text-green-600 font-bold">${totalSum || 0}</span>
         </h2>
@@ -99,7 +99,7 @@ const CartPage = () => {
       {/* Cart List */}
       <div className="md:flex gap-10">
         {/* cart info  */}
-        <div className="bg-white rounded-lg shadow-md md:w-[70%]">
+        <div className="bg-default-200 rounded-lg shadow-xl md:w-[70%]">
           <ul>
             {cartItems.map((item: any) => (
               <li
@@ -119,13 +119,13 @@ const CartPage = () => {
 
                   {/* Product Info */}
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-800">
+                    <h3 className="text-lg font-semibold text-default-800">
                       {item.product?.name}
                     </h3>
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm text-default-500">
                       {item.product?.category}
                     </p>
-                    <p className="text-sm font-bold text-gray-800">
+                    <p className="text-sm font-bold text-default-800">
                       ${item.totalPrice}
                     </p>
                   </div>
@@ -135,12 +135,12 @@ const CartPage = () => {
                 <div className="flex items-center space-x-2">
                   <button
                     onClick={() => handleDecreaseQuantity(item.product.id)}
-                    className="bg-gray-200 text-gray-600 px-3 py-1 rounded hover:bg-gray-300"
+                    className="bg-default-200 text-default-600 px-3 py-1 rounded hover:bg-default-300"
                     title="Decrease quantity"
                   >
                     -
                   </button>
-                  <span className="text-lg font-semibold text-gray-800">
+                  <span className="text-lg font-semibold text-default-800">
                     {item.quantity}
                   </span>
                   <button
@@ -150,14 +150,14 @@ const CartPage = () => {
                         item.product.userId
                       )
                     }
-                    className="bg-gray-200 text-gray-600 px-3 py-1 rounded hover:bg-gray-300"
+                    className="bg-default-200 text-default-800 px-3 py-1 rounded hover:bg-default-300"
                     title="Increase quantity"
                   >
                     +
                   </button>
                   <button
                     onClick={() => handleDeleteCartItem(item.id)}
-                    className="bg-red-400  px-2 py-[6px] text-xl rounded hover:bg-gray-300"
+                    className="bg-red-400  px-2 py-[6px] text-xl rounded hover:bg-default-300"
                   >
                     <MdDelete />
                   </button>
@@ -168,7 +168,7 @@ const CartPage = () => {
         </div>
 
         {/* Buy Info */}
-        <div className="md:w-[30%] h-70 bg-white mt-10 md:mt-0 p-6 rounded-lg shadow-md text-black space-y-6">
+        <div className="md:w-[30%] h-70 bg-default-200 mt-10 md:mt-0 p-6 rounded-lg shadow-xl text-default-800 space-y-6">
           {/* Total Price */}
           <h1 className="text-lg font-semibold">
             Discount Price:{" "}
@@ -228,7 +228,7 @@ const CartPage = () => {
 
       {/* Empty Cart Message */}
       {cartItems.length === 0 && (
-        <div className="text-center text-gray-600 mt-10">
+        <div className="text-center text-default-600 mt-10">
           <p>Your cart is empty. Start shopping now!</p>
         </div>
       )}

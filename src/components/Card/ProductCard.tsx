@@ -47,7 +47,7 @@ const ProductsCard = ({ products }: { products: any }) => {
   };
 
   return (
-    <div className="max-w-sm mx-auto bg-gray-900 rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-y-105 hover:shadow-2xl">
+    <div className="max-w-sm mx-auto bg-default-100 rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-y-105 hover:shadow-2xl">
       {/* Product Image */}
       <div className="relative">
         <img
@@ -64,7 +64,7 @@ const ProductsCard = ({ products }: { products: any }) => {
         <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
           <Link
             href={`/products/${products?.id}`}
-            className="text-sm px-4 py-2 bg-teal-500 text-white rounded-md shadow-md hover:bg-teal-600 transition"
+            className="text-sm px-4 py-2 bg-teal-500 text-default-900 rounded-md shadow-md hover:bg-teal-600 transition"
           >
             View Details
           </Link>
@@ -74,7 +74,7 @@ const ProductsCard = ({ products }: { products: any }) => {
       {/* Product Details */}
       <div className="px-4 py-2">
         {/* Product Title */}
-        <h3 className="text-lg font-semibold text-white truncate">
+        <h3 className="text-lg font-semibold text-default-900 truncate">
           {products?.name || "Product Name"}
         </h3>
         {/* <h3 className="text-sm text-white truncate">
@@ -87,18 +87,18 @@ const ProductsCard = ({ products }: { products: any }) => {
             <span className="text-teal-400 text-sm font-medium mr-1">
               Price:
             </span>
-            <p className="text-lg text-white font-semibold">
+            <p className="text-lg text-default-900 font-semibold">
               ${products?.price || "N/A"}
             </p>
           </div>
 
           {/* Divider */}
-          <span className="text-gray-600 mx-3">|</span>
+          <span className="text-default-600 mx-3">|</span>
 
           {/* Product Quantity */}
           <div className="flex items-center">
             <span className="text-teal-400 text-sm font-medium mr-1">Qty:</span>
-            <p className="text-lg text-white font-semibold">
+            <p className="text-lg text-default-900 font-semibold">
               {products?.inventoryCount || "N/A"}
             </p>
           </div>
@@ -107,24 +107,24 @@ const ProductsCard = ({ products }: { products: any }) => {
         {/* Short Description */}
         <Link
           href={`/product/${products?.id}`}
-          className="text-gray-400 text-sm mt-"
+          className="text-default-400 text-sm mt-"
         >
-          {products?.title?.slice(0, 50) || "No description available."}...
+          {products?.title?.slice(0, 25) || "No description available."}...
         </Link>
       </div>
 
       {/* Actions */}
-      <div className="flex justify-between items-center bg-gray-800 p-2">
+      <div className="flex justify-between items-center bg-default-300">
         {/* Rating */}
-        <div className="flex items-center text-teal-400">
+        <div className="flex items-center text-teal-400 px-2">
           {/* <span className="mr-1">⭐</span> */}
           {/* <span className="text-sm">{products?.rating || "No Rating"}</span> */}
-          <span className="text-sm">{products?.category || "No Rating"}</span>
+          <span className="text-sm ">{products?.category || "No Rating"}</span>
         </div>
 
         {/* Add to Cart Button */}
         <button
-          className="bg-teal-500 text-white text-sm md:px-4 md:py-2 px-2 py-1 rounded shadow-md hover:bg-teal-600 transition"
+          className="bg-teal-500 text-white text-sm md:px-2 md:py-1 px-2 py-1 rounded shadow-md hover:bg-teal-600 transition"
           onClick={() => handleDddToCart(products?.id, products?.userId)}
         >
           Add to Cart
