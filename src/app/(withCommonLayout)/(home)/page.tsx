@@ -1,5 +1,6 @@
 import ExtraSectionOne from "@/src/components/HomeSection/ExtraSectionOne";
 import HeroSection from "@/src/components/HomeSection/HeroSection";
+import ProductSection from "@/src/components/HomeSection/ProductSection";
 import AllProducts from "@/src/components/Products/AllProducts";
 
 const HomePage = () => {
@@ -7,8 +8,8 @@ const HomePage = () => {
     <div>
       {/* <HeroSection /> */}
       <HeroSection />
-      {/* All product */}
-      <AllProducts />
+      {/* home product */}
+      <ProductSection />
       {/* Extra section1 */}
       <ExtraSectionOne />
     </div>

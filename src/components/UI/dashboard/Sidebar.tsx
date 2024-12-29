@@ -9,8 +9,8 @@ import {
   MdSubscriptions,
 } from "react-icons/md";
 import { IoFastFood } from "react-icons/io5";
-import { useAppSelector } from "@/src/redux/hooks";
-import { selectCurrentUser } from "@/src/redux/features/auth/authSlice";
+import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
+import { logout, selectCurrentUser } from "@/src/redux/features/auth/authSlice";
 import React from "react";
 
 // Loading component (you can customize this as needed)
@@ -21,10 +21,16 @@ const Loading = () => (
 );
 
 const Sidebar = () => {
+  const dispatch = useAppDispatch();
   const searchParams = useSearchParams();
   const queryValue = searchParams?.get("key");
 
+  const handleLogOut = () => {
+    dispatch(logout());
+  };
+
   const user = useAppSelector(selectCurrentUser);
+  const userId = user?.user?.id;
   // const currentUser: any = user?.user;
   let currenttUser;
   if (user?.token) {
@@ -106,6 +112,21 @@ const Sidebar = () => {
 
           {currenttUserRole == "vendor" && (
             <>
+              {/* Products */}
+              <li className="w-full mb-2">
+                <Link href={`/shop/${userId}`}>
+                  <div
+                    className={`block px-2 py-4 text-white text-center md:text-left rounded-lg transition-all duration-300 hover:bg-purple-700 hover:shadow-xl
+                    `}
+                  >
+                    <span className="material-icons md:hidden">
+                      <IoFastFood />
+                    </span>
+                    <span className="hidden md:inline-block ml-2">My Shop</span>
+                  </div>
+                </Link>
+              </li>
+
               {/* Products */}
               <li className="w-full mb-2">
                 <Link href="/dashboard/products?key=products">
@@ -240,6 +261,18 @@ const Sidebar = () => {
                   <FaHome />
                 </span>
                 <span className="hidden md:inline-block ml-2">Home</span>
+              </div>
+            </Link>
+          </li>
+
+          {/* Log out */}
+          <li onClick={() => handleLogOut()} className="w-full mb-2">
+            <Link href="/">
+              <div className="block px-2 py-4 text-white text-center md:text-left rounded-lg transition-all duration-300 hover:bg-purple-700 hover:shadow-xl">
+                <span className="material-icons md:hidden">
+                  <FaHome />
+                </span>
+                <span className="hidden md:inline-block ml-2">Log out</span>
               </div>
             </Link>
           </li>

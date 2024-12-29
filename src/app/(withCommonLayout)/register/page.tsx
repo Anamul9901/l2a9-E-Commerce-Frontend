@@ -37,7 +37,7 @@ const Register = () => {
       dispatch(setUser({ user: finalUserData, token: res?.data?.accessToken }));
       if (res?.data?.result?.role == "vendor") {
         router.push("/create-shop");
-      } else {
+      } else if (res?.data?.result?.role != "vendor") {
         router.push("/");
       }
     }

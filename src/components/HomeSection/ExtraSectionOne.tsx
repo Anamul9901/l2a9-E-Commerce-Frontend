@@ -9,6 +9,7 @@ import support2 from "../../../public/supportImage/support2.png";
 import support3 from "../../../public/supportImage/support3.png";
 import support4 from "../../../public/supportImage/support4.png";
 import support5 from "../../../public/supportImage/support5.png";
+import Link from "next/link";
 
 const ExtraSectionOne = () => {
   const images = [image1, image2, image3, image4];
@@ -43,7 +44,7 @@ const ExtraSectionOne = () => {
     <div className="py-12">
       <div className="grid md:grid-cols-4 grid-cols-2 justify-center items-center gap-4">
         {images?.map((item: any, idx: number) => (
-          <div key={idx}>
+          <Link href={"/products"} key={idx}>
             <Image
               className="rounded-lg hover:scale-105 duration-300"
               src={item}
@@ -51,7 +52,7 @@ const ExtraSectionOne = () => {
               height={300}
               width={300}
             />
-          </div>
+          </Link>
         ))}
       </div>{" "}
       {/* support section */}

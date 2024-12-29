@@ -58,21 +58,21 @@ const Login = () => {
         <div className="pb-4">
           <div className="flex items-center justify-between gap-1">
             <p
-              onClick={() => handleCredentialSet("testuser@gmail.com", "123")}
+              onClick={() => handleCredentialSet("testuser@gmail.com", "Test@User")}
               className="bg-default-300 text-sm rounded-lg px-1 hover:cursor-pointer"
             >
               User credential
             </p>
             <p
               onClick={() =>
-                handleCredentialSet("vendor@gmail.com", "vendor123")
+                handleCredentialSet("testvendor@gmail.com", "Test@Vendor")
               }
               className="bg-default-300 text-sm rounded-lg px-1 hover:cursor-pointer"
             >
               Vendor credential
             </p>
             <p
-              onClick={() => handleCredentialSet("admin@gmail.com", "admin123")}
+              onClick={() => handleCredentialSet("testadmin@gmail.com", "Test@Admin")}
               className="bg-default-300 text-sm rounded-lg px-1 hover:cursor-pointer"
             >
               Admin credential
