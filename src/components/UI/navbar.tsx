@@ -22,17 +22,16 @@ import { selectCurrentUser } from "@/src/redux/features/auth/authSlice";
 import { useEffect, useState } from "react";
 
 export const Navbar = () => {
-  
   const [isMounted, setIsMounted] = useState(false);
   const { user } = useAppSelector(selectCurrentUser);
-    // For hydration error handle
-    useEffect(() => {
-      setIsMounted(true);
-    }, []);
-  
-    if (!isMounted) {
-      return null;
-    }
+  // For hydration error handle
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null;
+  }
   return (
     <NextUINavbar maxWidth="xl" position="sticky">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
@@ -65,12 +64,10 @@ export const Navbar = () => {
       <NavbarContent className=" basis-1/5 sm:basis-full" justify="end">
         <NavbarItem className="flex justify-center items-center gap-3">
           <a href="/cart" className="rounded-full p-1">
-            <HiMiniShoppingCart className="text-xl text-gray-400" />
+            <HiMiniShoppingCart className="text-xl text-default-700" />
           </a>
           <ThemeSwitch />
-          <div>{user ? <NavberDropdown /> : 
-          <a href="/login">
-            Login</a>}</div>
+          <div>{user ? <NavberDropdown /> : <a href="/login">Login</a>}</div>
         </NavbarItem>
         <div className="md:hidden w-[30px] h-[30px]">
           <NavbarMenuToggle className="w-full h-full" />

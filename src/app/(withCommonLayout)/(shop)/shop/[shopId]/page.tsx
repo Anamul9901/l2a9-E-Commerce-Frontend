@@ -55,11 +55,12 @@ const ShopPage = () => {
   return (
     <div>
       {/* Profile Banner */}
-      <div className="relative bg-blue-600 h-40">
-        <div className="absolute bottom-3 left-4 flex items-center space-x-4 w-full">
+      <div className="relative bg-gradient-to-r from-blue-500 to-blue-700 h-60">
+        {/* Profile Info Container */}
+        <div className="absolute bottom-6 left-6 flex items-center space-x-6 w-full">
           {/* Profile Picture */}
           <img
-            className="w-28 h-28 rounded-full border-4 border-white"
+            className="w-32 h-32 rounded-full border-4 border-white shadow-lg"
             src={
               singleShopData?.logo ||
               "https://i.ibb.co.com/z89cgQr/profile.webp"
@@ -67,22 +68,53 @@ const ShopPage = () => {
             alt="Shop logo"
           />
           <div className="text-white w-full">
-            <h2 className="text-2xl font-bold">{singleShopData?.name} </h2>
-            <h2 className="text-sm">{singleShopData?.title}</h2>
-            <h2 className="text-sm">Total Product: {shopProductLength}</h2>
-            <div className="flex justify-between items-center">
-              <p className="text-sm">{followerThisShop} Followers</p>
-              <div className="flex pr-6 md:pr-20 gap-2">
-                {isIFollowThisShop ? (
-                  <Button onClick={handleUnfollowShop} className="btn btn-sm">
-                    Unfollow
-                  </Button>
-                ) : (
-                  <Button onClick={handleFollowShop} className="btn btn-sm">
-                    Follow
-                  </Button>
+            {/* Shop Name */}
+            <h2 className="text-4xl font-extrabold tracking-wide">
+              {singleShopData?.name}
+            </h2>
+            {/* Shop Title */}
+            <h3 className="text-lg font-medium italic text-gray-200">
+              {singleShopData?.title}
+            </h3>
+
+            {/* Additional Info */}
+            <div className="flex flex-wrap mt-4 space-y-1 text-sm md:space-y-0">
+              <p className="w-full md:w-auto md:pr-4">
+                📦 Products: {shopProductLength}
+              </p>
+              <p className="w-full md:w-auto md:pr-4">
+                👥 Followers: {followerThisShop}
+              </p>
+              <p className="w-full md:w-auto">
+                📅 Joined:{" "}
+                {new Date(singleShopData?.cretedAt).toLocaleDateString(
+                  "en-US",
+                  {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  }
                 )}
-              </div>
+              </p>
+            </div>
+
+            {/* Follow/Unfollow Buttons */}
+            <div className="flex items-center mt-4 space-x-3">
+              {isIFollowThisShop ? (
+                <Button
+                  onClick={handleUnfollowShop}
+                  className="bg-default-500 hover:bg-default-600 text-white py-1.5 px-6 rounded-md font-semibold shadow-md"
+                >
+                  Unfollow
+                </Button>
+              ) : (
+                <Button
+                  onClick={handleFollowShop}
+                  className="bg-green-500 hover:bg-green-600 text-white py-1.5 px-6 rounded-md font-semibold shadow-md"
+                >
+                  Follow
+                </Button>
+              )}
             </div>
           </div>
         </div>
