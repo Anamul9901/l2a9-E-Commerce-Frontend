@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { useGetAllProductQuery } from "@/src/redux/features/products/productApi";
 import { Spinner } from "@nextui-org/spinner";
 import React, { useState, useMemo } from "react";
@@ -13,12 +13,12 @@ const AllProducts = () => {
   const [maxPrice, setMaxPrice] = useState("");
   const [rating, setRating] = useState("");
 
-  const filters = { 
-    limit: productLimit, 
-    page: productPage, 
-    searchTerm, 
-    category, 
-    rating 
+  const filters = {
+    limit: productLimit,
+    page: productPage,
+    searchTerm,
+    category,
+    rating,
   };
 
   const { data: allProduct, isLoading } = useGetAllProductQuery(filters);
@@ -57,13 +57,18 @@ const AllProducts = () => {
   };
 
   return (
-    <div className="flex">
+    <div className="flex flex-wrap">
       {/* Sidebar Filters */}
-      <aside className="w-64 border-r p-4">
+      <aside className="w-full sm:w-64 md:w-80 lg:w-1/4 xl:w-1/5 border-r p-4 mb-4 md:mb-0">
         <h2 className="text-lg font-bold mb-4">Filters</h2>
+
+        {/* Search Filter */}
         <div className="mb-4">
-          <label className="block font-medium mb-2">Search</label>
+          <label htmlFor="search" className="block font-medium mb-2">
+            Search
+          </label>
           <input
+            id="search"
             type="text"
             placeholder="Search by name"
             value={searchTerm}
@@ -71,9 +76,14 @@ const AllProducts = () => {
             className="border px-3 py-2 rounded-md w-full"
           />
         </div>
+
+        {/* Category Filter */}
         <div className="mb-4">
-          <label className="block font-medium mb-2">Category</label>
+          <label htmlFor="category" className="block font-medium mb-2">
+            Category
+          </label>
           <select
+            id="category"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
             className="border px-3 py-2 rounded-md w-full"
@@ -86,28 +96,37 @@ const AllProducts = () => {
             ))}
           </select>
         </div>
+
+        {/* Price Range Filter */}
         <div className="mb-4">
-          <label className="block font-medium mb-2">Price Range</label>
-          <div className="flex gap-2">
-            <input
-              type="number"
-              placeholder="Min"
-              value={minPrice}
-              onChange={(e) => setMinPrice(e.target.value)}
-              className="border px-3 py-2 rounded-md w-1/2"
-            />
-            <input
-              type="number"
-              placeholder="Max"
-              value={maxPrice}
-              onChange={(e) => setMaxPrice(e.target.value)}
-              className="border px-3 py-2 rounded-md w-1/2"
-            />
-          </div>
+          <label className="block font-medium mb-2">
+            Price Range
+            <div className="flex gap-2">
+              <input
+                type="number"
+                placeholder="Min"
+                value={minPrice}
+                onChange={(e) => setMinPrice(e.target.value)}
+                className="border px-3 py-2 rounded-md w-1/2"
+              />
+              <input
+                type="number"
+                placeholder="Max"
+                value={maxPrice}
+                onChange={(e) => setMaxPrice(e.target.value)}
+                className="border px-3 py-2 rounded-md w-1/2"
+              />
+            </div>
+          </label>
         </div>
+
+        {/* Rating Filter */}
         <div className="mb-4">
-          <label className="block font-medium mb-2">Ratings</label>
+          <label htmlFor="rating" className="block font-medium mb-2">
+            Ratings
+          </label>
           <select
+            id="rating"
             value={rating}
             onChange={(e) => setRating(e.target.value)}
             className="border px-3 py-2 rounded-md w-full"
@@ -125,7 +144,7 @@ const AllProducts = () => {
       {/* Main Content */}
       <main className="flex-1 p-4">
         {/* Product List */}
-        <div className="grid lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-3 grid-cols-1 pt-4 pb-4 gap-4">
+        <div className="grid lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-4">
           {filteredProducts.map((product: any, idx: any) => (
             <ProductsCard products={product} key={idx} />
           ))}
@@ -133,7 +152,9 @@ const AllProducts = () => {
 
         {/* No Products Message */}
         {filteredProducts.length === 0 && (
-          <p className="text-center text-2xl w-full">No products found</p>
+          <p className="text-center text-2xl text-gray-500">
+            No products found
+          </p>
         )}
 
         {/* Loading Spinner */}

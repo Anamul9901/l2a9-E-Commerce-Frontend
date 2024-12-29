@@ -57,35 +57,43 @@ const Login = () => {
         </p>
         <div className="pb-4">
           <div className="flex items-center justify-between gap-1">
-            <p
-              onClick={() => handleCredentialSet("testuser@gmail.com", "Test@User")}
+            <button
+              onClick={() =>
+                handleCredentialSet("testuser@gmail.com", "Test@User")
+              }
               className="bg-default-300 text-sm rounded-lg px-1 hover:cursor-pointer"
             >
               User credential
-            </p>
-            <p
+            </button>
+            <button
               onClick={() =>
                 handleCredentialSet("testvendor@gmail.com", "Test@Vendor")
               }
               className="bg-default-300 text-sm rounded-lg px-1 hover:cursor-pointer"
             >
               Vendor credential
-            </p>
-            <p
-              onClick={() => handleCredentialSet("testadmin@gmail.com", "Test@Admin")}
+            </button>
+            <button
+              onClick={() =>
+                handleCredentialSet("testadmin@gmail.com", "Test@Admin")
+              }
               className="bg-default-300 text-sm rounded-lg px-1 hover:cursor-pointer"
             >
               Admin credential
-            </p>
+            </button>
           </div>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-default-800 font-medium mb-1">
+            <label
+              htmlFor="email"
+              className="block text-default-800 font-medium mb-1"
+            >
               Email
             </label>
             <input
+              id="email"
               type="email"
               name="email"
               value={credentials.email}
@@ -97,10 +105,14 @@ const Login = () => {
             />
           </div>
           <div>
-            <label className="block text-default-800 font-medium mb-1">
+            <label
+              htmlFor="password"
+              className="block text-default-800 font-medium mb-1"
+            >
               Password
             </label>
             <input
+              id="password"
               type="password"
               name="password"
               value={credentials.password}

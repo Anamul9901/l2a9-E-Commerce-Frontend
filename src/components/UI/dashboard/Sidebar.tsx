@@ -266,14 +266,18 @@ const Sidebar = () => {
           </li>
 
           {/* Log out */}
-          <li onClick={() => handleLogOut()} className="w-full mb-2">
-            <Link href="/">
-              <div className="block px-2 py-4 text-white text-center md:text-left rounded-lg transition-all duration-300 hover:bg-purple-700 hover:shadow-xl">
+          <li className="w-full mb-2">
+            <Link href="/" passHref>
+              <button
+                onClick={() => handleLogOut()}
+                className="block w-full px-2 py-4 text-white text-center md:text-left rounded-lg transition-all duration-300 hover:bg-purple-700 hover:shadow-xl"
+                aria-label="Log out"
+              >
                 <span className="material-icons md:hidden">
                   <FaHome />
                 </span>
                 <span className="hidden md:inline-block ml-2">Log out</span>
-              </div>
+              </button>
             </Link>
           </li>
         </ul>
