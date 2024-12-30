@@ -1,9 +1,9 @@
 "use client";
 import { useGetAllProductQuery } from "@/src/redux/features/products/productApi";
 import { Spinner } from "@nextui-org/spinner";
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import ProductsCard from "../Card/ProductCard";
-
+import { useGetAllCategoryQuery } from "@/src/redux/features/Category/catogoryApi";
 const AllProducts = () => {
   const [productLimit, setProductLimit] = useState(8);
   const [productPage, setProductPage] = useState(1);
@@ -12,6 +12,12 @@ const AllProducts = () => {
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [rating, setRating] = useState("");
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const keyParam: any = params.get("key");
+    setCategory(keyParam);
+  }, []);
 
   const filters = {
     limit: productLimit,
@@ -22,15 +28,8 @@ const AllProducts = () => {
   };
 
   const { data: allProduct, isLoading } = useGetAllProductQuery(filters);
-
-  // Static categories
-  const categoryOptions = [
-    { key: "electronics", label: "Electronics" },
-    { key: "fashion", label: "Fashion" },
-    { key: "home", label: "Home & Living" },
-    { key: "books", label: "Books" },
-    { key: "sports", label: "Sports" },
-  ];
+  const { data: getAllCategory } = useGetAllCategoryQuery(undefined);
+  const categoryOptions = getAllCategory?.data;
 
   // Filter products locally based on min and max price
   const filteredProducts = useMemo(() => {
@@ -89,7 +88,7 @@ const AllProducts = () => {
             className="border px-3 py-2 rounded-md w-full"
           >
             <option value="">All Categories</option>
-            {categoryOptions.map((category, idx) => (
+            {categoryOptions?.map((category: any, idx: number) => (
               <option value={category.key} key={idx}>
                 {category.label}
               </option>
@@ -121,7 +120,7 @@ const AllProducts = () => {
         </div>
 
         {/* Rating Filter */}
-        <div className="mb-4">
+        {/* <div className="mb-4">
           <label htmlFor="rating" className="block font-medium mb-2">
             Ratings
           </label>
@@ -138,7 +137,7 @@ const AllProducts = () => {
             <option value="4">4 Stars & Up</option>
             <option value="5">5 Stars</option>
           </select>
-        </div>
+        </div> */}
       </aside>
 
       {/* Main Content */}
@@ -161,7 +160,7 @@ const AllProducts = () => {
         <div className="text-center text-2xl">{isLoading && <Spinner />}</div>
 
         {/* Pagination Controls */}
-        <div className="flex justify-center items-center gap-4 mb-4">
+        <div className="flex justify-center items-center gap-4 mb-4 pt-6">
           <button
             onClick={handlePreviousPage}
             disabled={productPage === 1}

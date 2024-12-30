@@ -1,35 +1,129 @@
-const HeroSection = () => {
-  return (
-    <section className="relative h-[50vh] bg-gradient-to-br from-blue-900 via-black to-purple-900 flex items-center justify-center text-center overflow-hidden">
-      {/* Background Decoration */}
-      <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 h-64 w-64 bg-gradient-to-r from-cyan-400 to-purple-600 opacity-40 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-10 h-48 w-48 bg-gradient-to-r from-pink-400 to-yellow-600 opacity-40 rounded-full blur-3xl"></div>
-      </div>
+"use client";
+import { useState, useEffect } from "react";
+import { ChevronLeft, ChevronRight } from "react-feather";
+import homeImage from "../../../public/home-image.png";
+import Image from "next/image";
 
-      {/* Content */}
-      <div className="relative z-10 container mx-auto px-6">
-        <h1 className="text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 drop-shadow-lg mb-6">
-          Welcome to the Future
-        </h1>
-        <p className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed">
-          Step into a world of endless possibilities. Harness cutting-edge
-          technology to shape tomorrow, today.
-        </p>
-        <div className="flex justify-center space-x-6">
-          <button className="px-8 py-3 bg-cyan-500 text-black rounded-lg shadow-lg font-semibold hover:bg-cyan-400 hover:shadow-cyan-500/50 transition">
-            Learn More
+const slides = [
+  {
+    image: homeImage,
+    cupon: "summer30",
+    header: "UP to 30% off",
+    title: "Summer Collection",
+    desc: "Explore our summer collection!",
+    colorCode: "#eb4034",
+    bgColorCode: "#FFE4E1", // Soft coral pink
+  },
+  {
+    image: homeImage,
+    cupon: "winter40",
+    header: "UP to 40% off",
+    title: "Winter Sale",
+    desc: "For a limited time only!",
+    colorCode: "#fc8a3d",
+    bgColorCode: "#FFF4E1", // Soft peach
+  },
+  {
+    image: homeImage,
+    cupon: "New25",
+    header: "UP to 25% off",
+    title: "New Arrivals",
+    desc: "Check out the latest trends!",
+    colorCode: "#df3dfc",
+    bgColorCode: "#F1E1FF", // Soft lavender
+  },
+];
+
+export default function HeroSection({
+  autoSlide = false,
+  autoSlideInterval = 3000,
+}) {
+  const [curr, setCurr] = useState(0);
+
+  const prev = () => {
+    setCurr((curr) => (curr === 0 ? slides.length - 1 : curr - 1));
+  };
+
+  const next = () => {
+    setCurr((curr) => (curr === slides.length - 1 ? 0 : curr + 1));
+  };
+
+  useEffect(() => {
+    if (!autoSlide) return;
+    const slideInterval = setInterval(next, autoSlideInterval);
+    return () => clearInterval(slideInterval);
+  }, [autoSlide, autoSlideInterval]);
+
+  return (
+    <div
+      className="flex justify-center items-center w-full h-full pt-12 px-4"
+      style={{ backgroundColor: slides[curr].bgColorCode }}
+    >
+      <div className="relative w-full max-w-screen-lg h-full overflow-hidden">
+        {/* Slides Container */}
+        <div
+          className="flex transition-transform ease-out duration-500 w-full"
+          style={{ transform: `translateX(-${curr * 100}%)` }}
+        >
+          {slides.map((item, index) => (
+            <div
+              key={index}
+              className="min-w-full h-full items-center text-center md:flex justify-between w-full"
+            >
+              <div className="mt-4 space-y-2">
+                <p
+                  className="text-md uppercase"
+                  style={{ color: item.colorCode }}
+                >
+                  {item.cupon}
+                </p>
+                <h2
+                  className="text-6xl uppercase font-extrabold"
+                  style={{ color: item.colorCode }}
+                >
+                  {item.header}
+                </h2>
+                <h3 className="text-4xl uppercase font-bold">{item.title}</h3>
+                <p className="text-default-500 text-xl">{item.desc}</p>
+              </div>
+              {/* Slide Content */}
+              <Image
+                src={item.image}
+                alt={`Slide ${index + 1}`}
+                className="md:w-[400px] object-cover pt-8"
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Navigation Buttons */}
+        {/* <div className="absolute inset-0 flex items-center justify-between px-4 w-full">
+          <button
+            onClick={prev}
+            className="p-2 rounded-full bg-white/20 text-gray-800 hover:bg-white/60"
+          >
+            <ChevronLeft size={30} />
           </button>
-          <button className="px-8 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg shadow-lg font-semibold hover:opacity-90 transition">
-            Get Started
+          <button
+            onClick={next}
+            className="p-2 rounded-full bg-white/20 text-gray-800 hover:bg-white/60"
+          >
+            <ChevronRight size={30} />
           </button>
+        </div> */}
+
+        {/* Indicators */}
+        <div className="absolute bottom-4 right-0 left-0 flex items-center justify-center gap-2">
+          {slides.map((_, i) => (
+            <div
+              key={i}
+              className={`w-2 h-2 rounded-full transition-all ${
+                curr === i ? "bg-white p-1" : "bg-white/40"
+              }`}
+            />
+          ))}
         </div>
       </div>
-
-      {/* Subtle Overlay */}
-      <div className="absolute inset-0 bg-black bg-opacity-40"></div>
-    </section>
+    </div>
   );
-};
-
-export default HeroSection;
+}
