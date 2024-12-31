@@ -31,10 +31,9 @@ export const SearchNavbar = () => {
     setIsMounted(true);
   }, []);
 
-  console.log("Search text:", searchText);
-  const handleSearch = () => {
-    // router.push(`/products?search=${searchText}`)
-  };
+  // const handleSearch = () => {
+  //   // router.push(`/products?search=${searchText}`)
+  // };
 
   if (!isMounted) {
     return null;
