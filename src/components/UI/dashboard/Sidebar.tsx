@@ -277,6 +277,25 @@ const Sidebar = () => {
                   </div>
                 </Link>
               </li>
+
+                 {/* cupon */}
+                 <li className="w-full mb-2">
+                <Link href="/dashboard/coupon?key=coupon">
+                  <div
+                    className={`block px-2 py-4 text-default text-center md:text-left rounded-lg transition-all duration-300 hover:bg-default-700 hover:shadow-xl ${
+                      queryValue === "coupon"
+                        ? "bg-default-700 shadow-xl text-[#ff4a4afd] font-extrabold"
+                        : ""
+                    }`}
+                  >
+                    <span className="material-icons md:hidden">
+                      <RiCoupon3Line />
+                    </span>
+                    <span className="hidden md:inline-block ml-2">Coupon</span>
+                  </div>
+                </Link>
+              </li>
+              
             </>
           )}
 

@@ -38,7 +38,7 @@ const AddCouponModel = () => {
       <FXModal
         title="Add Coupon"
         buttonText="Add Coupon"
-        buttonClassName="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+        buttonClassName="bg-teal-500 text-white px-4 py-2 rounded hover:bg-teal-600"
       >
         <FXForm onSubmit={onSubmit}>
           <div className="py-1">
