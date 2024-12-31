@@ -13,17 +13,25 @@ import { useEffect, useState } from "react";
 import clsx from "clsx";
 
 export const Navbar = () => {
-  const [isMounted, setIsMounted] = useState(false);
-  // const searchParams = useSearchParams();
-  // const queryValue = searchParams?.get("key"); 
+  const [isMounted, setIsMounted] = useState(false); // Hydration fix
+  // const [queryValue, setQueryValue] = useState<string | null>(null);
 
-  // For hydration error handling
+  // Hydration error handling
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
+  // Fetch query param directly within the component (after hydration)
+  // const searchParams = useSearchParams();
+  // const queryValueFromURL = searchParams?.get("key");
+
+  // Set the query value after the component is mounted
+  // useEffect(() => {
+  //   setQueryValue(queryValueFromURL);
+  // }, [queryValueFromURL]);
+
   if (!isMounted) {
-    return null;
+    return null; // Render nothing during SSR
   }
 
   return (
@@ -32,9 +40,9 @@ export const Navbar = () => {
         <ul className="hidden md:inline-block gap-4 justify-end ml-2">
           <div className="flex gap-4">
             {siteConfig.navItems.map((item) => {
-              // const isActive = queryValue === item.href; // Check if the query value matches the item's href
+              // const isActive = queryValue === item?.href; // Check if the query value matches the item's href
               return (
-                <NavbarItem key={item.href}>
+                <NavbarItem key={item?.href}>
                   <NextLink
                     // className={clsx(
                     //   linkStyles({ color: "foreground" }),
@@ -42,10 +50,10 @@ export const Navbar = () => {
                     //   isActive ? "text-teal-500 font-bold" : "text-foreground" // Apply active class based on `isActive`
                     // )}
                     // color="foreground"
-                    // href={`${item.href}?key=${item.href}`} 
-                    href={item.href} 
+                    // href={`${item?.href}?key=${item?.href}`}  // Add query parameter to the URL
+                    href={item?.href}
                   >
-                    {item.label}
+                    {item?.label}
                   </NextLink>
                 </NavbarItem>
               );

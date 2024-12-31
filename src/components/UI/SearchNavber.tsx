@@ -56,18 +56,18 @@ export const SearchNavbar = () => {
 
       {/* Search Input */}
       <div className="hidden md:block">
-        <div className="flex flex-1 justify-center items-center px-4 ">
-          <div className="flex w-full max-w-md items-center bg-gray-100 rounded-full shadow-md">
+        <div className="flex flex-1 justify-center items-center px-4">
+          <div className="flex w-full max-w-2xl items-center bg-gray-100 rounded-full shadow-md">
             <input
               type="text"
               placeholder="Search"
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
-              className="flex-1 px-4 py-2 text-sm text-gray-700 bg-transparent border-none outline-none focus:ring-2 focus:ring-teal-500 rounded-l-full"
+              className="flex-1 px-6 py-1 text-lg text-gray-700 bg-transparent border-none outline-none focus:ring-2 focus:ring-teal-500 rounded-l-full"
             />
             <Link
               href={`/products?search=${searchText}`}
-              className="px-4 py-2 bg-teal-500 text-white text-sm font-semibold rounded-r-full hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-500"
+              className="px-6 py-1 bg-teal-500 text-white text-lg font-semibold rounded-r-full hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-500"
             >
               Search
             </Link>
