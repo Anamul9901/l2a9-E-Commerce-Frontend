@@ -71,25 +71,25 @@ const Dashboard = () => {
         {/* Overview Section */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           {/* Card 1: Total Users */}
-          <div className="bg-white p-4 rounded-lg shadow-md flex flex-col items-center">
+          <div className="bg-default-200 p-4 rounded-lg shadow-md flex flex-col items-center">
             <h3 className="text-lg font-semibold">Total Users</h3>
             <p className="text-xl">{overviewData.totalUsers}</p>
           </div>
 
           {/* Card 2: Total Sales */}
-          <div className="bg-white p-4 rounded-lg shadow-md flex flex-col items-center">
+          <div className="bg-default-200 p-4 rounded-lg shadow-md flex flex-col items-center">
             <h3 className="text-lg font-semibold">Total Sales</h3>
             <p className="text-xl">${overviewData.totalSales}</p>
           </div>
 
           {/* Card 3: Pending Orders */}
-          <div className="bg-white p-4 rounded-lg shadow-md flex flex-col items-center">
+          <div className="bg-default-200 p-4 rounded-lg shadow-md flex flex-col items-center">
             <h3 className="text-lg font-semibold">Pending Orders</h3>
             <p className="text-xl">{overviewData.pendingOrders}</p>
           </div>
 
           {/* Card 4: Completed Orders */}
-          <div className="bg-white p-4 rounded-lg shadow-md flex flex-col items-center">
+          <div className="bg-default-200 p-4 rounded-lg shadow-md flex flex-col items-center">
             <h3 className="text-lg font-semibold">Completed Orders</h3>
             <p className="text-xl">{overviewData.completedOrders}</p>
           </div>
@@ -98,7 +98,7 @@ const Dashboard = () => {
         {/* Chart Section */}
         <div className="grid md:grid-cols-2 gap-4">
           {/* Bar Chart */}
-          <div className="bg-white p-6 rounded-lg shadow-md">
+          <div className="bg-default-200 p-6 rounded-lg shadow-md">
             <h3 className="text-lg font-semibold mb-4">
               Sales Data (Bar Chart)
             </h3>
@@ -106,7 +106,7 @@ const Dashboard = () => {
           </div>
 
           {/* Pie Chart */}
-          <div className="bg-white p-6 rounded-lg shadow-md">
+          <div className="bg-default-200 p-6 rounded-lg shadow-md">
             <h3 className="text-lg font-semibold mb-4">
               Order Status (Pie Chart)
             </h3>
@@ -115,7 +115,7 @@ const Dashboard = () => {
         </div>
 
         {/* Table Section */}
-        <div className="bg-white p-6 rounded-lg shadow-md">
+        <div className="bg-default-200 p-6 rounded-lg shadow-md">
           <h3 className="text-lg font-semibold mb-4">Recent Orders</h3>
           <table className="min-w-full table-auto">
             <thead>

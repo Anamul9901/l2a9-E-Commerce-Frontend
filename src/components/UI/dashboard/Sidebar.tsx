@@ -8,6 +8,15 @@ import { IoFastFood } from "react-icons/io5";
 import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
 import { logout, selectCurrentUser } from "@/src/redux/features/auth/authSlice";
 import React from "react";
+import { CgProfile } from "react-icons/cg";
+import { GrOverview } from "react-icons/gr";
+import { AiOutlineShop } from "react-icons/ai";
+import { AiFillProduct } from "react-icons/ai";
+import { RiCoupon3Line } from "react-icons/ri";
+import { MdWorkHistory } from "react-icons/md";
+import { GiShop } from "react-icons/gi";
+import { BiSolidCategoryAlt } from "react-icons/bi";
+import { TbLogout } from "react-icons/tb";
 
 // Loading component (you can customize this as needed)
 const Loading = () => (
@@ -50,8 +59,8 @@ const Sidebar = () => {
           {/* Logo */}
           <Link href="/dashboard?key=dashboard" className="w-full">
             <div className="flex items-center text-center justify-center mb-8 hover:scale-105 transition-all duration-300">
-              <p className="font-bold text-2xl text-inherit">
-                AnSa<span className="text-teal-500">Mart</span>
+              <p className="hidden md:block font-bold text-2xl text-inherit">
+                <span className="text-default-300">AnSa</span><span className="text-teal-500">Mart</span>
               </p>
             </div>
           </Link>
@@ -87,7 +96,7 @@ const Sidebar = () => {
                 }`}
               >
                 <span className="material-icons md:hidden">
-                  <MdSpaceDashboard />
+                  <CgProfile />
                 </span>
                 <span className="hidden md:inline-block ml-2">Profile</span>
               </div>
@@ -105,7 +114,7 @@ const Sidebar = () => {
                 }`}
               >
                 <span className="material-icons md:hidden">
-                  <IoFastFood />
+                  <GrOverview />
                 </span>
                 <span className="hidden md:inline-block ml-2">Recent view</span>
               </div>
@@ -140,7 +149,7 @@ const Sidebar = () => {
                     `}
                   >
                     <span className="material-icons md:hidden">
-                      <IoFastFood />
+                      <AiOutlineShop />
                     </span>
                     <span className="hidden md:inline-block ml-2">My Shop</span>
                   </div>
@@ -158,7 +167,7 @@ const Sidebar = () => {
                     }`}
                   >
                     <span className="material-icons md:hidden">
-                      <IoFastFood />
+                      <AiFillProduct />
                     </span>
                     <span className="hidden md:inline-block ml-2">
                       Products
@@ -178,7 +187,7 @@ const Sidebar = () => {
                     }`}
                   >
                     <span className="material-icons md:hidden">
-                      <IoFastFood />
+                      <RiCoupon3Line />
                     </span>
                     <span className="hidden md:inline-block ml-2">Coupon</span>
                   </div>
@@ -196,7 +205,7 @@ const Sidebar = () => {
                     }`}
                   >
                     <span className="material-icons md:hidden">
-                      <IoFastFood />
+                      <MdWorkHistory />
                     </span>
                     <span className="hidden md:inline-block ml-2">
                       Shop Order History
@@ -220,7 +229,7 @@ const Sidebar = () => {
                     }`}
                   >
                     <span className="material-icons md:hidden">
-                      <MdSubscriptions />
+                      <FaUsers />
                     </span>
                     <span className="hidden md:inline-block ml-2">
                       All User
@@ -240,7 +249,7 @@ const Sidebar = () => {
                     }`}
                   >
                     <span className="material-icons md:hidden">
-                      <MdSubscriptions />
+                      <GiShop />
                     </span>
                     <span className="hidden md:inline-block ml-2">
                       All Shop
@@ -260,7 +269,7 @@ const Sidebar = () => {
                     }`}
                   >
                     <span className="material-icons md:hidden">
-                      <MdSubscriptions />
+                      <BiSolidCategoryAlt />
                     </span>
                     <span className="hidden md:inline-block ml-2">
                       Manage Category
@@ -294,7 +303,7 @@ const Sidebar = () => {
                 aria-label="Log out"
               >
                 <span className="material-icons md:hidden">
-                  <FaHome />
+                  <TbLogout />
                 </span>
                 <span className="hidden md:inline-block ml-2">Log out</span>
               </button>

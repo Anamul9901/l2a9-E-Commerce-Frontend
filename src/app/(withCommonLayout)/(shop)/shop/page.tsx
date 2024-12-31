@@ -7,8 +7,6 @@ const ShopPage = () => {
   const { data: getAllShop } = useGetAllshopQuery(undefined);
   const shops = getAllShop?.data;
 
-  console.log("shop", shops);
-
   return (
     <div className="container mx-auto p-6">
       <h1 className="text-3xl font-bold text-center mb-8">Shop List</h1>
