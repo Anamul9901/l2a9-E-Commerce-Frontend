@@ -9,6 +9,7 @@ const AllProducts = () => {
   const [productPage, setProductPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
   const [category, setCategory] = useState("");
+  const [searchParams, setSearchParams] = useState("");
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [rating, setRating] = useState("");
@@ -16,13 +17,15 @@ const AllProducts = () => {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const keyParam: any = params.get("key");
+    const searchParam: any = params.get("search");
     setCategory(keyParam);
+    setSearchParams(searchParam);
   }, []);
 
   const filters = {
     limit: productLimit,
     page: productPage,
-    searchTerm,
+    searchTerm: searchTerm || searchParams,
     category,
     rating,
   };
@@ -143,7 +146,7 @@ const AllProducts = () => {
       {/* Main Content */}
       <main className="flex-1 p-4">
         {/* Product List */}
-        <div className="grid lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-4">
+        <div className="grid lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4">
           {filteredProducts.map((product: any, idx: any) => (
             <ProductsCard products={product} key={idx} />
           ))}

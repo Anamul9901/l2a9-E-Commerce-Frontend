@@ -32,7 +32,7 @@ const CategorySection = () => {
       {/* Left Button */}
       <button
         onClick={() => scroll("left")}
-        className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-teal-400 text-white px-2 py-1 rounded-full hover:bg-teal-600 z-10"
+        className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-teal-300 text-white px-2 py-1 rounded-full hover:bg-teal-600 z-10"
       >
         &lt;
       </button>
@@ -40,14 +40,14 @@ const CategorySection = () => {
       {/* Category List */}
       <div
         ref={scrollRef}
-        className="flex gap-4 overflow-hidden py-4 mx-8"
+        className="flex gap-4 overflow-hidden py-4"
         style={{ scrollBehavior: "smooth" }}
       >
         {cetagorys.map((category, index) => (
           <Link
             href={`/products?key=${category.name}`}
             key={index}
-            className="text-center bg-default-50 p-4 md:w-[200px] w-[130px] rounded-lg shadow-md flex-shrink-0 text-default-700"
+            className="text-center bg-[#60ffec3a] p-4 md:w-[190px] w-[130px] rounded-lg shadow-md flex-shrink-0 text-default-700"
           >
             <div className="flex justify-center items-center mb-2">
               <p className="md:text-3xl text-2xl">{category.image}</p>
@@ -60,7 +60,7 @@ const CategorySection = () => {
       {/* Right Button */}
       <button
         onClick={() => scroll("right")}
-        className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-teal-400 text-white px-2 py-1 rounded-full hover:bg-teal-600 z-10"
+        className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-teal-300 text-white px-2 py-1 rounded-full hover:bg-teal-600 z-10"
       >
         &gt;
       </button>

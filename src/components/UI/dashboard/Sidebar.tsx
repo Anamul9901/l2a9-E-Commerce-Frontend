@@ -41,28 +41,26 @@ const Sidebar = () => {
   return (
     <div className="min-h-screen fixed h-full flex bg-gray-900">
       {/* Dashboard Sidebar */}
-      <div className="md:w-64 w-20 bg-gradient-to-b from-purple-900 to-blue-900 pt-6 shadow-2xl relative">
+      <div className="md:w-64 w-20 bg-gradient-to-b from-default-900 to-teal-950 pt-6 shadow-2xl relative">
         <ul className="menu flex flex-col items-center md:items-start p-4">
           {/* Logo */}
-          <Link href="/dashboard?key=dashboard">
-            <div className="flex justify-center mb-8 hover:scale-105 transition-all duration-300">
-              <img
-                className="md:w-2/6 w-12 rounded-full border border-purple-500 shadow-lg"
-                src="https://i.ibb.co.com/61WySQq/pngwing-com-3.png"
-                alt="Logo"
-              />
+          <Link href="/dashboard?key=dashboard" className="w-full">
+            <div className="flex items-center text-center justify-center mb-8 hover:scale-105 transition-all duration-300">
+              <p className="font-bold text-2xl text-inherit">
+                AnSa<span className="text-teal-500">Mart</span>
+              </p>
             </div>
           </Link>
 
-          <hr className="border-purple-500 w-full mb-4 opacity-40" />
+          <hr className="border-default-500 w-full mb-4 opacity-40" />
 
           {/* Dashboard */}
           <li className="w-full mb-2">
             <Link href="/dashboard?key=dashboard">
               <div
-                className={`block px-2 py-4 text-white text-center md:text-left rounded-lg transition-all duration-300 hover:bg-purple-700 hover:shadow-xl ${
+                className={`block px-2 py-4 text-default text-center md:text-left rounded-lg transition-all duration-300 hover:bg-default-700 hover:shadow-xl ${
                   queryValue === "dashboard"
-                    ? "bg-purple-700 shadow-xl text-[#ff4a4afd] font-extrabold"
+                    ? "bg-default-700 shadow-xl text-[#ff4a4afd] font-extrabold"
                     : ""
                 }`}
               >
@@ -74,13 +72,31 @@ const Sidebar = () => {
             </Link>
           </li>
 
+          {/* profile */}
+          <li className="w-full mb-2">
+            <Link href="/dashboard/profile?key=profile">
+              <div
+                className={`block px-2 py-4 text-default text-center md:text-left rounded-lg transition-all duration-300 hover:bg-default-700 hover:shadow-xl ${
+                  queryValue === "profile"
+                    ? "bg-default-700 shadow-xl text-[#ff4a4afd] font-extrabold"
+                    : ""
+                }`}
+              >
+                <span className="material-icons md:hidden">
+                  <MdSpaceDashboard />
+                </span>
+                <span className="hidden md:inline-block ml-2">Profile</span>
+              </div>
+            </Link>
+          </li>
+
           {/* recent view Products */}
           <li className="w-full mb-2">
             <Link href="/dashboard/recent-view-products?key=recent-view-products">
               <div
-                className={`block px-2 py-4 text-white text-center md:text-left rounded-lg transition-all duration-300 hover:bg-purple-700 hover:shadow-xl ${
+                className={`block px-2 py-4 text-default text-center md:text-left rounded-lg transition-all duration-300 hover:bg-default-700 hover:shadow-xl ${
                   queryValue === "recent-view-products"
-                    ? "bg-purple-700 shadow-xl text-[#ff4a4afd] font-extrabold"
+                    ? "bg-default-700 shadow-xl text-[#ff4a4afd] font-extrabold"
                     : ""
                 }`}
               >
@@ -96,9 +112,9 @@ const Sidebar = () => {
           <li className="w-full mb-2">
             <Link href="/dashboard/order-history?key=order-history">
               <div
-                className={`block px-2 py-4 text-white text-center md:text-left rounded-lg transition-all duration-300 hover:bg-purple-700 hover:shadow-xl ${
+                className={`block px-2 py-4 text-default text-center md:text-left rounded-lg transition-all duration-300 hover:bg-default-700 hover:shadow-xl ${
                   queryValue === "order-history"
-                    ? "bg-purple-700 shadow-xl text-[#ff4a4afd] font-extrabold"
+                    ? "bg-default-700 shadow-xl text-[#ff4a4afd] font-extrabold"
                     : ""
                 }`}
               >
@@ -116,7 +132,7 @@ const Sidebar = () => {
               <li className="w-full mb-2">
                 <Link href={`/shop/${userId}`}>
                   <div
-                    className={`block px-2 py-4 text-white text-center md:text-left rounded-lg transition-all duration-300 hover:bg-purple-700 hover:shadow-xl
+                    className={`block px-2 py-4 text-default text-center md:text-left rounded-lg transition-all duration-300 hover:bg-default-700 hover:shadow-xl
                     `}
                   >
                     <span className="material-icons md:hidden">
@@ -131,9 +147,9 @@ const Sidebar = () => {
               <li className="w-full mb-2">
                 <Link href="/dashboard/products?key=products">
                   <div
-                    className={`block px-2 py-4 text-white text-center md:text-left rounded-lg transition-all duration-300 hover:bg-purple-700 hover:shadow-xl ${
+                    className={`block px-2 py-4 text-default text-center md:text-left rounded-lg transition-all duration-300 hover:bg-default-700 hover:shadow-xl ${
                       queryValue === "products"
-                        ? "bg-purple-700 shadow-xl text-[#ff4a4afd] font-extrabold"
+                        ? "bg-default-700 shadow-xl text-[#ff4a4afd] font-extrabold"
                         : ""
                     }`}
                   >
@@ -151,9 +167,9 @@ const Sidebar = () => {
               <li className="w-full mb-2">
                 <Link href="/dashboard/coupon?key=coupon">
                   <div
-                    className={`block px-2 py-4 text-white text-center md:text-left rounded-lg transition-all duration-300 hover:bg-purple-700 hover:shadow-xl ${
+                    className={`block px-2 py-4 text-default text-center md:text-left rounded-lg transition-all duration-300 hover:bg-default-700 hover:shadow-xl ${
                       queryValue === "coupon"
-                        ? "bg-purple-700 shadow-xl text-[#ff4a4afd] font-extrabold"
+                        ? "bg-default-700 shadow-xl text-[#ff4a4afd] font-extrabold"
                         : ""
                     }`}
                   >
@@ -169,9 +185,9 @@ const Sidebar = () => {
               <li className="w-full mb-2">
                 <Link href="/dashboard/shop-order-history?key=shop-order-history">
                   <div
-                    className={`block px-2 py-4 text-white text-center md:text-left rounded-lg transition-all duration-300 hover:bg-purple-700 hover:shadow-xl ${
+                    className={`block px-2 py-4 text-default text-center md:text-left rounded-lg transition-all duration-300 hover:bg-default-700 hover:shadow-xl ${
                       queryValue === "shop-order-history"
-                        ? "bg-purple-700 shadow-xl text-[#ff4a4afd] font-extrabold"
+                        ? "bg-default-700 shadow-xl text-[#ff4a4afd] font-extrabold"
                         : ""
                     }`}
                   >
@@ -193,9 +209,9 @@ const Sidebar = () => {
               <li className="w-full mb-2">
                 <Link href="/dashboard/all-users?key=all-users">
                   <div
-                    className={`block px-2 py-4 text-white text-center md:text-left rounded-lg transition-all duration-300 hover:bg-purple-700 hover:shadow-xl ${
+                    className={`block px-2 py-4 text-default text-center md:text-left rounded-lg transition-all duration-300 hover:bg-default-700 hover:shadow-xl ${
                       queryValue === "all-users"
-                        ? "bg-purple-700 shadow-xl text-[#ff4a4afd] font-extrabold"
+                        ? "bg-default-700 shadow-xl text-[#ff4a4afd] font-extrabold"
                         : ""
                     }`}
                   >
@@ -213,9 +229,9 @@ const Sidebar = () => {
               <li className="w-full mb-2">
                 <Link href="/dashboard/shops?key=shops">
                   <div
-                    className={`block px-2 py-4 text-white text-center md:text-left rounded-lg transition-all duration-300 hover:bg-purple-700 hover:shadow-xl ${
+                    className={`block px-2 py-4 text-default text-center md:text-left rounded-lg transition-all duration-300 hover:bg-default-700 hover:shadow-xl ${
                       queryValue === "shops"
-                        ? "bg-purple-700 shadow-xl text-[#ff4a4afd] font-extrabold"
+                        ? "bg-default-700 shadow-xl text-[#ff4a4afd] font-extrabold"
                         : ""
                     }`}
                   >
@@ -233,9 +249,9 @@ const Sidebar = () => {
               <li className="w-full mb-2">
                 <Link href="/dashboard/category?key=category">
                   <div
-                    className={`block px-2 py-4 text-white text-center md:text-left rounded-lg transition-all duration-300 hover:bg-purple-700 hover:shadow-xl ${
+                    className={`block px-2 py-4 text-default text-center md:text-left rounded-lg transition-all duration-300 hover:bg-default-700 hover:shadow-xl ${
                       queryValue === "category"
-                        ? "bg-purple-700 shadow-xl text-[#ff4a4afd] font-extrabold"
+                        ? "bg-default-700 shadow-xl text-[#ff4a4afd] font-extrabold"
                         : ""
                     }`}
                   >
@@ -251,12 +267,12 @@ const Sidebar = () => {
             </>
           )}
 
-          <hr className="border-purple-500 w-full mb-4 opacity-40" />
+          <hr className="border-default-500 w-full mb-4 opacity-40" />
 
           {/* Home */}
           <li className="w-full mb-2">
             <Link href="/">
-              <div className="block px-2 py-4 text-white text-center md:text-left rounded-lg transition-all duration-300 hover:bg-purple-700 hover:shadow-xl">
+              <div className="block px-2 py-4 text-default text-center md:text-left rounded-lg transition-all duration-300 hover:bg-default-700 hover:shadow-xl">
                 <span className="material-icons md:hidden">
                   <FaHome />
                 </span>
@@ -270,7 +286,7 @@ const Sidebar = () => {
             <Link href="/" passHref>
               <button
                 onClick={() => handleLogOut()}
-                className="block w-full px-2 py-4 text-white text-center md:text-left rounded-lg transition-all duration-300 hover:bg-purple-700 hover:shadow-xl"
+                className="block w-full px-2 py-4 text-default text-center md:text-left rounded-lg transition-all duration-300 hover:bg-default-700 hover:shadow-xl"
                 aria-label="Log out"
               >
                 <span className="material-icons md:hidden">
@@ -283,7 +299,7 @@ const Sidebar = () => {
         </ul>
 
         {/* Bottom Glow Effect */}
-        <div className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-purple-500 to-blue-500 opacity-75 blur-lg"></div>
+        <div className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-default-500 to-blue-500 opacity-75 blur-lg"></div>
       </div>
     </div>
   );

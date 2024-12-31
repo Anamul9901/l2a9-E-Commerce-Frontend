@@ -19,7 +19,7 @@ const ReletedProduct = ({ products }: { products: any }) => {
 
         <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
           <Link
-            href={`/product/${products?.id}`}
+            href={`/products/${products?.id}`}
             className="text-xs px-3 py-1 bg-teal-500 text-white rounded-md shadow-md hover:bg-teal-600 transition"
           >
             View Details

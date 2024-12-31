@@ -1,110 +1,162 @@
 "use client";
-import ChangePasswordModal from "@/src/components/modals/ChangePasswordModal";
-import UpdateShopInfoModel from "@/src/components/modals/UpdateShopInfoModel";
-import { useGetFollowerCountQuery } from "@/src/redux/features/Follower/followerApi";
-import { useGetSingleshopQuery } from "@/src/redux/features/shop/shopApi";
-import { useGetMyDataQuery } from "@/src/redux/features/user/userApi";
-import { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Bar, Pie } from "react-chartjs-2"; // Chart.js
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement,
+} from "chart.js";
+import "chart.js/auto";
+
+// Register chart.js components
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement
+);
 
 const Dashboard = () => {
-  const [isMounted, setIsMounted] = useState(false);
-  const { data: myData } = useGetMyDataQuery(undefined);
-  const currentUserData = myData?.data;
+  const [overviewData, setOverviewData] = useState({
+    totalUsers: 0,
+    totalSales: 0,
+    pendingOrders: 0,
+    completedOrders: 0,
+  });
 
-  const userId = currentUserData?.id;
-  const { data: shopData } = useGetSingleshopQuery(userId, { skip: !userId });
-  const myShopInfo = shopData?.data;
-  const shopId = myShopInfo?.id;
+  const [chartData, setChartData] = useState({
+    barChart: {
+      labels: ["January", "February", "March", "April"],
+      datasets: [
+        {
+          label: "Sales",
+          data: [300, 500, 100, 400],
+          backgroundColor: "rgba(54, 162, 235, 0.6)",
+        },
+      ],
+    },
+    pieChart: {
+      labels: ["Completed", "Pending", "Cancelled"],
+      datasets: [
+        {
+          data: [60, 30, 10],
+          backgroundColor: ["#36A2EB", "#FFCE56", "#FF6384"],
+        },
+      ],
+    },
+  });
 
-  const { data: getFollowerCount } = useGetFollowerCountQuery(shopId);
-  const followerThisShop = getFollowerCount?.data?.follower;
-
-
-  // For hydration error handle
+  // Simulating fetching data
   useEffect(() => {
-    setIsMounted(true);
+    // Simulating dynamic data fetch
+    setOverviewData({
+      totalUsers: 1200,
+      totalSales: 50000,
+      pendingOrders: 20,
+      completedOrders: 300,
+    });
   }, []);
 
-  if (!isMounted) {
-    return null;
-  }
-
   return (
-    <div className="min-h-screen  p-6">
-      <div className="max-w-4xl mx-auto bg-white/60 shadow-xl rounded-lg overflow-hidden">
-        <h1 className="text-3xl font-bold text-center text-gray-800 py-6">
-          Dashboard
-        </h1>
-
-        {/* Profile Section */}
-        <div className="flex flex-col md:flex-row items-center justify-between px-6 py-4 border-b border-gray-200">
-          <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden shadow-lg">
-            <img
-              src={
-                currentUserData?.profilePhoto ||
-                "https://i.ibb.co/z89cgQr/profile.webp"
-              }
-              alt="Profile"
-              className="w-full h-full object-cover"
-            />
+    <div className="flex justify-center items-center w-full">
+      <div className="p-4 space-y-6 ">
+        {/* Overview Section */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {/* Card 1: Total Users */}
+          <div className="bg-white p-4 rounded-lg shadow-md flex flex-col items-center">
+            <h3 className="text-lg font-semibold">Total Users</h3>
+            <p className="text-xl">{overviewData.totalUsers}</p>
           </div>
-          <div className="mt-4 md:mt-0 text-center md:text-left">
-            <h2 className="text-2xl font-semibold text-gray-800">
-              {currentUserData?.name || "User Name"}
-            </h2>
-            <p className="text-gray-600 mt-2">
-              {currentUserData?.bio || "No bio available"}
-            </p>
+
+          {/* Card 2: Total Sales */}
+          <div className="bg-white p-4 rounded-lg shadow-md flex flex-col items-center">
+            <h3 className="text-lg font-semibold">Total Sales</h3>
+            <p className="text-xl">${overviewData.totalSales}</p>
+          </div>
+
+          {/* Card 3: Pending Orders */}
+          <div className="bg-white p-4 rounded-lg shadow-md flex flex-col items-center">
+            <h3 className="text-lg font-semibold">Pending Orders</h3>
+            <p className="text-xl">{overviewData.pendingOrders}</p>
+          </div>
+
+          {/* Card 4: Completed Orders */}
+          <div className="bg-white p-4 rounded-lg shadow-md flex flex-col items-center">
+            <h3 className="text-lg font-semibold">Completed Orders</h3>
+            <p className="text-xl">{overviewData.completedOrders}</p>
           </div>
         </div>
 
-        {/* Statistics Section */}
-        {currentUserData && currentUserData?.role === "vendor" && (
-          <>
-            <h1 className="text-center font-semibold text-xl">Shop Info</h1>
-            <div className="grid text-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-6 py-4">
-              <div className="bg-gray-500 p-4 rounded-lg shadow">
-                <h4 className=" font-semibold text-gray-200">Followers</h4>
-                <p className=" text-gray-200">{followerThisShop || 0}</p>
-              </div>
-              <div className="bg-gray-500 p-4 rounded-lg shadow">
-                <h4 className=" font-semibold text-gray-200">Shop Name</h4>
-                <p className=" text-gray-200">
-                  {myShopInfo?.name || "No name"}
-                </p>
-              </div>
-              <div className="bg-gray-500 p-4 rounded-lg shadow">
-                <h4 className=" font-semibold text-gray-200">Shop Title</h4>
-                <p className=" text-gray-200">
-                  {myShopInfo?.title || "No title"}
-                </p>
-              </div>
-            </div>
-          </>
-        )}
+        {/* Chart Section */}
+        <div className="grid md:grid-cols-2 gap-4">
+          {/* Bar Chart */}
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <h3 className="text-lg font-semibold mb-4">
+              Sales Data (Bar Chart)
+            </h3>
+            <Bar data={chartData.barChart} />
+          </div>
 
-        {/* Actions Section */}
-        <div className="px-6 py-4 border-t border-gray-200 flex justify-center items-center space-x-4">
-          {currentUserData && currentUserData?.role == "vendor" && (
-            <UpdateShopInfoModel shopInfo={myShopInfo} />
-          )}
-
-          <ChangePasswordModal />
+          {/* Pie Chart */}
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <h3 className="text-lg font-semibold mb-4">
+              Order Status (Pie Chart)
+            </h3>
+            <Pie data={chartData.pieChart} />
+          </div>
         </div>
 
-        {/* Account Details */}
-        <div className="px-6 py-4 border-t border-gray-200">
-          <h3 className="text-xl font-semibold text-gray-700 mb-4">
-            Account Details
-          </h3>
-          <div className="bg-gray-200 p-4 rounded-lg shadow">
-            <p className="text-black">
-              <strong>Role:</strong> {currentUserData?.role || "No role"}
-            </p>
-            <p className="text-black">
-              <strong>Active:</strong> Yes
-            </p>
-          </div>
+        {/* Table Section */}
+        <div className="bg-white p-6 rounded-lg shadow-md">
+          <h3 className="text-lg font-semibold mb-4">Recent Orders</h3>
+          <table className="min-w-full table-auto">
+            <thead>
+              <tr>
+                <th className="border px-4 py-2">Order ID</th>
+                <th className="border px-4 py-2">Customer</th>
+                <th className="border px-4 py-2">Amount</th>
+                <th className="border px-4 py-2">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {/* Dynamic Table Rows */}
+              {[
+                {
+                  id: 1,
+                  customer: "John Doe",
+                  amount: "$120",
+                  status: "Completed",
+                },
+                {
+                  id: 2,
+                  customer: "Jane Smith",
+                  amount: "$250",
+                  status: "Pending",
+                },
+                {
+                  id: 3,
+                  customer: "Michael Brown",
+                  amount: "$80",
+                  status: "Completed",
+                },
+              ].map((order) => (
+                <tr key={order.id}>
+                  <td className="border px-4 py-2">{order.id}</td>
+                  <td className="border px-4 py-2">{order.customer}</td>
+                  <td className="border px-4 py-2">{order.amount}</td>
+                  <td className="border px-4 py-2">{order.status}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

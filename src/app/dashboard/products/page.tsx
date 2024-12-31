@@ -46,14 +46,14 @@ const Products = () => {
   };
 
   return (
-    <div>
+    <div className="w-full">
       <div className="flex justify-between items-center pt-10 px-4">
         <h1 className="text-2xl font-bold">Your Products</h1>
         <button>
           <AddProductModel />
         </button>
       </div>
-      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-4 pt-10">
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-4 px-2 pt-10">
         { myPruducts && myPruducts?.map((product: any) => (
           <div
             key={product?.id}

@@ -1,7 +1,7 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "Next.js + NextUI",
+  name: "AnSa Mart - Ecommerce Website",
   description: "Make beautiful websites regardless of your design experience.",
   navItems: [
     {
@@ -10,15 +10,15 @@ export const siteConfig = {
     },
     {
       label: "Products",
-      href: "/products",
+      href: "products",
     },
     {
       label: "About",
-      href: "/about",
+      href: "about",
     },
     {
       label: "Contact Us",
-      href: "/contact",
+      href: "contact",
     },
   ],
   navMenuItems: [

@@ -11,8 +11,8 @@ const slides = [
     header: "UP to 30% off",
     title: "Summer Collection",
     desc: "Explore our summer collection!",
-    colorCode: "#eb4034",
-    bgColorCode: "#FFE4E1", // Soft coral pink
+    colorCode: "#14B8A6", // Teal-500
+    bgColorCode: "#CCFBF1", // Teal-100
   },
   {
     image: homeImage,
@@ -20,8 +20,11 @@ const slides = [
     header: "UP to 40% off",
     title: "Winter Sale",
     desc: "For a limited time only!",
-    colorCode: "#fc8a3d",
-    bgColorCode: "#FFF4E1", // Soft peach
+
+    colorCode: "#eb4034",
+    bgColorCode: "#FFE4E1", // Soft coral pink
+    // colorCode: "#fc8a3d",
+    // bgColorCode: "#FFF4E1", // Soft peach
   },
   {
     image: homeImage,

@@ -15,10 +15,10 @@ const ProductSection = () => {
   return (
     <div className="container mx-auto p-2">
       {/* Header Section */}
-      <div className="pt-10 text-end">
+      <div className="pt-2 text-end">
         <Link
           href="/products"
-          className="text-blue-500 hover:underline text-lg font-semibold"
+          className="text-teal-500 hover:underline text-lg font-semibold"
         >
           View All Products
         </Link>
@@ -34,16 +34,16 @@ const ProductSection = () => {
         </div>
 
         {/* See More Button */}
-        <div className="flex justify-center mt-6">
+        {/* <div className="flex justify-center mt-6">
           {products?.length > 0 && (
             <Link
               href="/products"
-              className="px-6 py-3 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 transition duration-200"
+              className="px-6 py-2 bg-teal-500 text-white rounded-lg shadow-md hover:bg-teal-600 transition duration-200"
             >
               See More
             </Link>
           )}
-        </div>
+        </div> */}
 
         {/* No Products Message */}
         {products?.length === 0 && (

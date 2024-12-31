@@ -11,7 +11,7 @@ const RecentViewProducts = () => {
   const recentViewProductsData = recentViewProducts?.data;
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white flex justify-center pt-10 px-4">
+    <div className="min-h-screen text-white flex justify-center pt-10 px-4 md:w-full">
       <div className="w-full max-w-6xl">
         <h1 className="text-2xl font-bold mb-6 text-center text-white">
           Recently Viewed Products

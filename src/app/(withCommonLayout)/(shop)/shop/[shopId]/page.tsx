@@ -55,7 +55,7 @@ const ShopPage = () => {
   return (
     <div>
       {/* Profile Banner */}
-      <div className="relative bg-gradient-to-r from-blue-500 to-blue-700 h-60">
+      <div className="relative bg-gradient-to-r from-teal-500 to-teal-200 h-60">
         {/* Profile Info Container */}
         <div className="absolute bottom-6 left-6 flex items-center space-x-6 w-full">
           {/* Profile Picture */}
@@ -78,7 +78,7 @@ const ShopPage = () => {
             </h3>
 
             {/* Additional Info */}
-            <div className="flex flex-wrap mt-4 space-y-1 text-sm md:space-y-0">
+            <div className="flex flex-wrap mt-4 space-y-1 md:space-y-0">
               <p className="w-full md:w-auto md:pr-4">
                 📦 Products: {shopProductLength}
               </p>
@@ -110,7 +110,7 @@ const ShopPage = () => {
               ) : (
                 <Button
                   onClick={handleFollowShop}
-                  className="bg-green-500 hover:bg-green-600 text-white py-1.5 px-6 rounded-md font-semibold shadow-md"
+                  className="bg-teal-600 hover:bg-teal-800 text-white py-1.5 px-6 rounded-md font-semibold shadow-md"
                 >
                   Follow
                 </Button>

@@ -52,7 +52,7 @@ const NavberDropdown = () => {
         {userRole == "vendor" && shopData ? (
           <>
             <DropdownItem onClick={() => handleNavigation(`/shop/${shopId}`)}>
-              Profile
+              My shop
             </DropdownItem>
             <DropdownItem
               onClick={() => handleNavigation("/dashboard?key=dashboard")}

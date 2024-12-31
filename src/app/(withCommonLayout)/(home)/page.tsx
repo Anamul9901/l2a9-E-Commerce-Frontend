@@ -2,7 +2,6 @@ import CategorySection from "@/src/components/HomeSection/CategorySection";
 import ExtraSectionOne from "@/src/components/HomeSection/ExtraSectionOne";
 import HeroSection from "@/src/components/HomeSection/HeroSection";
 import ProductSection from "@/src/components/HomeSection/ProductSection";
-import AllProducts from "@/src/components/Products/AllProducts";
 
 const HomePage = () => {
   return (
