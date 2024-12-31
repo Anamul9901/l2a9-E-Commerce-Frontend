@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@nextui-org/button";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 import FXForm from "@/src/components/form/FXForm";
@@ -10,6 +10,7 @@ import FXInput from "@/src/components/form/FXInput";
 import Loading from "@/src/components/UI/loading";
 
 const CreateShop = () => {
+  const [isMounted, setIsMounted] = useState(false);
   const router = useRouter();
 
   const [createShop, { isLoading, error }] = useAddShopMutation();
@@ -26,6 +27,15 @@ const CreateShop = () => {
       router.push("/dashboard?key=dashboard");
     }
   };
+
+  // For hydration error handle
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null;
+  }
 
   return (
     <div className="relative h-screen flex items-center justify-center">

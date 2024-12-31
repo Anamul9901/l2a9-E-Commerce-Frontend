@@ -8,17 +8,14 @@ import { Link } from "@nextui-org/link";
 import { link as linkStyles } from "@nextui-org/theme";
 import NextLink from "next/link";
 import { siteConfig } from "../../config/site";
-import { useAppSelector } from "@/src/redux/hooks";
-import { selectCurrentUser } from "@/src/redux/features/auth/authSlice";
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+// import { useSearchParams } from "next/navigation";
 import clsx from "clsx";
 
 export const Navbar = () => {
   const [isMounted, setIsMounted] = useState(false);
-  const { user } = useAppSelector(selectCurrentUser);
-  const searchParams = useSearchParams();
-  const queryValue = searchParams?.get("key"); 
+  // const searchParams = useSearchParams();
+  // const queryValue = searchParams?.get("key"); 
 
   // For hydration error handling
   useEffect(() => {
@@ -35,17 +32,18 @@ export const Navbar = () => {
         <ul className="hidden md:inline-block gap-4 justify-end ml-2">
           <div className="flex gap-4">
             {siteConfig.navItems.map((item) => {
-              const isActive = queryValue === item.href; // Check if the query value matches the item's href
+              // const isActive = queryValue === item.href; // Check if the query value matches the item's href
               return (
                 <NavbarItem key={item.href}>
                   <NextLink
-                    className={clsx(
-                      linkStyles({ color: "foreground" }),
-                      "data-[active=true]:text-teal-500 data-[active=true]:font-medium",
-                      isActive ? "text-teal-500 font-bold" : "text-foreground" // Apply active class based on `isActive`
-                    )}
-                    color="foreground"
-                    href={`${item.href}?key=${item.href}`} // Append the query value to the href
+                    // className={clsx(
+                    //   linkStyles({ color: "foreground" }),
+                    //   "data-[active=true]:text-teal-500 data-[active=true]:font-medium",
+                    //   isActive ? "text-teal-500 font-bold" : "text-foreground" // Apply active class based on `isActive`
+                    // )}
+                    // color="foreground"
+                    // href={`${item.href}?key=${item.href}`} 
+                    href={item.href} 
                   >
                     {item.label}
                   </NextLink>

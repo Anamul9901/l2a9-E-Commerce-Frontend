@@ -1,13 +1,9 @@
 "use client";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { Suspense } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { FaHome, FaUsers } from "react-icons/fa";
-import {
-  MdAdminPanelSettings,
-  MdSpaceDashboard,
-  MdSubscriptions,
-} from "react-icons/md";
+import { MdSpaceDashboard, MdSubscriptions } from "react-icons/md";
 import { IoFastFood } from "react-icons/io5";
 import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
 import { logout, selectCurrentUser } from "@/src/redux/features/auth/authSlice";
@@ -21,6 +17,7 @@ const Loading = () => (
 );
 
 const Sidebar = () => {
+  const [isMounted, setIsMounted] = useState(false);
   const dispatch = useAppDispatch();
   const searchParams = useSearchParams();
   const queryValue = searchParams?.get("key");
@@ -32,11 +29,18 @@ const Sidebar = () => {
   const user = useAppSelector(selectCurrentUser);
   const userId = user?.user?.id;
   // const currentUser: any = user?.user;
-  let currenttUser;
   if (user?.token) {
     // currenttUser = verifyToken(user?.token);
   }
   const currenttUserRole = (user as any)?.user?.role;
+  // For hydration error handle
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null;
+  }
 
   return (
     <div className="min-h-screen fixed h-full flex bg-gray-900">
