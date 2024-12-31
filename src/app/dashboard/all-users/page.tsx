@@ -69,7 +69,7 @@ const AllUsers = () => {
     return null;
   }
   return (
-    <div className="min-h-screen bg-gray-900 text-white flex justify-center pt-10 px-4">
+    <div className="min-h-screen w-full text-white flex justify-center pt-10 px-4">
       <div className="w-full max-w-6xl">
         {/* Futuristic Table Container for desktop and tablet */}
         <div className="overflow-x-auto shadow-2xl bg-gray-800 rounded-lg p-6 hidden md:block">

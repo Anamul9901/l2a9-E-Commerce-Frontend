@@ -60,7 +60,8 @@ const Sidebar = () => {
           <Link href="/dashboard?key=dashboard" className="w-full">
             <div className="flex items-center text-center justify-center mb-8 hover:scale-105 transition-all duration-300">
               <p className="hidden md:block font-bold text-2xl text-inherit">
-                <span className="text-default-300">AnSa</span><span className="text-teal-500">Mart</span>
+                <span className="text-default-300">AnSa</span>
+                <span className="text-teal-500">Mart</span>
               </p>
             </div>
           </Link>
@@ -278,8 +279,8 @@ const Sidebar = () => {
                 </Link>
               </li>
 
-                 {/* cupon */}
-                 <li className="w-full mb-2">
+              {/* cupon */}
+              <li className="w-full mb-2">
                 <Link href="/dashboard/coupon?key=coupon">
                   <div
                     className={`block px-2 py-4 text-default text-center md:text-left rounded-lg transition-all duration-300 hover:bg-default-700 hover:shadow-xl ${
@@ -295,7 +296,24 @@ const Sidebar = () => {
                   </div>
                 </Link>
               </li>
-              
+
+              {/* Newsletter */}
+              <li className="w-full mb-2">
+                <Link href="/dashboard/newsletter?key=newsletter">
+                  <div
+                    className={`block px-2 py-4 text-default text-center md:text-left rounded-lg transition-all duration-300 hover:bg-default-700 hover:shadow-xl ${
+                      queryValue === "newsletter"
+                        ? "bg-default-700 shadow-xl text-[#ff4a4afd] font-extrabold"
+                        : ""
+                    }`}
+                  >
+                    <span className="material-icons md:hidden">
+                      <RiCoupon3Line />
+                    </span>
+                    <span className="hidden md:inline-block ml-2">Newsletter</span>
+                  </div>
+                </Link>
+              </li>
             </>
           )}
 
