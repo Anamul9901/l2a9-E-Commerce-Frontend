@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const AboutPage = () => {
   return (
     <div className="text-default-800 min-h-screen py-10">
@@ -20,7 +22,9 @@ const AboutPage = () => {
                 Our Mission
               </h2>
               <p className="text-default-600 text-lg">
-                Our mission is to bridge the gap between businesses and customers by providing a robust and user-friendly e-commerce platform.
+                Our mission is to bridge the gap between businesses and
+                customers by providing a robust and user-friendly e-commerce
+                platform.
               </p>
             </div>
             <div className="lg:w-1/2 mt-6 lg:mt-0 flex justify-center">
@@ -40,19 +44,25 @@ const AboutPage = () => {
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="bg-default-50 p-6 rounded-lg shadow">
-              <h3 className="text-xl font-bold mb-2 text-default-800">User-Centric Design</h3>
+              <h3 className="text-xl font-bold mb-2 text-default-800">
+                User-Centric Design
+              </h3>
               <p className="text-default-600">
                 Enjoy an intuitive and seamless shopping experience.
               </p>
             </div>
             <div className="bg-default-50 p-6 rounded-lg shadow">
-              <h3 className="text-xl font-bold mb-2 text-default-800">Advanced Vendor Tools</h3>
+              <h3 className="text-xl font-bold mb-2 text-default-800">
+                Advanced Vendor Tools
+              </h3>
               <p className="text-default-600">
                 Easily manage shops, products, and inventories.
               </p>
             </div>
             <div className="bg-default-50 p-6 rounded-lg shadow">
-              <h3 className="text-xl font-bold mb-2 text-default-800">Secure Transactions</h3>
+              <h3 className="text-xl font-bold mb-2 text-default-800">
+                Secure Transactions
+              </h3>
               <p className="text-default-600">
                 Trusted payment gateways for worry-free shopping.
               </p>
@@ -67,10 +77,18 @@ const AboutPage = () => {
               Technologies We Use
             </h2>
             <ul className="list-disc list-inside text-default-600 text-lg space-y-2">
-              <li>Backend: Node.js and Express.js for server-side efficiency.</li>
-              <li>Frontend: React.js (or Next.js) for dynamic user interfaces.</li>
-              <li>Database: PostgreSQL for secure and structured data management.</li>
-              <li>Payments: Integrated with Aamarpay/Stripe for secure checkout.</li>
+              <li>
+                Backend: Node.js and Express.js for server-side efficiency.
+              </li>
+              <li>
+                Frontend: React.js (or Next.js) for dynamic user interfaces.
+              </li>
+              <li>
+                Database: PostgreSQL for secure and structured data management.
+              </li>
+              <li>
+                Payments: Integrated with Aamarpay/Stripe for secure checkout.
+              </li>
             </ul>
           </div>
         </section>
@@ -78,11 +96,17 @@ const AboutPage = () => {
         {/* Call to Action */}
         <div className="text-center">
           <p className="text-lg text-default-600">
-            Have any questions or feedback? Feel free to get in touch and let’s build the future of online shopping together!
+            Have any questions or feedback? Feel free to get in touch and let’s
+            build the future of online shopping together!
           </p>
-          <button className="mt-6 px-6 py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700">
-            Contact Us
-          </button>
+          <div className="pt-6">
+            <Link
+              href={"/contact"}
+              className="mt-10 px-6 py-3 bg-teal-600 text-white rounded-lg shadow hover:bg-teal-700"
+            >
+              Contact Us
+            </Link>
+          </div>
         </div>
       </div>
     </div>

@@ -1,4 +1,11 @@
+"use client";
+
+import { toast } from "sonner";
+
 const ContactUs = () => {
+  // const handleSendMessage = () => {
+  //   toast.success("Message sent successfully!");
+  // };
   return (
     <div className="px-4 py-10 lg:px-20 bg-default-50">
       {/* Page Heading */}
@@ -17,26 +24,18 @@ const ContactUs = () => {
       <div className="grid lg:grid-cols-3 gap-10 mb-10">
         {/* United States */}
         <div className="bg-default-200 shadow-lg rounded-lg p-6">
-          <h2 className="text-xl font-semibold text-default-800">
-            United States
-          </h2>
-          <p className="mt-2 text-default-600">
-            205 Middle Road, 2nd Floor, New York
-          </p>
-          <p className="mt-2 text-default-600">+02 1234 567 88</p>
-          <p className="mt-2 text-default-600">info@example.com</p>
+          <h2 className="text-xl font-semibold text-default-800">Dhaka</h2>
+          <p className="mt-2 text-default-600">Mirpur-1, Dhaka, Bangladesh</p>
+          <p className="mt-2 text-default-600">+8801864668089</p>
+          <p className="mt-2 text-default-600">anamulhaque9901@gmail.com</p>
         </div>
 
         {/* Netherlands */}
         <div className="bg-default-200 shadow-lg rounded-lg p-6">
-          <h2 className="text-xl font-semibold text-default-800">
-            Netherlands
-          </h2>
-          <p className="mt-2 text-default-600">
-            Amsterdam, 205 Middle Road, 2nd Floor, New York
-          </p>
-          <p className="mt-2 text-default-600">+02 1234 567 88</p>
-          <p className="mt-2 text-default-600">info@example.com</p>
+          <h2 className="text-xl font-semibold text-default-800">Narsingdi</h2>
+          <p className="mt-2 text-default-600">Narsingdi, Dhaka, Bangladesh</p>
+          <p className="mt-2 text-default-600">+8801864668089</p>
+          <p className="mt-2 text-default-600">anamulhaque9901@gmail.com</p>
         </div>
 
         {/* Social Media */}
@@ -44,25 +43,19 @@ const ContactUs = () => {
           <h2 className="text-xl font-semibold text-default-800">Follow us</h2>
           <div className="flex mt-4 gap-4">
             <a
-              href="https://facebook.com"
+              href="https://www.facebook.com/Anamul114"
               className="text-blue-600 hover:text-blue-700"
             >
               Facebook
             </a>
             <a
-              href="https://twitter.com"
+              href="https://github.com/Anamul9901"
               className="text-blue-500 hover:text-blue-600"
             >
-              Twitter
+              Github
             </a>
             <a
-              href="https://instagram.com"
-              className="text-pink-500 hover:text-pink-600"
-            >
-              Instagram
-            </a>
-            <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/anamul9901/"
               className="text-blue-700 hover:text-blue-800"
             >
               LinkedIn
@@ -88,7 +81,7 @@ const ContactUs = () => {
             <input
               id="name"
               type="text"
-              className="w-full border border-default-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+              className="w-full border border-default-300 rounded-lg p-3 focus:ring-2 focus:ring-teal-400 focus:outline-none"
               placeholder="Enter your name"
               required
             />
@@ -105,7 +98,7 @@ const ContactUs = () => {
             <input
               id="email"
               type="email"
-              className="w-full border border-default-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+              className="w-full border border-default-300 rounded-lg p-3 focus:ring-2 focus:ring-teal-400 focus:outline-none"
               placeholder="Enter your email"
               required
             />
@@ -122,7 +115,7 @@ const ContactUs = () => {
             <input
               id="subject"
               type="text"
-              className="w-full border border-default-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+              className="w-full border border-default-300 rounded-lg p-3 focus:ring-2 focus:ring-teal-400 focus:outline-none"
               placeholder="Enter subject"
               required
             />
@@ -138,7 +131,7 @@ const ContactUs = () => {
             </label>
             <textarea
               id="message"
-              className="w-full border border-default-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+              className="w-full border border-default-300 rounded-lg p-3 focus:ring-2 focus:ring-teal-400 focus:outline-none"
               rows={5}
               placeholder="Enter your message"
             ></textarea>
@@ -148,7 +141,7 @@ const ContactUs = () => {
           <div>
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 focus:outline-none"
+              className="w-full bg-teal-600 text-white font-semibold py-3 rounded-lg hover:bg-teal-700 focus:outline-none"
             >
               Send Message
             </button>
