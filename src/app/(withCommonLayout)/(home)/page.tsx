@@ -1,12 +1,12 @@
-'use client'
+"use client";
 import CategorySection from "@/src/components/HomeSection/CategorySection";
 import ExtraSectionOne from "@/src/components/HomeSection/ExtraSectionOne";
 import HeroSection from "@/src/components/HomeSection/HeroSection";
+import NewsletterSection from "@/src/components/HomeSection/NewsletterSection";
 import ProductSection from "@/src/components/HomeSection/ProductSection";
 import { useEffect, useState } from "react";
 
 const HomePage = () => {
-  
   const [isMounted, setIsMounted] = useState(false);
   // For hydration error handle
   useEffect(() => {
@@ -26,6 +26,7 @@ const HomePage = () => {
       <CategorySection />
       {/* home product */}
       <ProductSection />
+      <NewsletterSection />
       {/* Extra section1 */}
       <ExtraSectionOne />
     </div>

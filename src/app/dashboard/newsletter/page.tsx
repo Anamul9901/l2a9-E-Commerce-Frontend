@@ -29,6 +29,7 @@ const Newsletter = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const res = await deleteNewsletter(id).unwrap();
+        console.log('res', res)
         if (res.success) {
           toast.success("Newsletter Deleted Successfully");
         }
@@ -112,7 +113,7 @@ const Newsletter = () => {
                     </button>
                     <button
                       className="px-2 py-1 bg-red-500 hover:bg-red-700 rounded-full text-sm transition duration-300"
-                      onClick={() => handleDeleteNewsletter(blog._id)}
+                      onClick={() => handleDeleteNewsletter(blog.id)}
                     >
                       <MdDelete className="text-white" />
                     </button>
@@ -138,7 +139,7 @@ const Newsletter = () => {
                   </button>
                   <button
                     className="px-3 py-1 bg-red-500 hover:bg-red-700 rounded-full text-sm transition duration-300"
-                    onClick={() => handleDeleteNewsletter(blog._id)}
+                    onClick={() => handleDeleteNewsletter(blog.id)}
                   >
                     <MdDelete className="text-white" />
                   </button>

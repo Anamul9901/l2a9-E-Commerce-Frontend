@@ -17,6 +17,7 @@ import { MdWorkHistory } from "react-icons/md";
 import { GiShop } from "react-icons/gi";
 import { BiSolidCategoryAlt } from "react-icons/bi";
 import { TbLogout } from "react-icons/tb";
+import { IoNewspaperOutline } from "react-icons/io5";
 
 // Loading component (you can customize this as needed)
 const Loading = () => (
@@ -308,9 +309,11 @@ const Sidebar = () => {
                     }`}
                   >
                     <span className="material-icons md:hidden">
-                      <RiCoupon3Line />
+                      <IoNewspaperOutline />
                     </span>
-                    <span className="hidden md:inline-block ml-2">Newsletter</span>
+                    <span className="hidden md:inline-block ml-2">
+                      Newsletter
+                    </span>
                   </div>
                 </Link>
               </li>
