@@ -40,9 +40,9 @@ export const SearchNavbar = () => {
   }
 
   return (
-    <NextUINavbar maxWidth="xl">
+    <NextUINavbar maxWidth="xl" height={100} >
       {/* Navbar Content */}
-      <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
+      <NavbarContent className="sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
           <NextLink className="flex justify-start items-center gap-1" href="/">
             <Logo />
@@ -54,6 +54,34 @@ export const SearchNavbar = () => {
       </NavbarContent>
 
       {/* Search Input */}
+      <div className="items-center text-center space-y-2">
+        <div>
+        <NavbarContent className="sticky basis-1/5 sm:basis-full " justify="end">
+        <ul className="hidden md:inline-block gap-4 justify-end ml-2">
+          <div className="flex gap-4">
+            {siteConfig.navItems.map((item) => {
+              // const isActive = queryValue === item?.href; // Check if the query value matches the item's href
+              return (
+                <NavbarItem key={item?.href}>
+                  <NextLink
+                    // className={clsx(
+                    //   linkStyles({ color: "foreground" }),
+                    //   "data-[active=true]:text-teal-500 data-[active=true]:font-medium",
+                    //   isActive ? "text-teal-500 font-bold" : "text-foreground" // Apply active class based on `isActive`
+                    // )}
+                    // color="foreground"
+                    // href={`${item?.href}?key=${item?.href}`}  // Add query parameter to the URL
+                    href={item?.href}
+                  >
+                    {item?.label}
+                  </NextLink>
+                </NavbarItem>
+              );
+            })}
+          </div>
+        </ul>
+      </NavbarContent>
+        </div>
       <div className="hidden md:block">
         <div className="flex flex-1 justify-center items-center px-4">
           <div className="flex w-full max-w-2xl items-center bg-gray-100 rounded-full shadow-md">
@@ -72,6 +100,7 @@ export const SearchNavbar = () => {
             </Link>
           </div>
         </div>
+      </div>
       </div>
 
       {/* End Content */}

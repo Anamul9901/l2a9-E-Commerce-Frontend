@@ -36,7 +36,7 @@ export const Navbar = () => {
 
   return (
     <NextUINavbar>
-      <NavbarContent className="basis-1/5 sm:basis-full " justify="end">
+      {/* <NavbarContent className="sticky basis-1/5 sm:basis-full " justify="end">
         <ul className="hidden md:inline-block gap-4 justify-end ml-2">
           <div className="flex gap-4">
             {siteConfig.navItems.map((item) => {
@@ -60,7 +60,7 @@ export const Navbar = () => {
             })}
           </div>
         </ul>
-      </NavbarContent>
+      </NavbarContent> */}
     </NextUINavbar>
   );
 };

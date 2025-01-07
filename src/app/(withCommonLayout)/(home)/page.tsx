@@ -18,17 +18,19 @@ const HomePage = () => {
   }
   return (
     <div>
-      {/* <HeroSection /> */}
       <div className="md:h-[50vh] border rounded-md justify-center items-center overflow-hidden">
         <HeroSection autoSlide={true} autoSlideInterval={3500} />
       </div>
-      {/* Category */}
-      <CategorySection />
-      {/* home product */}
-      <ProductSection />
-      <NewsletterSection />
-      {/* Extra section1 */}
-      <ExtraSectionOne />
+      <div className="mx-auto max-w-7xl md:px-4 px-2">
+        {/* <HeroSection /> */}
+        {/* Category */}
+        <CategorySection />
+        {/* home product */}
+        <ProductSection />
+        <NewsletterSection />
+        {/* Extra section1 */}
+        <ExtraSectionOne />
+      </div>
     </div>
   );
 };
