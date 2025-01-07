@@ -55,16 +55,16 @@ const Footer = () => {
             © 2024 AnSaMart. All rights reserved.
           </p>
           <div className="flex justify-center space-x-4 mt-4">
-            <a href="#" className="hover:text-white">
+            <a href="/" className="hover:text-white">
               <i className="fab fa-facebook-f"></i>
             </a>
-            <a href="#" className="hover:text-white">
+            <a href="/" className="hover:text-white">
               <i className="fab fa-twitter"></i>
             </a>
-            <a href="#" className="hover:text-white">
+            <a href="/" className="hover:text-white">
               <i className="fab fa-instagram"></i>
             </a>
-            <a href="#" className="hover:text-white">
+            <a href="/" className="hover:text-white">
               <i className="fab fa-linkedin-in"></i>
             </a>
           </div>
